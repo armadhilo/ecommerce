@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('template.template');
 });
+Route::get('/users','UsersController@index')->name('users.index');
+Route::get('/category','CategoryController@index')->name('category.index');
+Route::get('/product','ProductController@index')->name('product.index');
