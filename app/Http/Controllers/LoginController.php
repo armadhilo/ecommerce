@@ -37,4 +37,15 @@ class LoginController extends Controller
             return redirect('/login')->with('error','email / password anda salah 2');
         }
     }
+
+    public function logout(){
+
+		$request->session()->forget('username');
+		$request->session()->forget('nama');
+		$request->session()->forget('role');
+        $request->session()->flush();
+        
+	    return redirect('/login')->with('success','Anda berhasil logout !');
+
+	}
 }

@@ -21,9 +21,13 @@ Route::get('logout','LoginController@logout');
 
 Route::group(['middleware' => 'cekAdmin'], function () {
 
-    //nang kene route mari validasi
+    Route::post('users','UsersController@store')->name('users.post');
+    Route::put('users/edit/{id}','UsersController@update')->name('users.edit');
+    Route::delete('users','UsersController@delete')->name('users.delete');
 
 });
+
+Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
 
 Route::get('/users','UsersController@index')->name('users.index');
 Route::get('/category','CategoryController@index')->name('category.index');
