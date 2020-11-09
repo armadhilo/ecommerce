@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('login','LoginController@index');
-Route::post('login/coba','LoginController@action')->name('login.store');
+Route::post('login','LoginController@action')->name('login.store');
 Route::get('logout','LoginController@logout');
 
 Route::group(['middleware' => 'cekAdmin'], function () {
