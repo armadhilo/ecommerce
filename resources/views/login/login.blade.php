@@ -152,7 +152,7 @@
                 success: function(response){
                     if(response.status === "success"){
                         alertResponse('success', 'Success!', 'Login Berhasil');
-                        window.location.href = "{{ route('dashboard.index') }}";
+                        // window.location.href = "{{ route('dashboard.index') }}";
                     }else{
                         alertResponse('error', 'Error!', 'Username atau Password salah');
                     }

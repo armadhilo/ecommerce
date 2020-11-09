@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('login','LoginController@index');
-Route::post('login','LoginController@action')->name('login.store');
+Route::post('login','LoginController@action')->name('login.post');
 Route::get('logout','LoginController@logout');
 
 Route::group(['middleware' => 'cekAdmin'], function () {
@@ -30,11 +30,8 @@ Route::group(['middleware' => 'cekAdmin'], function () {
 Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
 
 Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
-Route::get('/category','CategoryController@index')->name('category.index');
-Route::post('/category','CategoryController@save')->name('category.save');
-
-
 Route::get('/users','UsersController@index')->name('users.index');
+Route::get('/category','CategoryController@index')->name('category.index');
 Route::get('/product','ProductController@index')->name('product.index');
 
 Route::get('/main_product','MainproductController@index')->name('main_product.index');

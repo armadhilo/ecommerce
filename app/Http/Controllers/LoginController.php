@@ -17,8 +17,7 @@ class LoginController extends Controller
 
     public function action(Request $request)
     {
-        dd($request);
-
+        
         $username = $request->username;
         $password = $request->password;
 
