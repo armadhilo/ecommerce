@@ -71,18 +71,6 @@
                                         </div>
                                         <p class="px-2">Welcome back, please login to your account.</p>
                                         
-                                        {{-- @if ($message = Session::get('success'))
-                                        <div class="alert alert-success">
-                                            {{$message}} 
-                                        </div>    
-                                        @endif     
-                        
-                                        @if ($message = Session::get('error'))
-                                        <div class="alert alert-danger">
-                                            {{$message}} 
-                                        </div>    
-                                        @endif              --}}
-
                                         <div class="card-content">
                                             <div class="card-body pt-1" style="margin-bottom: 60px;">
                                                 <form method="POST" action="#" id="form_login" class="form-horizontal">
@@ -101,7 +89,7 @@
                                                         </div>
                                                         <label for="user-password">Password</label>
                                                     </fieldset>
-                                                    <button type="button" class="btn btn-primary float-right btn-inline" onclick="login()">Login</button>
+                                                    <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -151,6 +139,9 @@
           });
         }
 
+        $('#form_login').submit(function(){
+            login();
+        });
 
         function login(){
             $.ajax({
