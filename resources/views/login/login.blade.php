@@ -6,12 +6,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
-    <link rel="apple-touch-icon" href="{{asset('app-assets/images/ico/apple-icon-120.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('')}}app-assets/images/ico/favicon.ico">
+    <meta name="description" content="Inovasi Unesa">
+    <meta name="keywords" content="Inovasi unesa">
+    <meta name="author" content="INOVASIUNESA">
+    <title>Inovasi Unesa</title>
+    <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/apple-icon-120.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -60,7 +60,7 @@
                                 <div class="col-lg-6 col-12 p-0">
 
                                     <div class="card rounded-0 mb-0 px-2">
-                                        <div class="card-header pb-1">
+                                        <div class="card-header pb-1" style="margin-top: 10px;">
                                             <div class="card-title">
                                                 <h4 class="mb-0">Login</h4>
                                             </div>
@@ -80,7 +80,7 @@
                                         @endif             
 
                                         <div class="card-content">
-                                            <div class="card-body pt-1">
+                                            <div class="card-body pt-1" style="margin-bottom: 60px;">
                                                 <form action="{{route('login.post')}}" method="POST">
                                                     @csrf
                                                     <fieldset class="form-label-group form-group position-relative has-icon-left">
@@ -98,38 +98,11 @@
                                                         </div>
                                                         <label for="user-password">Password</label>
                                                     </fieldset>
-                                                    <div class="form-group d-flex justify-content-between align-items-center">
-                                                        <div class="text-left">
-                                                            <fieldset class="checkbox">
-                                                                <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                    <input type="checkbox">
-                                                                    <span class="vs-checkbox">
-                                                                        <span class="vs-checkbox--check">
-                                                                            <i class="vs-icon feather icon-check"></i>
-                                                                        </span>
-                                                                    </span>
-                                                                    <span class="">Remember me</span>
-                                                                </div>
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="text-right"><a href="auth-forgot-password.html" class="card-link">Forgot Password?</a></div>
-                                                    </div>
-                                                    <a href="auth-register.html" class="btn btn-outline-primary float-left btn-inline">Register</a>
                                                     <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
                                                 </form>
                                             </div>
                                         </div>
-                                        <div class="login-footer">
-                                            <div class="divider">
-                                                <div class="divider-text">OR</div>
-                                            </div>
-                                            <div class="footer-btn d-inline">
-                                                <a href="#" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>
-                                                <a href="#" class="btn btn-twitter white"><span class="fa fa-twitter"></span></a>
-                                                <a href="#" class="btn btn-google"><span class="fa fa-google"></span></a>
-                                                <a href="#" class="btn btn-github"><span class="fa fa-github-alt"></span></a>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

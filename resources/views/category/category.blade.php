@@ -121,26 +121,27 @@
     }
     
     function save(){
-        var url = "";
-        if(save_method === 'add'){
-            url = "";
-        }else{
-            url = "";
-        }
-        $.ajax({
-            url : url,
-            type: "POST",
-            data: $('#form').serialize(),
-            dataType: "JSON",
-            success: function(response){
-                alert(response.status);
-                $('#modal_form').modal('hide');
-                reload();
-            },
-            error: function (jqXHR, textStatus, errorThrown){
-                console.log("Error json " + errorThrown);
-            }
-        });
+        alertResponse('success', 'Success!', 'Data Tersimpan');
+        // var url = "";
+        // if(save_method === 'add'){
+        //     url = "";
+        // }else{
+        //     url = "";
+        // }
+        // $.ajax({
+        //     url : url,
+        //     type: "POST",
+        //     data: $('#form').serialize(),
+        //     dataType: "JSON",
+        //     success: function(response){
+        //         alert(response.status);
+        //         $('#modal_form').modal('hide');
+        //         reload();
+        //     },
+        //     error: function (jqXHR, textStatus, errorThrown){
+        //         console.log("Error json " + errorThrown);
+        //     }
+        // });
     }
     
     function ganti(id){
