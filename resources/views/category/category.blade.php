@@ -73,7 +73,6 @@
             </div>
             <div class="modal-body">
                 <form class="form form-horizontal" id="form" autocomplete="off">
-                    <input name="_token" type="text" hidden id="_token" value="{{ csrf_token() }}" />
                     <input name="id" type="text" hidden id="id"/>
                     <div class="form-body">
                         <div class="row pr-1 pl-1">
@@ -122,26 +121,26 @@
     
     function save(){
         alertResponse('success', 'Success!', 'Data Tersimpan');
-        // var url = "";
-        // if(save_method === 'add'){
-        //     url = "";
-        // }else{
-        //     url = "";
-        // }
-        // $.ajax({
-        //     url : url,
-        //     type: "POST",
-        //     data: $('#form').serialize(),
-        //     dataType: "JSON",
-        //     success: function(response){
-        //         alert(response.status);
-        //         $('#modal_form').modal('hide');
-        //         reload();
-        //     },
-        //     error: function (jqXHR, textStatus, errorThrown){
-        //         console.log("Error json " + errorThrown);
-        //     }
-        // });
+        var url = "";
+        if(save_method === 'add'){
+            url : "{{ route('login.post') }}",
+        }else{
+            url : "{{ route('login.post') }}",
+        }
+        $.ajax({
+            url : url,
+            type: "POST",
+            data: $('#form').serialize(),
+            dataType: "JSON",
+            success: function(response){
+                alert(response.status);
+                $('#modal_form').modal('hide');
+                reload();
+            },
+            error: function (jqXHR, textStatus, errorThrown){
+                console.log("Error json " + errorThrown);
+            }
+        });
     }
     
     function ganti(id){
