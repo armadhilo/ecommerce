@@ -82,7 +82,7 @@
                                         <span>Category</span>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="nama_kategori" name="nama_kategori" class="form-control">
+                                        <input type="text" id="category_name" name="category_name" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="save();">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
@@ -105,37 +105,47 @@
     var table;
         
     $(document).ready(function() {
-        table = $('#tb').DataTable();
+        table = $('#tb').DataTable({
+            "ajax": "{{ route('users.get') }}"
+        });
     });
     
     function add(){
         save_method = 'add';
         $('#form')[0].reset();
         $('#modal_form').modal('show');
-        $('.modal-title').text('Add Category');
+        $('.modal-title').text('Add Users');
     }
     
     function reload(){
         table.ajax.reload(null, false);
     }
+
+    $('#form').submit(function(){
+        save();
+    });
     
     function save(){
-        alertResponse('success', 'Success!', 'Data Tersimpan');
         var url = "";
         if(save_method === 'add'){
-            url : "{{ route('login.post') }}";
+            url = "<?= url('/users/add') ?>";
         }else{
-            url : "{{ route('login.post') }}";
+            url = "<?= url('/users/update') ?>";
         }
         $.ajax({
             url : url,
             type: "POST",
             data: $('#form').serialize(),
             dataType: "JSON",
-            success: function(response){
-                alert(response.status);
-                $('#modal_form').modal('hide');
-                reload();
+            success: function(response) {
+                if(response.callback === "success"){
+                    alertResponse('success', 'Success!', response.desc);
+                    $('#modal_form').modal('hide');
+                    reload();
+                }else{
+                    alertResponse('error', 'Failed!', response.desc);
+                }
+                
             },
             error: function (jqXHR, textStatus, errorThrown){
                 console.log("Error json " + errorThrown);
@@ -147,36 +157,25 @@
         save_method = 'update';
         $('#form')[0].reset();
         $('#modal_form').modal('show');
-        $('.modal-title').text('Edit Category');
+        $('.modal-title').text('Edit Users');
         
         $.ajax({
-            url : "<?= url('/'); ?>" + "/edit/" + id,
+            url : "/users/detail/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data){
-                $('#id').val(data.idcategory);
-                $('#nama_kategori').val(data.category);
+                if(data.callback === "success"){
+                    var data = data.data;
+                    $('#id').val(data.id);
+                    $('#category_name').val(data.category_name);
+                }else{
+                    alertResponse('error', 'Failed!', 'Data tidak ditemukan');
+                }
+               
             },error: function (jqXHR, textStatus, errorThrown){
                 console.log('Error get data');
             }
         });
-    }
-    
-     function hapus(id){
-        if(confirm("Apakah anda yakin menghapus category dengan kode " + id + " ?")){
-            // ajax delete data to database
-            $.ajax({
-                url : "<?php echo url('/'); ?>" + "/delete/" + id,
-                type: "GET",
-                dataType: "JSON",
-                success: function(data){
-                    alert(data.status);
-                    reload();
-                },error: function (jqXHR, textStatus, errorThrown){
-                    console.log('Error hapus data');
-                }
-            });
-        }
     }
     </script>
     @endsection

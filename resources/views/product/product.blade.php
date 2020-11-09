@@ -76,15 +76,14 @@
             </div>
             <div class="modal-body">
                 <form class="form form-horizontal" id="form" autocomplete="off">
-                    <input name="_token" type="text" hidden id="_token" value="{{ csrf_token() }}" />
                     <input name="id" type="text" hidden id="id"/>
                     <div class="form-body">
                         <div class="row pr-1 pl-1">
                             <div class="col-6">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Category</label>
-                                    <select class="form-control" id="category_id" name="category_id" onchange="chooseCategory();">
-                                        <option value="">- Pilih -</option>
+                                    <select class="form-control" id="category_id" name="category_id" onchange="chooseCategory();" required>
+                                        <option value="" disabled>- Pilih -</option>
                                         <option value="book">Book</option>
                                         <option value="beauty">Beauty</option>
                                     </select>
@@ -93,7 +92,7 @@
                             <div class="col-6">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Nama Product</label>
-                                    <input type="text" id="product_name" class="form-control" name="product_name">
+                                    <input type="text" id="product_name" class="form-control" name="product_name" required>
                                 </div>
                             </div>
                             <!-- Book Category Start -->
@@ -216,11 +215,93 @@
     function reload() {
         table.ajax.reload(null, false);
     }
+
+    $('#form').submit(function(){
+        save();
+    });
     
     function save(){
-        var desc = tinyMCE.get('description').getContent();
+        var category_id     = $('#category_id').val();
+        var product_name    = $('#product_name').val();
+        var nidn            = $('#nidn').val();
+        var nama_lengkap    = $('#nama_lengkap').val();
+        var isbn            = $('#isbn').val();
+        var jml_halaman     = $('#jml_halaman').val();
+        var penerbit        = $('#penerbit').val();
+        var pic             = $('#pic').val();
+        var mitra           = $('#mitra').val();
+        var status          = $('#status').val();
+        var image           = $('#image').prop('files')[0];
+        var description     = tinyMCE.get('description').getContent();
+
+        var form_data = new FormData();
+        form_data.append('id', category_id);
+        form_data.append('product_name', product_name);
+        form_data.append('nidn', nidn);
+        form_data.append('nama_lengkap', nama_lengkap);
+        form_data.append('isbn', isbn);
+        form_data.append('jml_halaman', jml_halaman);
+        form_data.append('penerbit', penerbit);
+        form_data.append('pic', pic);
+        form_data.append('mitra', mitra);
+        form_data.append('status', status);
+        form_data.append('image', image);
+        form_data.append('description', description);
+       
+        var url = "";
+        if(save_method === 'add'){
+            url = "<?= url('/users/add') ?>";
+        }else{
+            url = "<?= url('/users/update') ?>";
+        }
+        $.ajax({
+            url: url,
+            dataType: 'JSON',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'POST',
+            success: function(response) {
+                console.log(response.callback);
+                // if(response.callback === "success"){
+                //     alertResponse('success', 'Success!', response.desc);
+                //     $('#modal_form').modal('hide');
+                //     reload();
+                // }else{
+                //     alertResponse('error', 'Failed!', response.desc);
+                // }
+                
+            },
+            error: function (jqXHR, textStatus, errorThrown){
+                console.log("Error json " + errorThrown);
+            }
+        });
+    }
+    
+    function ganti(id){
+        save_method = 'update';
+        $('#form')[0].reset();
+        $('#modal_form').modal('show');
+        $('.modal-title').text('Edit Users');
         
-        
+        $.ajax({
+            url : "/users/detail/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data){
+                if(data.callback === "success"){
+                    var data = data.data;
+                    $('#id').val(data.id);
+                    $('#category_name').val(data.category_name);
+                }else{
+                    alertResponse('error', 'Failed!', 'Data tidak ditemukan');
+                }
+               
+            },error: function (jqXHR, textStatus, errorThrown){
+                console.log('Error get data');
+            }
+        });
     }
 </script>
 @endsection

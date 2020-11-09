@@ -59,29 +59,21 @@ class UsersController extends Controller
                  ]);
 
         if($query){
-            return response()->json(["callback" => 'success']);
+            return response()->json(["callback" => 'success', "desc" => "Data tersimpan"]);
         }else{
-            return response()->json(["callback" => 'fail']);
+            return response()->json(["callback" => 'fail', "desc" => "Data gagal ditambahkan"]);
         }
     }
 
     public function update(Request $request)
     {
-        // $query = DB::table('users')->where('id',$request->id)->update([
-        //     "nama" => $request->nama,
-        //     "no_hp" => $request->no_hp,
-        //     "alamat" => $request->alamat,
-        //     "role" => $request->role,
-        // ]);
+        $query = DB::table('users')->where('id',$request->id)->update([
+            "nama" => $request->nama,
+            "no_hp" => $request->telepon,
+            "alamat" => $request->alamat,
+        ]);
 
-        // if($query){
-        //     return response()->json(["callback" => 'success']);
-        // }else{
-        //     return response()->json(["callback" => 'fail']);
-        // }
-
-        $status ="AAAA";
-        echo json_encode(array("callback" => $status));
+        return response()->json(["callback" => 'success', "desc" => "Data terupdate"]);
     }
 
     public function delete($id)
