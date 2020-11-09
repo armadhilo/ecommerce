@@ -9,6 +9,7 @@
     <meta name="description" content="Inovasi Unesa">
     <meta name="keywords" content="Inovasi unesa">
     <meta name="author" content="INOVASIUNESA">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Inovasi Unesa</title>
     <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/apple-icon-120.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/favicon.ico') }}">
@@ -38,7 +39,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <!-- END: Custom CSS-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
 <!-- END: Head-->
@@ -164,39 +164,6 @@
             
         }
     </script>
-
-    <script>
-
-        $(document).ready(function(){
-            
-        })
-
-        $('#form_login').submit(function(e){
-            e.prevenDefault();
-
-            $.ajaxSetup({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                  }
-              });
-            // $.ajax({
-            // url: "{{ url('/login/coba') }}",
-            // type: "POST",
-            // dataType: 'JSON',
-            // data:$('#form_login').serialize(),
-            // success: function( data, textStatus, jQxhr ){
-            
-            // },
-            // error: function( jqXhr, textStatus, errorThrown ){
-            //     console.log( errorThrown );
-            //     console.warn(jqXhr.responseText);
-            // },
-            // });
-
-            alert($('#form_login').serialize());
-        });
-    </script>
-
 </body>
 <!-- END: Body-->
 
