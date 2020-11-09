@@ -77,7 +77,7 @@
             </div>
             <div class="modal-body">
                 <form class="form form-horizontal" id="form" autocomplete="off">
-                    {{-- <input name="_token" type="text" hidden id="_token" value="{{ csrf_token() }}" /> --}}
+                    
                     <input name="id" type="text" id="id" name="id"/>
                     <div class="form-body">
                         <div class="row pr-1 pl-1">
@@ -159,12 +159,11 @@
     function save(){
         
         var url = "";
-        // var type = "";
         if(save_method === 'add'){
             url : "{{ route('users.post') }}";
-            // type : "POST";
         }else{
-            url : "{{ url('/usersupdate') }}";
+            url : "{{ route('users.edit') }}";
+            alert($('#form').serialize());
         }
         $.ajax({
             url : url,
