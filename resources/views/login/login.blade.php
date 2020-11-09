@@ -165,6 +165,38 @@
         }
     </script>
 
+    <script>
+
+        $(document).ready(function(){
+            
+        })
+
+        $('#form_login').submit(function(e){
+            e.prevenDefault();
+
+            $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+            // $.ajax({
+            // url: "{{ url('/login/coba') }}",
+            // type: "POST",
+            // dataType: 'JSON',
+            // data:$('#form_login').serialize(),
+            // success: function( data, textStatus, jQxhr ){
+            
+            // },
+            // error: function( jqXhr, textStatus, errorThrown ){
+            //     console.log( errorThrown );
+            //     console.warn(jqXhr.responseText);
+            // },
+            // });
+
+            alert($('#form_login').serialize());
+        });
+    </script>
+
 </body>
 <!-- END: Body-->
 
