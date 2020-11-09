@@ -28,10 +28,20 @@ Route::group(['middleware' => 'cekAdmin'], function () {
     Route::post('users/add','UsersController@store')->name('users.post');
     Route::get('users/list','UsersController@list')->name('users.get');
     Route::post('users/update','UsersController@update')->name('users.edit');
-    Route::delete('users','UsersController@delete')->name('users.delete');
+    // Route::delete('users','UsersController@delete')->name('users.delete');
     Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
-    
-    Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
+
+    Route::post('category/add','CategoryController@store')->name('category.post');
+    Route::get('category/list','CategoryController@list')->name('category.get');
+    Route::post('category/update','CategoryController@update')->name('category.edit');
+    // Route::delete('category','UsersController@delete')->name('users.delete');
+    Route::get('category/detail/{id}','CategoryController@detail')->name('category.detail');
+
+    Route::post('product/add','ProductController@store')->name('product.post');
+    Route::get('product/list','ProductController@list')->name('product.get');
+    Route::post('product/update','ProductController@update')->name('product.edit');
+    // Route::delete('category','UsersController@delete')->name('users.delete');
+    Route::get('product/detail/{id}','ProductController@detail')->name('product.detail');
 
     Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
     Route::get('/users','UsersController@index')->name('users.index');

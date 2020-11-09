@@ -44,7 +44,7 @@
                                                     <th scope="col">Image</th>
                                                     <th scope="col">Product Name</th>
                                                     <th scope="col">Category</th>
-                                                    <th scope="col">User Input</th>
+                                                    <th scope="col">Description</th>
                                                     <th scope="col" class="text-center">Action</th>
                                                 </tr>
                                             </thead>
@@ -83,9 +83,10 @@
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Category</label>
                                     <select class="form-control" id="category_id" name="category_id" onchange="chooseCategory();" required>
-                                        <option value="" disabled>- Pilih -</option>
-                                        <option value="book">Book</option>
-                                        <option value="beauty">Beauty</option>
+                                        <option value="" selected disabled>- Pilih -</option>
+                                        @foreach ($category as $item)
+                                            <option value="{{$item->id}}">{{$item->category_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -189,12 +190,15 @@
     $(document).ready(function () {
         $('.book-category').attr('hidden', true);
         $('.other-category').attr('hidden', true);
-        table = $('#tb').DataTable();
+        table = $('#tb').DataTable({
+            "ajax": "{{ route('product.get') }}"
+        });
+        
     });
     
     function chooseCategory(){
         var category = $('#category_id').val();
-        if(category === "book"){
+        if(category === "1"){
             $('.book-category').attr('hidden', false);
             $('.other-category').attr('hidden', true);
         }else if(category === ""){
@@ -235,7 +239,7 @@
         var description     = tinyMCE.get('description').getContent();
 
         var form_data = new FormData();
-        form_data.append('id', category_id);
+        form_data.append('category_id', category_id);
         form_data.append('product_name', product_name);
         form_data.append('nidn', nidn);
         form_data.append('nama_lengkap', nama_lengkap);
@@ -250,9 +254,9 @@
        
         var url = "";
         if(save_method === 'add'){
-            url = "<?= url('/users/add') ?>";
+            url = "<?= url('/product/add') ?>";
         }else{
-            url = "<?= url('/users/update') ?>";
+            url = "<?= url('/product/update') ?>";
         }
         $.ajax({
             url: url,
@@ -264,14 +268,13 @@
             type: 'POST',
             success: function(response) {
                 console.log(response.callback);
-                // if(response.callback === "success"){
-                //     alertResponse('success', 'Success!', response.desc);
-                //     $('#modal_form').modal('hide');
-                //     reload();
-                // }else{
-                //     alertResponse('error', 'Failed!', response.desc);
-                // }
-                
+                if(response.callback === "success"){
+                    alertResponse('success', 'Success!', response.desc);
+                    $('#modal_form').modal('hide');
+                    reload();
+                }else{
+                    alertResponse('error', 'Failed!', response.desc);
+                }
             },
             error: function (jqXHR, textStatus, errorThrown){
                 console.log("Error json " + errorThrown);
@@ -286,7 +289,7 @@
         $('.modal-title').text('Edit Users');
         
         $.ajax({
-            url : "/users/detail/" + id,
+            url : "/product/detail/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data){

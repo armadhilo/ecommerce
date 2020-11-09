@@ -167,16 +167,9 @@
     function save(){
         var url = "";
         if(save_method === 'add'){
-<<<<<<< HEAD
-            url : "{{ route('users.post') }}";
-        }else{
-            url : "{{ route('users.edit') }}";
-            alert($('#form').serialize());
-=======
             url = "<?= url('/users/add') ?>";
         }else{
             url = "<?= url('/users/update') ?>";
->>>>>>> 55af8f5d5a04f6183965f1e60fa3e34a6f80be6f
         }
         $.ajax({
             url : url,

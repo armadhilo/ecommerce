@@ -82,18 +82,17 @@
                                         <span>Category</span>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="category_name" name="category_name" class="form-control">
+                                        <input type="text" id="category_name" name="category_name" class="form-control" required>
                                     </div>
                                 </div>
-                            </div>
-                            
+                            </div>  
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -106,7 +105,7 @@
         
     $(document).ready(function() {
         table = $('#tb').DataTable({
-            "ajax": "{{ route('users.get') }}"
+            "ajax": "{{ route('category.get') }}"
         });
     });
     
@@ -114,7 +113,7 @@
         save_method = 'add';
         $('#form')[0].reset();
         $('#modal_form').modal('show');
-        $('.modal-title').text('Add Users');
+        $('.modal-title').text('Add Category');
     }
     
     function reload(){
@@ -128,9 +127,9 @@
     function save(){
         var url = "";
         if(save_method === 'add'){
-            url = "<?= url('/users/add') ?>";
+            url = "<?= url('/category/add') ?>";
         }else{
-            url = "<?= url('/users/update') ?>";
+            url = "<?= url('/category/update') ?>";
         }
         $.ajax({
             url : url,
@@ -157,10 +156,10 @@
         save_method = 'update';
         $('#form')[0].reset();
         $('#modal_form').modal('show');
-        $('.modal-title').text('Edit Users');
+        $('.modal-title').text('Edit Category');
         
         $.ajax({
-            url : "/users/detail/" + id,
+            url : "/category/detail/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data){

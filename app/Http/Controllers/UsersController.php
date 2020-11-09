@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use DB;
 
 class UsersController extends Controller
 {
