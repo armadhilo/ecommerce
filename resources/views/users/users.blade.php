@@ -149,6 +149,7 @@
         $('#form')[0].reset();
         $('#modal_form').modal('show');
         $('.modal-title').text('Add Users');
+        $('#username').attr('readonly', false);
     }
     
     function reload(){
@@ -158,7 +159,7 @@
     $('#form').submit(function(){
         save();
     });
-    
+
     function save(){
         var url = "";
         if(save_method === 'add'){
@@ -179,6 +180,7 @@
                 }else{
                     alertResponse('error', 'Failed!', response.desc);
                 }
+                location.reload();
                 
             },
             error: function (jqXHR, textStatus, errorThrown){
@@ -192,6 +194,7 @@
         $('#form')[0].reset();
         $('#modal_form').modal('show');
         $('.modal-title').text('Edit Users');
+        $('#username').attr('readonly', true);
         
         $.ajax({
             url : "/users/detail/" + id,

@@ -30,8 +30,6 @@ Route::group(['middleware' => 'cekAdmin'], function () {
     Route::post('users/update','UsersController@update')->name('users.edit');
     Route::delete('users','UsersController@delete')->name('users.delete');
     Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
-    
-    Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
 
     Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
     Route::get('/users','UsersController@index')->name('users.index');
