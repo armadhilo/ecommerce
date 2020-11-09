@@ -9,6 +9,7 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
+    <meta name="_token" content="{{csrf_token()}}" />
     <title>Login Page - Vuexy - Bootstrap HTML admin template</title>
     <link rel="apple-touch-icon" href="{{asset('app-assets/images/ico/apple-icon-120.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('')}}app-assets/images/ico/favicon.ico">
@@ -81,8 +82,7 @@
 
                                         <div class="card-content">
                                             <div class="card-body pt-1">
-                                                <form action="{{route('login.post')}}" method="POST">
-                                                    @csrf
+                                                <form id="form_login">
                                                     <fieldset class="form-label-group form-group position-relative has-icon-left">
                                                         <input type="text" class="form-control" name="username" placeholder="Username" required>
                                                         <div class="form-control-position">
@@ -158,6 +158,38 @@
 
     <!-- BEGIN: Page JS-->
     <!-- END: Page JS-->
+
+    <script>
+
+        $(document).ready(function(){
+            
+        })
+
+        $('#form_login').submit(function(e){
+            e.prevenDefault();
+
+            $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  }
+              });
+            // $.ajax({
+            // url: "{{ url('/login/coba') }}",
+            // type: "POST",
+            // dataType: 'JSON',
+            // data:$('#form_login').serialize(),
+            // success: function( data, textStatus, jQxhr ){
+            
+            // },
+            // error: function( jqXhr, textStatus, errorThrown ){
+            //     console.log( errorThrown );
+            //     console.warn(jqXhr.responseText);
+            // },
+            // });
+
+            alert($('#form_login').serialize());
+        });
+    </script>
 
 </body>
 <!-- END: Body-->
