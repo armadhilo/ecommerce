@@ -77,12 +77,7 @@
             </div>
             <div class="modal-body">
                 <form class="form form-horizontal" id="form" autocomplete="off">
-<<<<<<< HEAD
-                    
-                    <input name="id" type="text" id="id" name="id"/>
-=======
                     <input name="id" type="text" hidden id="id" name="id"/>
->>>>>>> 55af8f5d5a04f6183965f1e60fa3e34a6f80be6f
                     <div class="form-body">
                         <div class="row pr-1 pl-1">
                             <div class="col-12">
@@ -168,16 +163,9 @@
     function save(){
         var url = "";
         if(save_method === 'add'){
-<<<<<<< HEAD
-            url : "{{ route('users.post') }}";
-        }else{
-            url : "{{ route('users.edit') }}";
-            alert($('#form').serialize());
-=======
             url = "<?= url('/users/add') ?>";
         }else{
             url = "<?= url('/users/update') ?>";
->>>>>>> 55af8f5d5a04f6183965f1e60fa3e34a6f80be6f
         }
         $.ajax({
             url : url,
