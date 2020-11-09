@@ -14,6 +14,7 @@ class LoginController extends Controller
         return view('login.login');
     }
 
+
     public function action(Request $request)
     {
         $username = $request->username;
@@ -28,13 +29,13 @@ class LoginController extends Controller
                 $request->session()->put('role', $data->role);
 
                 if($data->role == '2'){
-                    redirect('admin/dashboard');
+                    return response()->json(['status' => 'success']);
                 }
             }else{
-                return redirect('/login')->with('error','email / password anda salah 1');
+                return response()->json(['status' => 'fail']);
             }
         }else{
-            return redirect('/login')->with('error','email / password anda salah 2');
+            return response()->json(['status' => 'fail']);
         }
     }
 

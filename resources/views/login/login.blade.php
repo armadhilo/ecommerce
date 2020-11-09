@@ -16,6 +16,8 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/vendors.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/animate/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -35,6 +37,8 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <!-- END: Custom CSS-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
 <!-- END: Head-->
@@ -67,7 +71,7 @@
                                         </div>
                                         <p class="px-2">Welcome back, please login to your account.</p>
                                         
-                                        @if ($message = Session::get('success'))
+                                        {{-- @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             {{$message}} 
                                         </div>    
@@ -77,13 +81,12 @@
                                         <div class="alert alert-danger">
                                             {{$message}} 
                                         </div>    
-                                        @endif             
+                                        @endif              --}}
 
                                         <div class="card-content">
                                             <div class="card-body pt-1" style="margin-bottom: 60px;">
-                                                <form action="{{route('login.post')}}" method="POST">
-                                                    @csrf
-                                                    <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                <form method="POST" action="#" id="form_login" class="form-horizontal">
+                                                   <fieldset class="form-label-group form-group position-relative has-icon-left">
                                                         <input type="text" class="form-control" name="username" placeholder="Username" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
@@ -98,7 +101,7 @@
                                                         </div>
                                                         <label for="user-password">Password</label>
                                                     </fieldset>
-                                                    <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
+                                                    <button type="button" class="btn btn-primary float-right btn-inline" onclick="login()">Login</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -121,6 +124,7 @@
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -131,6 +135,44 @@
 
     <!-- BEGIN: Page JS-->
     <!-- END: Page JS-->
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function alertResponse(type, title, text){
+            Swal.fire({
+            type: type,
+            title: title,
+            text: text,
+            confirmButtonClass: 'btn btn-success',
+          });
+        }
+
+
+        function login(){
+            $.ajax({
+                url : "{{ route('login.post') }}",
+                type: "POST",
+                data: $('#form_login').serialize(),
+                dataType: "JSON",
+                success: function(response){
+                    if(response.status === "success"){
+                        alertResponse('success', 'Success!', 'Login Berhasil');
+                        window.location.href = "{{ route('dashboard.index') }}";
+                    }else{
+                        alertResponse('error', 'Error!', 'Username atau Password salah');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown){
+                    console.log("Error json " + errorThrown);
+                }
+            });
+            
+        }
+    </script>
 
 </body>
 <!-- END: Body-->
