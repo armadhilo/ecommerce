@@ -77,8 +77,12 @@
             </div>
             <div class="modal-body">
                 <form class="form form-horizontal" id="form" autocomplete="off">
+<<<<<<< HEAD
                     
                     <input name="id" type="text" id="id" name="id"/>
+=======
+                    <input name="id" type="text" hidden id="id" name="id"/>
+>>>>>>> 55af8f5d5a04f6183965f1e60fa3e34a6f80be6f
                     <div class="form-body">
                         <div class="row pr-1 pl-1">
                             <div class="col-12">
@@ -87,7 +91,7 @@
                                         <span>Username</span>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="username" name="username" class="form-control">
+                                        <input type="text" id="username" name="username" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +101,7 @@
                                         <span>Nama</span>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" id="nama" name="nama" class="form-control">
+                                        <input type="text" id="nama" name="nama" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -124,11 +128,11 @@
                             
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="save();">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -155,31 +159,39 @@
     function reload(){
         table.ajax.reload(null, false);
     }
+
+    $('#form').submit(function(){
+        save();
+    });
     
     function save(){
-        
         var url = "";
         if(save_method === 'add'){
+<<<<<<< HEAD
             url : "{{ route('users.post') }}";
         }else{
             url : "{{ route('users.edit') }}";
             alert($('#form').serialize());
+=======
+            url = "<?= url('/users/add') ?>";
+        }else{
+            url = "<?= url('/users/update') ?>";
+>>>>>>> 55af8f5d5a04f6183965f1e60fa3e34a6f80be6f
         }
         $.ajax({
             url : url,
             type: "POST",
             data: $('#form').serialize(),
             dataType: "JSON",
-            success: function(response){
-                console.log(response.callback);
-                // if(response.callback === "success"){
-                //     alertResponse('success', 'Success!', 'Data tersimpan');
-                //     $('#modal_form').modal('hide');
-                //     reload();
-                // }else{
-                //     alertResponse('error', 'Failed!', 'Data gagal ditambahkan');
-                // }
-               
+            success: function(response) {
+                if(response.callback === "success"){
+                    alertResponse('success', 'Success!', response.desc);
+                    $('#modal_form').modal('hide');
+                    reload();
+                }else{
+                    alertResponse('error', 'Failed!', response.desc);
+                }
+                
             },
             error: function (jqXHR, textStatus, errorThrown){
                 console.log("Error json " + errorThrown);
@@ -213,23 +225,6 @@
                 console.log('Error get data');
             }
         });
-    }
-    
-     function hapus(id){
-        if(confirm("Apakah anda yakin menghapus category dengan kode " + id + " ?")){
-            // ajax delete data to database
-            $.ajax({
-                url : "<?php echo url('/'); ?>" + "/delete/" + id,
-                type: "GET",
-                dataType: "JSON",
-                success: function(data){
-                    alert(data.status);
-                    reload();
-                },error: function (jqXHR, textStatus, errorThrown){
-                    console.log('Error hapus data');
-                }
-            });
-        }
     }
     </script>
     @endsection
