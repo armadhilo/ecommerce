@@ -119,5 +119,64 @@
     function reload(){
         table.ajax.reload(null, false);
     }
+    
+    function save(){
+        var url = "";
+        if(save_method === 'add'){
+            url = "";
+        }else{
+            url = "";
+        }
+        $.ajax({
+            url : url,
+            type: "POST",
+            data: $('#form').serialize(),
+            dataType: "JSON",
+            success: function(response){
+                alert(response.status);
+                $('#modal_form').modal('hide');
+                reload();
+            },
+            error: function (jqXHR, textStatus, errorThrown){
+                console.log("Error json " + errorThrown);
+            }
+        });
+    }
+    
+    function ganti(id){
+        save_method = 'update';
+        $('#form')[0].reset();
+        $('#modal_form').modal('show');
+        $('.modal-title').text('Edit Category');
+        
+        $.ajax({
+            url : "<?= url('/'); ?>" + "/edit/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data){
+                $('#id').val(data.idcategory);
+                $('#nama_kategori').val(data.category);
+            },error: function (jqXHR, textStatus, errorThrown){
+                console.log('Error get data');
+            }
+        });
+    }
+    
+     function hapus(id){
+        if(confirm("Apakah anda yakin menghapus category dengan kode " + id + " ?")){
+            // ajax delete data to database
+            $.ajax({
+                url : "<?php echo url('/'); ?>" + "/delete/" + id,
+                type: "GET",
+                dataType: "JSON",
+                success: function(data){
+                    alert(data.status);
+                    reload();
+                },error: function (jqXHR, textStatus, errorThrown){
+                    console.log('Error hapus data');
+                }
+            });
+        }
+    }
     </script>
     @endsection

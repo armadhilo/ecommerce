@@ -1,3 +1,6 @@
+<?php
+$menu = Request::segment(1);
+?>
 <!-- BEGIN: Header-->
     <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
             <div class="navbar-wrapper">
@@ -17,8 +20,8 @@
                                     <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">John Doe</span><span class="user-status">Available</span></div><span><img class="round" src="{{ URL::asset('app-assets/images/portrait/small/avatar-s-11.jpg') }}" alt="avatar" height="40" width="40"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i class="feather icon-user"></i> Edit Profile</a>
-                                    <a class="dropdown-item" href="#"><i class="feather icon-settings"></i> Change Password</a>
+                                    <a class="dropdown-item" href="{{ route('settings.edit_profile') }}"><i class="feather icon-user"></i> Edit Profile</a>
+                                    <a class="dropdown-item" href="{{ route('settings.change_password') }}"><i class="feather icon-settings"></i> Change Password</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="feather icon-power"></i> Logout</a>
                                 </div>
                             </li>
@@ -48,14 +51,42 @@
             <div class="shadow-bottom"></div>
             <div class="main-menu-content">
                 <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                    <li class=" navigation-header"><span>Apps</span>
-                    </li>
-                    <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a>
-                    </li>
-                    <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a>
-                    </li>
-                    <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a>
-                    </li>
+                    <?php
+                    if($menu == "users"){
+                        ?>
+                        <li class="nav-item"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
+                        <li class=" navigation-header"><span>Apps</span></li>
+                        <li class=" nav-item active"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
+                        <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
+                        <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
+                        <?php
+                    }else if($menu == "category"){
+                        ?>
+                        <li class="nav-item"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
+                        <li class=" navigation-header"><span>Apps</span></li>
+                        <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
+                        <li class=" nav-item active"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
+                        <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
+                        <?php
+                    }else if($menu == "product"){
+                        ?>
+                        <li class="nav-item"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
+                        <li class=" navigation-header"><span>Apps</span></li>
+                        <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
+                        <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
+                        <li class=" nav-item active"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
+                        <?php
+                    }else{
+                        ?>
+                        <li class="nav-item active"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
+                        <li class=" navigation-header"><span>Apps</span></li>
+                        <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
+                        <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
+                        <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
+                        <?php
+                    }
+                    ?>
+                    
 
                 </ul>
             </div>

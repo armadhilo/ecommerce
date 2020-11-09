@@ -83,33 +83,73 @@
                             <div class="col-6">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Category</label>
-                                    <input type="text" id="category" class="form-control" name="category">
+                                    <select class="form-control" id="category_id" name="category_id" onchange="chooseCategory();">
+                                        <option value="">- Pilih -</option>
+                                        <option value="book">Book</option>
+                                        <option value="beauty">Beauty</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Nama Product</label>
-                                    <input type="text" id="nama_produk" class="form-control" name="nama_produk">
+                                    <input type="text" id="product_name" class="form-control" name="product_name">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <!-- Book Category Start -->
+                            <div class="col-6 book-category">
+                                <div class="form-group mb-1">
+                                    <label style="padding-bottom: 4px;">NIDN</label>
+                                    <input type="text" id="nidn" class="form-control" name="nidn">
+                                </div>
+                            </div>
+                            <div class="col-6 book-category">
+                                <div class="form-group mb-1">
+                                    <label style="padding-bottom: 4px;">Nama Lengkap</label>
+                                    <input type="text" id="nama_lengkap" class="form-control" name="nama_lengkap">
+                                </div>
+                            </div>
+                            <div class="col-6 book-category">
+                                <div class="form-group mb-1">
+                                    <label style="padding-bottom: 4px;">ISBN</label>
+                                    <input type="text" id="isbn" class="form-control" name="isbn">
+                                </div>
+                            </div>
+                            <div class="col-6 book-category">
+                                <div class="form-group mb-1">
+                                    <label style="padding-bottom: 4px;">Jumlah Halaman</label>
+                                    <input type="text" id="jml_halaman" class="form-control" name="jml_halaman">
+                                </div>
+                            </div>
+                            <div class="col-6 book-category">
+                                <div class="form-group mb-1">
+                                    <label style="padding-bottom: 4px;">Penerbit</label>
+                                    <input type="text" id="penerbit" class="form-control" name="penerbit">
+                                </div>
+                            </div>
+                            <!-- Book Category End -->
+                            
+                            <!-- Others Category Start -->
+                            <div class="col-6 other-category">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">PIC</label>
                                     <input type="text" id="pic" class="form-control" name="pic">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 other-category">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Mitra</label>
                                     <input type="text" id="mitra" class="form-control" name="mitra">
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 other-category">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Status</label>
                                     <input type="text" id="status" class="form-control" name="status">
                                 </div>
                             </div>
+                            <!-- Others Category End -->
+                            
                             <div class="col-6">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Image</label>
@@ -148,9 +188,24 @@
     var table;
 
     $(document).ready(function () {
+        $('.book-category').attr('hidden', true);
+        $('.other-category').attr('hidden', true);
         table = $('#tb').DataTable();
     });
-
+    
+    function chooseCategory(){
+        var category = $('#category_id').val();
+        if(category === "book"){
+            $('.book-category').attr('hidden', false);
+            $('.other-category').attr('hidden', true);
+        }else if(category === ""){
+            $('.book-category').attr('hidden', true);
+            $('.other-category').attr('hidden', true);
+        }else{
+            $('.book-category').attr('hidden', true);
+            $('.other-category').attr('hidden', false);
+        }
+    }
     function add() {
         save_method = 'add';
         $('#form')[0].reset();
@@ -164,7 +219,7 @@
     
     function save(){
         var desc = tinyMCE.get('description').getContent();
-        alert(desc);
+        
         
     }
 </script>
