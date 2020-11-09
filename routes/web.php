@@ -12,9 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('main_product.main_product');
+    return view('login.login');
 });
-Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
+
+Route::get('login','LoginController@index');
+Route::post('login','LoginController@action')->name('login.post');
+Route::get('logout','LoginController@logout');
+
+Route::group(['middleware' => 'cekAdmin'], function () {
+
+    Route::post('users','UsersController@store')->name('users.post');
+    Route::put('users/edit/{id}','UsersController@update')->name('users.edit');
+    Route::delete('users','UsersController@delete')->name('users.delete');
+
+});
+
+Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
+
 Route::get('/users','UsersController@index')->name('users.index');
 Route::get('/category','CategoryController@index')->name('category.index');
 Route::get('/product','ProductController@index')->name('product.index');
