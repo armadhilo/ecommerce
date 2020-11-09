@@ -15,6 +15,24 @@ class UsersController extends Controller
         return view('users.users',$data);
     }
 
+    public function list() {
+        $data = array();
+        $list = DB::table('users')->get();
+        foreach ($list as $row) {
+            $val = array();
+            $val[] = $row->username;
+            $val[] = $row->nama;
+            $val[] = $row->no_hp;
+            $val[] = $row->alamat;
+            $val[] = '<div style="text-align: center;">'
+                    . '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="ganti('."'".$row->id."'".')"><i class="fa fa-pencil"></i> Edit</a>'
+                    . '</div>';
+            $data[] = $val;
+        }
+        $output = array("data" => $data);
+        echo json_encode($output);
+    }
+
     public function detail($id)
     {
         $query = DB::table('users')->where('id',$id)->first();
@@ -35,9 +53,9 @@ class UsersController extends Controller
                     "username" => $request->username,
                     "password" =>  Hash::make($request->username),
                     "nama" => $request->nama,
-                    "no_hp" => $request->no_hp,
+                    "no_hp" => $request->telepon,
                     "alamat" => $request->alamat,
-                    "role" => $request->role,
+                    "role" => '2',
                  ]);
 
         if($query){
@@ -47,20 +65,23 @@ class UsersController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $query = DB::table('users')->where('id',$id)->update([
-            "nama" => $request->nama,
-            "no_hp" => $request->no_hp,
-            "alamat" => $request->alamat,
-            "role" => $request->role,
-        ]);
+        // $query = DB::table('users')->where('id',$request->id)->update([
+        //     "nama" => $request->nama,
+        //     "no_hp" => $request->no_hp,
+        //     "alamat" => $request->alamat,
+        //     "role" => $request->role,
+        // ]);
 
-        if($query){
-            return response()->json(["callback" => 'success']);
-        }else{
-            return response()->json(["callback" => 'fail']);
-        }
+        // if($query){
+        //     return response()->json(["callback" => 'success']);
+        // }else{
+        //     return response()->json(["callback" => 'fail']);
+        // }
+
+        $status ="AAAA";
+        echo json_encode(array("callback" => $status));
     }
 
     public function delete($id)

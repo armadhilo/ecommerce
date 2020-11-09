@@ -45,7 +45,7 @@
                                                     <th scope="col">Nama</th>
                                                     <th scope="col">Telepon</th>
                                                     <th scope="col">Alamat</th>
-                                                    <th scope="col">Foto</th>
+                                                    {{-- <th scope="col">Foto</th> --}}
                                                     <th scope="col" class="text-center">Action</th>
                                                 </tr>
                                             </thead>
@@ -77,8 +77,8 @@
             </div>
             <div class="modal-body">
                 <form class="form form-horizontal" id="form" autocomplete="off">
-                    <input name="_token" type="text" hidden id="_token" value="{{ csrf_token() }}" />
-                    <input name="id" type="text" hidden id="id"/>
+                    {{-- <input name="_token" type="text" hidden id="_token" value="{{ csrf_token() }}" /> --}}
+                    <input name="id" type="text" id="id" name="id"/>
                     <div class="form-body">
                         <div class="row pr-1 pl-1">
                             <div class="col-12">
@@ -140,7 +140,9 @@
     var table;
         
     $(document).ready(function() {
-        table = $('#tb').DataTable();
+        table = $('#tb').DataTable({
+            "ajax": "{{ route('users.get') }}"
+        });
     });
     
     function add(){
@@ -152,6 +154,83 @@
     
     function reload(){
         table.ajax.reload(null, false);
+    }
+    
+    function save(){
+        
+        var url = "";
+        // var type = "";
+        if(save_method === 'add'){
+            url : "{{ route('users.post') }}";
+            // type : "POST";
+        }else{
+            url : "{{ url('/usersupdate') }}";
+        }
+        $.ajax({
+            url : url,
+            type: "POST",
+            data: $('#form').serialize(),
+            dataType: "JSON",
+            success: function(response){
+                console.log(response.callback);
+                // if(response.callback === "success"){
+                //     alertResponse('success', 'Success!', 'Data tersimpan');
+                //     $('#modal_form').modal('hide');
+                //     reload();
+                // }else{
+                //     alertResponse('error', 'Failed!', 'Data gagal ditambahkan');
+                // }
+               
+            },
+            error: function (jqXHR, textStatus, errorThrown){
+                console.log("Error json " + errorThrown);
+            }
+        });
+    }
+    
+    function ganti(id){
+        save_method = 'update';
+        $('#form')[0].reset();
+        $('#modal_form').modal('show');
+        $('.modal-title').text('Edit Users');
+        
+        $.ajax({
+            url : "/users/detail/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data){
+                if(data.callback === "success"){
+                    var data = data.data;
+                    $('#id').val(data.id);
+                    $('#username').val(data.username);
+                    $('#nama').val(data.nama);
+                    $('#telepon').val(data.no_hp); 
+                    $('#alamat').val(data.alamat); 
+                }else{
+                    alertResponse('error', 'Failed!', 'Data tidak ditemukan');
+                }
+               
+            },error: function (jqXHR, textStatus, errorThrown){
+                console.log('Error get data');
+            }
+        });
+    }
+    
+     function hapus(id){
+        if(confirm("Apakah anda yakin menghapus category dengan kode " + id + " ?")){
+            // ajax delete data to database
+            $.ajax({
+                url : "<?php echo url('/'); ?>" + "/delete/" + id,
+                type: "GET",
+                dataType: "JSON",
+                success: function(data){
+                    alert(data.status);
+                    reload();
+                },error: function (jqXHR, textStatus, errorThrown){
+                    console.log('Error hapus data');
+                }
+            });
+        }
     }
     </script>
     @endsection

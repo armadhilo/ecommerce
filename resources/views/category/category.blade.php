@@ -123,9 +123,9 @@
         alertResponse('success', 'Success!', 'Data Tersimpan');
         var url = "";
         if(save_method === 'add'){
-            url : "{{ route('login.post') }}",
+            url : "{{ route('login.post') }}";
         }else{
-            url : "{{ route('login.post') }}",
+            url : "{{ route('login.post') }}";
         }
         $.ajax({
             url : url,
