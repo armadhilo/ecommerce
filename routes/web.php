@@ -28,7 +28,11 @@ Route::group(['middleware' => 'cekAdmin'], function () {
     Route::post('users/add','UsersController@store')->name('users.post');
     Route::get('users/list','UsersController@list')->name('users.get');
     Route::post('users/update','UsersController@update')->name('users.edit');
+<<<<<<< HEAD
     // Route::delete('users','UsersController@delete')->name('users.delete');
+=======
+    Route::delete('users','UsersController@delete')->name('users.delete');
+>>>>>>> f70f0c4dc08ad6a3f93b6bcae88dcd6cf6255d3f
     Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
 
     Route::post('category/add','CategoryController@store')->name('category.post');

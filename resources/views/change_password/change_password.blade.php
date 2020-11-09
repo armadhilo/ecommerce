@@ -34,7 +34,6 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <form class="form form-horizontal" id="form" autocomplete="off">
-                                        <input name="_token" type="text" hidden id="_token" value="{{ csrf_token() }}" />
                                         <input name="id" type="text" hidden id="id"/>
                                         <div class="form-body">
                                             <div class="row pr-1 pl-1">
@@ -44,7 +43,7 @@
                                                             <span>Old Password</span>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="old_pass" name="old_pass" class="form-control">
+                                                            <input type="password" id="old_pass" name="old_pass" class="form-control my-required">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -54,7 +53,7 @@
                                                             <span>New Password</span>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="new_pass" name="new_pass" class="form-control">
+                                                            <input type="password" id="new_pass" name="new_pass" class="form-control my-required">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -64,7 +63,7 @@
                                                             <span>Retype Password</span>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" id="retype_pass" name="retype_pass" class="form-control">
+                                                            <input type="password" id="retype_pass" name="retype_pass" class="form-control my-required">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -74,8 +73,9 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" onclick="save();">Change Password</button>
+                                    <button type="button" class="btn btn-primary" onclick="save()">Change Password</button>
                                 </div>
+                            
                             </div>
                         </div>
                     </div>
@@ -91,81 +91,41 @@
     
     @section('js')
     <script>
-    var save_method;
-    var table;
-        
-    $(document).ready(function() {
-        table = $('#tb').DataTable();
-    });
-    
-    function add(){
-        save_method = 'add';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Add Category');
-    }
-    
-    function reload(){
-        table.ajax.reload(null, false);
-    }
-    
-    function save(){
-        var url = "";
-        if(save_method === 'add'){
-            url = "";
-        }else{
-            url = "";
-        }
-        $.ajax({
-            url : url,
-            type: "POST",
-            data: $('#form').serialize(),
-            dataType: "JSON",
-            success: function(response){
-                alert(response.status);
-                $('#modal_form').modal('hide');
-                reload();
-            },
-            error: function (jqXHR, textStatus, errorThrown){
-                console.log("Error json " + errorThrown);
-            }
-        });
-    }
-    
-    function ganti(id){
-        save_method = 'update';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Edit Category');
-        
-        $.ajax({
-            url : "<?= url('/'); ?>" + "/edit/" + id,
-            type: "GET",
-            dataType: "JSON",
-            success: function(data){
-                $('#id').val(data.idcategory);
-                $('#nama_kategori').val(data.category);
-            },error: function (jqXHR, textStatus, errorThrown){
-                console.log('Error get data');
-            }
-        });
-    }
-    
-     function hapus(id){
-        if(confirm("Apakah anda yakin menghapus category dengan kode " + id + " ?")){
-            // ajax delete data to database
-            $.ajax({
-                url : "<?php echo url('/'); ?>" + "/delete/" + id,
-                type: "GET",
-                dataType: "JSON",
-                success: function(data){
-                    alert(data.status);
-                    reload();
-                },error: function (jqXHR, textStatus, errorThrown){
-                    console.log('Error hapus data');
-                }
+        function checkRequired(){
+            var reqlength = $('.my-required').length;
+            var value = $('.my-required').filter(function () {
+                return this.value != '';
             });
+            var empty = "";
+            if (value.length >= 0 && (value.length !== reqlength)) {
+                empty = "empty";
+            }else{
+                empty = "not_empty";
+            }
+            return empty;
         }
-    }
+        
+        function save(){
+
+            var check_req = checkRequired();
+            if(check_req === "empty"){
+                alertResponse('info', 'Info!', 'Mohon isi field yang kosong');
+            }else if($('#new_pass').val() != $('#retype_pass').val()){
+                alertResponse('info', 'Info!', 'Password tidak sama');
+            }else{
+                $.ajax({
+                    url : "",
+                    type: "POST",
+                    data: $('#form').serialize(),
+                    dataType: "JSON",
+                    success: function(response){
+                        console.log(response);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown){
+                        console.log("Error json " + errorThrown);
+                    }
+                });
+            }
+        }
     </script>
     @endsection

@@ -77,12 +77,7 @@
             </div>
             <div class="modal-body">
                 <form class="form form-horizontal" id="form" autocomplete="off">
-<<<<<<< HEAD
-                    
-                    <input name="id" type="text" id="id" name="id"/>
-=======
                     <input name="id" type="text" hidden id="id" name="id"/>
->>>>>>> 55af8f5d5a04f6183965f1e60fa3e34a6f80be6f
                     <div class="form-body">
                         <div class="row pr-1 pl-1">
                             <div class="col-12">
@@ -154,6 +149,7 @@
         $('#form')[0].reset();
         $('#modal_form').modal('show');
         $('.modal-title').text('Add Users');
+        $('#username').attr('readonly', false);
     }
     
     function reload(){
@@ -163,7 +159,7 @@
     $('#form').submit(function(){
         save();
     });
-    
+
     function save(){
         var url = "";
         if(save_method === 'add'){
@@ -184,6 +180,7 @@
                 }else{
                     alertResponse('error', 'Failed!', response.desc);
                 }
+                location.reload();
                 
             },
             error: function (jqXHR, textStatus, errorThrown){
@@ -197,6 +194,7 @@
         $('#form')[0].reset();
         $('#modal_form').modal('show');
         $('.modal-title').text('Edit Users');
+        $('#username').attr('readonly', true);
         
         $.ajax({
             url : "/users/detail/" + id,

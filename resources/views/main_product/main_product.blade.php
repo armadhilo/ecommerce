@@ -6,10 +6,49 @@
     <div class="content-overlay"></div>
     <!--<div class="header-navbar-shadow"></div>-->
     <div class="content-wrapper">
-        <div class="content-header row">                       
+        <div class="content-header row">  
+            <section id="carousel-options">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="card" style="margin-left: 14px; margin-right: 14px;">
+                            <div class="card-content">
+                                <div class="card-body" style="padding: 0px;">
+                                    <div id="carousel-interval" class="carousel slide" data-ride="carousel" data-interval="5000">
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#carousel-interval" data-slide-to="0" class="active"></li>
+                                            <li data-target="#carousel-interval" data-slide-to="1"></li>
+                                            <li data-target="#carousel-interval" data-slide-to="2"></li>
+                                        </ol>
+                                        <div class="carousel-inner" role="listbox">
+                                            <div class="carousel-item active" style="height: 300px;">
+                                                <img class="img-fluid" src="../../../app-assets/images/slider/01.jpg" alt="First slide">
+                                            </div>
+                                            <div class="carousel-item" style="height: 300px;">
+                                                <img class="img-fluid" src="../../../app-assets/images/slider/03.jpg" alt="Second slide">
+                                            </div>
+                                            <div class="carousel-item" style="height: 300px;">
+                                                <img class="img-fluid" src="../../../app-assets/images/slider/02.jpg" alt="Third slide">
+                                            </div>
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carousel-interval" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carousel-interval" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>                     
         </div>
         <div class="content-detached content-right">
             <div class="content-body">
+                
                 <!-- Ecommerce Content Section Starts -->
                 <section id="ecommerce-header">
                     <div class="row">
@@ -147,35 +186,6 @@
                     </span>
                     <div class="card">
                         <div class="card-body">
-                            <div class="multi-range-price">
-                                <div class="multi-range-title pb-75">
-                                    <h6 class="filter-title mb-0">Multi Range</h6>
-                                </div>
-                                <ul class="list-unstyled price-range" id="price-range">
-                                    <li>
-                                        <span class="vs-radio-con vs-radio-primary py-25">
-                                            <input type="radio" name="price-range" checked value="false">
-                                            <span class="vs-radio">
-                                                <span class="vs-radio--border"></span>
-                                                <span class="vs-radio--circle"></span>
-                                            </span>
-                                            <span class="ml-50">All</span>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span class="vs-radio-con vs-radio-primary py-25">
-                                            <input type="radio" name="price-range" value="false">
-                                            <span class="vs-radio">
-                                                <span class="vs-radio--border"></span>
-                                                <span class="vs-radio--circle"></span>
-                                            </span>
-                                            <span class="ml-50"> &lt;=$10</span>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /Price Filter -->
-                            <hr>
                             <!-- Categories Starts -->
                             <div id="product-categories">
                                 <div class="product-category-title">
@@ -184,66 +194,35 @@
                                 <ul class="list-unstyled categories-list">
                                     <li>
                                         <span class="vs-radio-con vs-radio-primary py-25">
-                                            <input type="radio" name="category-filter" value="false" checked>
+                                            <input type="radio" name="category_id" value="all">
                                             <span class="vs-radio">
                                                 <span class="vs-radio--border"></span>
                                                 <span class="vs-radio--circle"></span>
                                             </span>
-                                            <span class="ml-50">Appliances</span>
+                                            <span class="ml-50"> All</span>
                                         </span>
                                     </li>
-                                    <li>
-                                        <span class="vs-radio-con vs-radio-primary py-25">
-                                            <input type="radio" name="category-filter" value="false">
-                                            <span class="vs-radio">
-                                                <span class="vs-radio--border"></span>
-                                                <span class="vs-radio--circle"></span>
+                                    <?php
+                                    $list = DB::table('category')->get();
+                                    foreach ($list as $row) {
+                                        ?>
+                                        <li>
+                                            <span class="vs-radio-con vs-radio-primary py-25">
+                                                <input type="radio" name="category_id" value="<?php echo $row->id;?>">
+                                                <span class="vs-radio">
+                                                    <span class="vs-radio--border"></span>
+                                                    <span class="vs-radio--circle"></span>
+                                                </span>
+                                                <span class="ml-50"><?php echo $row->category_name?></span>
                                             </span>
-                                            <span class="ml-50"> Audio</span>
-                                        </span>
-                                    </li>
+                                        </li>
+                                        <?php
+                                    }    
+                                    ?>
                                 </ul>
                             </div>
                             <!-- Categories Ends -->
                             <hr>
-                            <!-- Brands -->
-                            <div class="brands">
-                                <div class="brand-title mt-1 pb-1">
-                                    <h6 class="filter-title mb-0">Brands</h6>
-                                </div>
-                                <div class="brand-list" id="brands">
-                                    <ul class="list-unstyled">
-                                        <li class="d-flex justify-content-between align-items-center py-25">
-                                            <span class="vs-checkbox-con vs-checkbox-primary">
-                                                <input type="checkbox" value="false">
-                                                <span class="vs-checkbox">
-                                                    <span class="vs-checkbox--check">
-                                                        <i class="vs-icon feather icon-check"></i>
-                                                    </span>
-                                                </span>
-                                                <span class="">Insignia™</span>
-                                            </span>
-                                            <span>746</span>
-                                        </li>
-                                        <li class="d-flex justify-content-between align-items-center py-25">
-                                            <span class="vs-checkbox-con vs-checkbox-primary">
-                                                <input type="checkbox" value="false">
-                                                <span class="vs-checkbox">
-                                                    <span class="vs-checkbox--check">
-                                                        <i class="vs-icon feather icon-check"></i>
-                                                    </span>
-                                                </span>
-                                                <span class="">
-                                                    Samsung
-                                                </span>
-                                            </span>
-                                            <span>633</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /Brand -->
-                           
                             <!-- Clear Filters Starts -->
                             <div id="clear-filters">
                                 <button class="btn btn-block btn-primary">CLEAR ALL FILTERS</button>
@@ -261,3 +240,29 @@
 </div>
 <!-- END: Content-->
 @endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+
+            $("input:radio").click(function() {
+                var category_id =$('input[name="category_id"]:checked').val();
+                $.ajax({
+                    url : "/users/detail/" + category_id,
+                    type: "GET",
+                    dataType: "JSON",
+                    success: function(response){
+                        //append product
+                        console.log(response);
+                    },error: function (jqXHR, textStatus, errorThrown){
+                        console.log('Error get data');
+                    }
+                });
+
+            });
+
+            // $("input:radio:first").prop("checked", true).trigger("click");
+
+        });
+    </script>
+    @endsection
