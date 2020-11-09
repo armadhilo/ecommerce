@@ -29,6 +29,7 @@ Route::group(['middleware' => 'cekAdmin'], function () {
 
 Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
 
+Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
 Route::get('/users','UsersController@index')->name('users.index');
 Route::get('/category','CategoryController@index')->name('category.index');
 Route::get('/product','ProductController@index')->name('product.index');

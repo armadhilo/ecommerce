@@ -14,6 +14,7 @@ class LoginController extends Controller
         return view('login.login');
     }
 
+
     public function action(Request $request)
     {
         dd($request);
@@ -30,15 +31,13 @@ class LoginController extends Controller
                 $request->session()->put('role', $data->role);
 
                 if($data->role == '2'){
-                    return response()->json(['status' => 'berhasil']);
+                    return response()->json(['status' => 'success']);
                 }
             }else{
-                return response()->json(['status' => 'gagal']);
-                // return redirect('/login')->with('error','email / password anda salah 1');
+                return response()->json(['status' => 'fail']);
             }
         }else{
-            return response()->json(['status' => 'gagal']);
-            // return redirect('/login')->with('error','email / password anda salah 2');
+            return response()->json(['status' => 'fail']);
         }
     }
 

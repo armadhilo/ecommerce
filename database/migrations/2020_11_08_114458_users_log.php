@@ -28,6 +28,6 @@ class UsersLog extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('users_log');
     }
 }
