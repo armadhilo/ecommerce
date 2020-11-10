@@ -109,7 +109,7 @@ class ProductController extends Controller
             $foto = $photo;
         }
 
-        $query = DB::table('category')->update([
+        $query = DB::table('product')->update([
             "category_id" => $request->category_id,
             "users_id" => session('id'),
             "product_name" => $request->product_name,
@@ -121,11 +121,17 @@ class ProductController extends Controller
             "penerbit" => $request->penerbit,
             "status" => '1',   
             "image" => $foto,     
-        ],
-    );
+        ]);
 
+        DB::table('users_log')->insert([
+            "users_id" => session('username'),
+            "action" => 'UPDATE',
+            "product_id" => $query,
+            "created_at" => date("Y-m-d H:i:s"),
+            "updated_at" => date("Y-m-d H:i:s"),
+        ]);
 
-
+        return response()->json(["callback" => 'success', "desc" => "Data terupdate"]);
     }
 
 

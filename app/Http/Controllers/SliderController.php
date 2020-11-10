@@ -47,7 +47,6 @@ class SliderController extends Controller
             $file->move('images',$photo);
 
             $query = DB::table('slider')->insert([
-                "id" => 1,
                 "slider" => $photo,
             ]);
             if($query){
