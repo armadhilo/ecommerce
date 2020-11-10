@@ -10,8 +10,8 @@
     <meta name="keywords" content="Inovasi unesa">
     <meta name="author" content="INOVASIUNESA">
     <title>Inovasi Unesa</title>
-    <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/apple-icon-120.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('app-assets/images/logo/logo-unesa.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/logo/logo-unesa.png') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -47,12 +47,19 @@
         /* .horizontal-menu.navbar-floating:not(.blank-page) .app-content{
             padding-top: 0px !important;
         } */
-        /* .horizontal-menu .horizontal-menu-wrapper{
+        .horizontal-menu .horizontal-menu-wrapper{
             top: 0px;
         }
         .horizontal-menu.navbar-floating:not(.blank-page) .app-content{
             padding-top: 6.35rem;
-        } */
+        }
+        
+        @media screen and (max-width: 1200px) {
+            div#nav_logo{
+                display: none !important;
+            }
+        }
+
     </style>
 </head>
 <!-- END: Head-->

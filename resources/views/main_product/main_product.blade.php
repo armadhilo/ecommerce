@@ -30,6 +30,7 @@
                                                 <img class="img-fluid" src="../../../app-assets/images/slider/02.jpg" alt="Third slide">
                                             </div>
                                         </div>
+
                                         <a class="carousel-control-prev" href="#carousel-interval" role="button" data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="sr-only">Previous</span>
@@ -86,7 +87,7 @@
                     <div class="row mt-1">
                         <div class="col-sm-12">
                             <fieldset class="form-group position-relative">
-                                <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here">
+                                <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here" onkeyup="searchProduct();">
                                 <div class="form-control-position">
                                     <i class="feather icon-search"></i>
                                 </div>
@@ -98,47 +99,10 @@
 
                 <!-- Ecommerce Products Starts -->
                 <section id="ecommerce-products" class="grid-view">
-                    <div class="card ecommerce-card">
-                        <div class="card-content">
-                            <div class="item-img text-center">
-                                <a href="{{ route('main_product.product_detail') }}">
-                                    <img class="img-fluid" src="../../../app-assets/images/pages/eCommerce/1.png" alt="img-placeholder"></a>
-                            </div>
-                            <div class="card-body">
-                                <div class="item-wrapper">
-                                    <div>
-                                        <h6 class="item-price">
-                                        </h6>
-                                    </div>
-                                </div>
-                                <div class="item-name">
-                                    <a href="app-ecommerce-details.html">Amazon - Fire TV Stick with Alexa Voice Remote - Black</a>
-                                    <p class="item-company">By <span class="company-name">Google</span></p>
-                                </div>
-                                <div>
-                                    <p class="item-description">
-                                        Enjoy smart access to videos, games and apps with this Amazon Fire TV stick. Its Alexa voice remote lets you
-                                        deliver hands-free commands when you want to watch television or engage with other applications. With a
-                                        quad-core processor, 1GB internal memory and 8GB of storage, this portable Amazon Fire TV stick works fast
-                                        for buffer-free streaming.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="item-options text-center">
-                                <div class="item-wrapper">
-                                    <div class="item-cost">
-                                        <h6 class="item-price">
-                                        </h6>
-                                    </div>
-                                </div>
-                                <div class="cart">
-                                    <i class="feather icon-eye"></i> 
-                                    <a href="{{ route('main_product.product_detail') }}" class="view-in-cart">Product Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     
+                    
+                </section>
+                <section id="products_notfound">
                 </section>
                 <!-- Ecommerce Products Ends -->
 
@@ -169,6 +133,7 @@
         <div class="sidebar-detached sidebar-left">
             <div class="sidebar">
                 <!-- Ecommerce Sidebar Starts -->
+               
                 <div class="sidebar-shop" id="ecommerce-sidebar-toggler">
 
                     <div class="row">
@@ -189,7 +154,7 @@
                                 <ul class="list-unstyled categories-list">
                                     <li>
                                         <span class="vs-radio-con vs-radio-primary py-25">
-                                            <input type="radio" name="category_id" value="all" checked>
+                                            <input type="radio" name="category_id" value="" checked>
                                             <span class="vs-radio">
                                                 <span class="vs-radio--border"></span>
                                                 <span class="vs-radio--circle"></span>
@@ -246,9 +211,23 @@
 
             $("input:radio:first").prop("checked", true).trigger("click");
 
+            // $('#search_product').keypress(function (e) {
+            // var key = e.which;
+            // if(key == 13){
+            //     filterProduct();
+            //     }
+            // });   
+
         });
 
+        function searchProduct(){
+            filterProduct();
+        }
+
+
         function filterProduct(){
+            var product_list = $('#ecommerce-products');
+            product_list.empty();
             var category_id =$('input[name="category_id"]:checked').val();
             var search = $('#search_product').val(); 
             var form_data = new FormData();
@@ -266,6 +245,66 @@
                 success: function(response){
                     //append product
                     console.log(response);
+                    var data = response.data;
+                    if(data.length > 0){
+                        for (let i = 0; i < data.length; i++) {
+                            product_list.append(`
+                                <div class="card ecommerce-card">
+                                    <div class="card-content">
+                                        <div class="item-img text-center">
+                                            <a href="{{ route('main_product.product_detail') }}">
+                                                <img class="img-fluid" src="{{ url('images/') }}/${data[i].image}" alt="img-product"></a>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="item-wrapper">
+                                                <div>
+                                                    <h6 class="item-price">
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="item-name">
+                                                <a href="app-ecommerce-details.html">${data[i].product_name}</a>
+                                                <p class="item-company">By <span class="company-name">Google</span></p>
+                                            </div>
+                                            <div>
+                                                <p class="item-description">${data[i].description}</p>
+                                            </div>
+                                        </div>
+                                        <div class="item-options text-center">
+                                            <div class="item-wrapper">
+                                                <div class="item-cost">
+                                                    <h6 class="item-price">
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="cart">
+                                                <i class="feather icon-eye"></i> 
+                                                <a href="{{ route('main_product.product_detail') }}" class="view-in-cart">Product Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                `);
+                            
+                        }
+                    }else{
+                        $('#products_notfound').append(`
+                        <div class="card">
+                            <div class="card-body text-center p-4">
+                                <img class="img-fluid rounded-sm mb-1" style="width: 200px; height: auto;" src="{{ asset('app-assets/images/logo/not_found.png') }}">
+                                <p>
+                                    Oops, produk tidak ditemukan.
+                                    Coba gunakan kata kunci lain.
+                                </p>
+                            </div>
+                            
+                        </div>
+                        `);
+
+                    }
+                    
+                    
                 },error: function (jqXHR, textStatus, errorThrown){
                     console.log('Error get data');
                 }
