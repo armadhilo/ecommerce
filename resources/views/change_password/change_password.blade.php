@@ -114,7 +114,7 @@
                 alertResponse('info', 'Info!', 'Password tidak sama');
             }else{
                 $.ajax({
-                    url : "",
+                    url : "/change_password/action",
                     type: "POST",
                     data: $('#form').serialize(),
                     dataType: "JSON",
