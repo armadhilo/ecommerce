@@ -44,9 +44,9 @@
     <!-- END: Custom CSS-->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
-        .horizontal-menu.navbar-floating:not(.blank-page) .app-content{
+        /* .horizontal-menu.navbar-floating:not(.blank-page) .app-content{
             padding-top: 0px !important;
-        }
+        } */
         /* .horizontal-menu .horizontal-menu-wrapper{
             top: 0px;
         }
@@ -60,7 +60,7 @@
 <!-- BEGIN: Body-->
 
 <body class="horizontal-layout horizontal-menu content-detached-left-sidebar ecommerce-application navbar-floating footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="content-detached-left-sidebar">
-    {{-- @include('partial_horizontal.header') --}}
+    @include('partial_horizontal.header')
     @yield('content')
 
     <div class="sidenav-overlay"></div>

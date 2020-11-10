@@ -9,7 +9,7 @@
   'use strict';
 
   var $danger = "#ea5455";
-  var $primary = "#7367f0";
+  var $primary = "#3f9ce8";
   var $textcolor = "#4e5154";
 
   $(".char-textarea").on("keyup", function (event) {
