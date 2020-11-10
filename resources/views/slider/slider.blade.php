@@ -134,8 +134,8 @@
 
         var slider = $('#slider').prop('files')[0];
         var form_data = new FormData();
-        form_data.append('id', id);
-        form_data.append('slider', slider);
+        form_data.append('id', $('#id').val());
+        form_data.append('slider', $('#slider').val());
 
         $.ajax({
             url: url,

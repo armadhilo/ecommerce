@@ -76,37 +76,25 @@ class SliderController extends Controller
     }
 
     public function update(Request $request){
-        if(empty($_FILES['slider']['name'])){
-            $status = "Please choose a picture";
-        }else{
-            $save_path = "images/slider";
 
-            $this->validate($request, [
-                'slider' => 'required|image|mimes:jpg,png,jpeg'
-            ]);
-    
-            $data = $request->input('slider');
-            $file = $request->file('slider');
-            $photo =  time().$file->getClientOriginalName();
-            $file->move($save_path,$photo);
-
-            $query = DB::table('slider')->where('id',$request->id)->update([
-                "slider" => $photo,
-                "updated_at" => date("Y-m-d H:i:s"),
-            ]);
-            if($query){
-                $pict = DB::table('slider')->where('id',$request->id)->select('image')->first();
-                $image_path = 'images/slider/'.$pict->image;  // Value is not URL but directory file path
-                if(File::exists($image_path)) {
-                    File::delete($image_path);
-                }
-                $status = "Data terupdate";
-            }else{
-                $status = "Data gagal terupdate";
-            }
+        dd($request);
+        if(!$request->hasfile('slider')){
+            return response()->json(["callback" => 'add image please']);
         }
+        
+        $data = $request->input('slider');
+        $file = $request->file('slider');
+        $photo =  time().$file->getClientOriginalName();
+        $file->move('images/slider',$photo);
+        $foto = $photo;
 
-        echo json_encode(array("status" => $status));
+        $query = DB::table('slider')->where('id',$request->id)->update([
+            "slider" => $foto
+        ]);
+
+       return response()->json([
+           "status" => 'Data Tersimpan',
+       ]);
     }
 
 

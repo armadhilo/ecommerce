@@ -54,14 +54,8 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $validator = $this->validate($request, [
-            'image' => 'required|image|mimes:jpg,png,jpeg'
-        ]);
-
-        if($validator->fails()){
-            return response()->json([
-                "status" => 'Please choose a picture',
-            ]);
+        if(!$request->hasfile('image')){
+            return response()->json(["callback" => 'add image please']);
         }
         
         $data = $request->input('image');
@@ -77,7 +71,8 @@ class ProductController extends Controller
                     "description" => $request->description,
                     "pic" => $request->pic,
                     "mitra" => $request->mitra,
-                    "nidn" => $request->nidn,
+                    "isbn" => $request->isbn,
+                    "nama_lengkap" => $request->nama_lengkap,
                     "jml_halaman" => $request->jml_halaman,
                     "penerbit" => $request->penerbit,
                     "status" => '1',
@@ -112,7 +107,9 @@ class ProductController extends Controller
             $photo =  time().$file->getClientOriginalName();
             $file->move('images',$photo);
 
-            $foto = $photo;
+            $query = DB::table('product')->where('id',$request->id)->update([
+                "image" => $photo
+            ]);
         }
 
         $query = DB::table('product')->where('id',$request->id)->update([
@@ -122,11 +119,11 @@ class ProductController extends Controller
             "description" => $request->description,
             "pic" => $request->pic,
             "mitra" => $request->mitra,
-            "nidn" => $request->nidn,
+            "isbn" => $request->isbn,
+            "nama_lengkap" => $request->nama_lengkap,
             "jml_halaman" => $request->jml_halaman,
             "penerbit" => $request->penerbit,
-            "status" => '1',   
-            "image" => $foto,     
+            "status" => '1',        
         ]);
 
         DB::table('users_log')->insert([

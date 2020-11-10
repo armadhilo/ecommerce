@@ -14,7 +14,7 @@ class AddNamaLengkapToProduct extends Migration
     public function up()
     {
         Schema::table('product', function (Blueprint $table) {
-            $table->string('nama_lengkap');
+            $table->string('nama_lengkap')->nullable();
             $table->renameColumn('nidn', 'isbn');
         });
     }

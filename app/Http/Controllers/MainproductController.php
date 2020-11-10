@@ -17,8 +17,8 @@ class MainproductController extends Controller
 
     public function list(Request $request){
 
-        // $search = '';
-        // $filter = '';
+        $search = $request->search;
+        $filter = $request->filter;
 
         $query = DB::table('product')->where([
             ['product_name', 'like', '%'.$search.'%'],
@@ -29,13 +29,7 @@ class MainproductController extends Controller
     }
 
     public function detail($id){
-        $query = DB::table('product')->where('id',$id)->get();
-
-        if($query){
-            return response()->json([
-                "status" => 'success',
-                "data" => $query,    
-            ]);
-        }
+        $data['product'] = DB::table('product')->where('id',$id)->get();
+        redirect('/product_detail',$data);
     }
 }
