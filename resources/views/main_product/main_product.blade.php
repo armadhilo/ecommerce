@@ -87,8 +87,8 @@
                     <div class="row mt-1">
                         <div class="col-sm-12">
                             <fieldset class="form-group position-relative">
-                                <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here" onkeyup="searchProduct();">
-                                <div class="form-control-position">
+                                <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here">
+                                <div class="form-control-position" onclick="filterProduct();">
                                     <i class="feather icon-search"></i>
                                 </div>
                             </fieldset>
@@ -211,12 +211,12 @@
 
             $("input:radio:first").prop("checked", true).trigger("click");
 
-            // $('#search_product').keypress(function (e) {
-            // var key = e.which;
-            // if(key == 13){
-            //     filterProduct();
-            //     }
-            // });   
+            $('#search_product').keypress(function (e) {
+            var key = e.which;
+            if(key == 13){
+                filterProduct();
+                }
+            });   
 
         });
 
@@ -247,6 +247,8 @@
                     //append product
                     console.log(response);
                     var data = response.data;
+                    $('#products_notfound').empty();
+                    $('#products_notfound').empty();
                     if(data.length > 0){
                         for (let i = 0; i < data.length; i++) {
                             product_list.append(`
@@ -296,7 +298,7 @@
                             
                         }
                     }else{
-                        $('#products_notfound').empty();
+                       
                         $('#products_notfound').append(`
                         <div class="card">
                             <div class="card-body text-center p-4">

@@ -20,7 +20,7 @@ $menu = Request::segment(1);
                             <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{session('nama')}}</span><span class="user-status">Available</span></div><span><img class="round" src="{{ URL::asset('app-assets/images/logo/user-default.jpg') }}" alt="avatar" height="40" width="40"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('settings.edit_profile') }}"><i class="feather icon-user"></i> Edit Profile</a>
+                                    {{-- <a class="dropdown-item" href="{{ route('settings.edit_profile') }}"><i class="feather icon-user"></i> Edit Profile</a> --}}
                                     <a class="dropdown-item" href="{{ route('settings.change_password') }}"><i class="feather icon-settings"></i> Change Password</a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="{{route('login.logout')}}"><i class="feather icon-power"></i> Logout</a>
                                 </div>

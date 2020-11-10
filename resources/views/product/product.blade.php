@@ -214,6 +214,7 @@
         $('#form')[0].reset();
         $('#modal_form').modal('show');
         $('.modal-title').text('Add Product');
+        $('#category_id').attr('disabled', false);
     }
 
     function reload() {
@@ -301,7 +302,7 @@
         $('#form')[0].reset();
         $('#modal_form').modal('show');
         $('.modal-title').text('Edit Users');
-        
+        $('#category_id').attr('disabled', true);
         $.ajax({
             url : "/product/detail/" + id,
             type: "GET",

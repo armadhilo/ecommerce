@@ -119,7 +119,12 @@
                     data: $('#form').serialize(),
                     dataType: "JSON",
                     success: function(response){
-                        console.log(response);
+                        if(response.callback === "success"){
+                            alertResponse('success', 'Success!', 'Password berhasil diganti');
+                            location.reload();
+                        }else{
+                            alertResponse('error', 'Failed!', response.callback);
+                        }
                     },
                     error: function (jqXHR, textStatus, errorThrown){
                         console.log("Error json " + errorThrown);
