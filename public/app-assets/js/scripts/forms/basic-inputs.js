@@ -1,10 +1,6 @@
 /*=========================================================================================
         File Name: basic-inputs.js
         Description: Input field js for label type
-        ----------------------------------------------------------------------------------------
-        Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
-        Author: Pixinvent
-        Author URL: hhttp://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
 (function(window, document, $) {
