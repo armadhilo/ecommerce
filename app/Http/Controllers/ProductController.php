@@ -28,7 +28,7 @@ class ProductController extends Controller
             $val[] = $row->category_name;
             $val[] = $row->description;
             $val[] = '<div style="text-align: center;">'
-                    . '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="ganti('."'".$row->id."'".')"><i class="fa fa-pencil"></i> Edit</a>'
+                    . '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="ganti('."'".$row->id."'".')"><i class="fa fa-pencil"></i> Edit</a>&nbsp;'
                     . '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Delete" onclick="hapus('."'".$row->id."'".')"><i class="fa fa-trash"></i> Delete</a>'
                     . '</div>';
             $data[] = $val;
@@ -53,6 +53,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        
         $save_path = "public/images";
 
         $this->validate($request, [
@@ -86,7 +87,7 @@ class ProductController extends Controller
 
         if($query){
             DB::table('users_log')->insert([
-                "users_id" => session('username'),
+                "users_id" => session('id'),
                 "action" => 'INSERT',
                 "product_id" => $query,
                 "created_at" => date("Y-m-d H:i:s"),
@@ -130,7 +131,7 @@ class ProductController extends Controller
         ]);
 
         DB::table('users_log')->insert([
-            "users_id" => session('username'),
+            "users_id" => session('id'),
             "action" => 'UPDATE',
             "product_id" => $query,
             "created_at" => date("Y-m-d H:i:s"),
@@ -146,7 +147,7 @@ class ProductController extends Controller
         $query = DB::table('product')->where('id',$id)->update(['deleted_at' => date("Y-m-d H:i:s")]);
         if($query){
             DB::table('users_log')->insert([
-                "users_id" => session('username'),
+                "users_id" => session('id'),
                 "action" => 'DELETE',
                 "product_id" => $id,
                 "created_at" => date("Y-m-d H:i:s"),

@@ -45,7 +45,7 @@
                                                     <th scope="col">Product Name</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">Description</th>
-                                                    <th scope="col" class="text-center">Action</th>
+                                                    <th scope="col" class="text-center" style="width: 150px;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -118,7 +118,7 @@
                             <div class="col-6 book-category">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Jumlah Halaman</label>
-                                    <input type="text" id="jml_halaman" class="form-control" name="jml_halaman">
+                                    <input type="number" id="jml_halaman" class="form-control" name="jml_halaman">
                                 </div>
                             </div>
                             <div class="col-6 book-category">
@@ -145,7 +145,7 @@
                             <div class="col-6 other-category">
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Status</label>
-                                    <input type="text" id="status" class="form-control" name="status">
+                                    <input type="number" id="status" class="form-control" name="status">
                                 </div>
                             </div>
                             <!-- Others Category End -->
@@ -297,6 +297,7 @@
             success: function(data){
                 if(data.callback === "success"){
                     var data = data.data;
+                    console.log(data);
                     $('#category_id').val(data.category_id);
                     chooseCategory();
                     $('#id').val(data.id);
@@ -307,6 +308,10 @@
                     $('#nidn').val(data.nidn);
                     $('#jml_halaman').val(data.jml_halaman);
                     $('#penerbit').val(data.penerbit);
+                    $('#nama_lengkap').val(data.nama_lengkap);
+                    $('#isbn').val(data.isbn);
+                    $('#status').val(data.status);
+                    tinyMCE.get('description').setContent(data.description);
                     
                 }else{
                     alertResponse('error', 'Failed!', 'Data tidak ditemukan');
@@ -319,15 +324,35 @@
     }
 
     function hapus(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonClass: 'btn btn-primary',
+            cancelButtonClass: 'btn btn-danger ml-1',
+            buttonsStyling: false,
+            }).then(function (result) {
+            if (result.value) {
+                ajax_delete(id);
+            }
+        });
+    }
+
+    function ajax_delete(id){
         $.ajax({
             url : "/product/delete/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data){
                 if(data.callback === "success"){
-                    alert('success');
+                    alertResponse('success', 'Deleted!', 'Your file has been deleted.');
+                    reload();
                 }else{
-                    alertResponse('error', 'Failed!', 'Data tidak ditemukan');
+                    alertResponse('error', 'Failed!', 'Your file has failed to delete.');
                 }
                
             },error: function (jqXHR, textStatus, errorThrown){
