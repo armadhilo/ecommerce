@@ -225,7 +225,7 @@
     });
     
     function save(){
-        var id              = $('$id').val();
+        var id              = $('#id').val();
         var category_id     = $('#category_id').val();
         var product_name    = $('#product_name').val();
         var nidn            = $('#nidn').val();
@@ -240,6 +240,7 @@
         var description     = tinyMCE.get('description').getContent();
 
         var form_data = new FormData();
+        form_data.append('id', id);
         form_data.append('category_id', category_id);
         form_data.append('product_name', product_name);
         form_data.append('nidn', nidn);

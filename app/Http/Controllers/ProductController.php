@@ -18,15 +18,16 @@ class ProductController extends Controller
 
     public function list() {
         $data = array();
-        $list = DB::table('product')->join('category', 'product.category_id', '=', 'category.id')->get();
+        $list = DB::table('product')->join('category', 'product.category_id', '=', 'category.id')->select('product.*','çategory.category_name')->get();
         foreach ($list as $row) {
             $val = array();
-            $val[] = $row->image;
+            $val[] = '<img src="'.asset('image/'.$row->image).'">';
             $val[] = $row->product_name;
             $val[] = $row->category_name;
             $val[] = $row->description;
             $val[] = '<div style="text-align: center;">'
                     . '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="ganti('."'".$row->id."'".')"><i class="fa fa-pencil"></i> Edit</a>'
+                    . '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Delete" onclick="hapus('."'".$row->id."'".')"><i class="fa fa-trash"></i> Delete</a>'
                     . '</div>';
             $data[] = $val;
         }
@@ -64,7 +65,7 @@ class ProductController extends Controller
 
         $query = DB::table('product')->insertGetId([
                     "category_id" => $request->category_id,
-                    "users_id" => session('username'),
+                    "users_id" => session('id'),
                     "product_name" => $request->product_name,
                     "description" => $request->description,
                     "pic" => $request->pic,

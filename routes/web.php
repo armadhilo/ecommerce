@@ -44,6 +44,12 @@ Route::get('logout','LoginController@logout')->name('login.logout');
     Route::get('/category','CategoryController@index')->name('category.index');
     Route::get('/product','ProductController@index')->name('product.index');
 
+    Route::get('/slider','SliderController@index')->name('slider.index');
+    Route::post('slider/add','SliderController@store')->name('slider.post');
+    Route::get('slider/list','SliderController@list')->name('slider.get');
+    Route::get('slider/detail/{id}','SliderController@detail')->name('slider.detail');
+    Route::post('slider/update','SliderController@update')->name('slider.edit');
+
 
 // });
 

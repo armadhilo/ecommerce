@@ -24,6 +24,7 @@ class LoginController extends Controller
 
         if($data){
             if(Hash::check($password, $data->password)){
+                $request->session()->put('id', $data->id);
                 $request->session()->put('username', $data->username);
                 $request->session()->put('nama', $data->nama);
                 $request->session()->put('role', $data->role);
