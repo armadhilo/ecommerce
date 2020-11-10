@@ -55,7 +55,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         if(!$request->hasfile('image')){
-            return response()->json(["callback" => 'add image please']);
+            return response()->json(["callback" => 'fail', "desc" => 'add image please']);
         }
         
         $data = $request->input('image');

@@ -94,8 +94,8 @@ $menu = Request::segment(1);
                         <li class=" navigation-header"><span>Apps</span></li>
                         <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
                         <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>
                         <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
+                        <li class=" nav-item"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>
                         <?php
                     }
                     ?>

@@ -11,8 +11,9 @@ class MainproductController extends Controller
         return view('main_product.main_product');
     }
     
-    public function product_detail(){
-        return view('main_product.detail_product');
+    public function product_detail($id){
+        $data['product'] = DB::table('product')->where('id',$id)->first();
+        return view('main_product.detail_product',$data);
     }
 
     public function list(Request $request){
@@ -26,10 +27,5 @@ class MainproductController extends Controller
         ])->get();
 
         return response()->json(['data' => $query]);
-    }
-
-    public function detail($id){
-        $data['product'] = DB::table('product')->where('id',$id)->get();
-        redirect('/product_detail',$data);
     }
 }
