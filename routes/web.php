@@ -58,7 +58,7 @@ Route::get('logout','LoginController@logout')->name('login.logout');
     
 
     Route::get('/main_product','MainproductController@index')->name('main_product.index');
-    Route::get('main_product/search','MainproductController@list');
+    Route::post('main_product/search','MainproductController@list');
     Route::get('main_product/detail/{id}','MainproductController@detail');
     Route::get('/product_detail','MainproductController@product_detail')->name('main_product.product_detail');
 

@@ -220,9 +220,9 @@
         table.ajax.reload(null, false);
     }
 
-    $('#form').submit(function(){
-        save();
-    });
+    // $('#form').submit(function(){
+    //     save();
+    // });
     
     function save(){
         var id              = $('#id').val();

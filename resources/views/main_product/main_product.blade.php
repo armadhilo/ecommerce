@@ -227,6 +227,7 @@
 
         function filterProduct(){
             var product_list = $('#ecommerce-products');
+            $('#products_notfound').empty();
             product_list.empty();
             var category_id =$('input[name="category_id"]:checked').val();
             var search = $('#search_product').val(); 
@@ -251,14 +252,20 @@
                             product_list.append(`
                                 <div class="card ecommerce-card">
                                     <div class="card-content">
-                                        <div class="item-img text-center">
-                                            <a href="{{ route('main_product.product_detail') }}">
-                                                <img class="img-fluid" src="{{ url('images/') }}/${data[i].image}" alt="img-product"></a>
+                                        <div class="item-img text-center pt-0">
+                                            <a href="/main_product/detail/${data[i].id}">
+                                                <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/${data[i].image}" alt="img-product"></a>
                                         </div>
+                                        
                                         <div class="card-body">
-                                            <div class="item-wrapper">
+                                            
+                                                <div class="item-wrapper">
+                                                    <div class="item-rating">
+                                                    <div class="badge-md"></div>
+                                                </div>
                                                 <div>
                                                     <h6 class="item-price">
+                                                    
                                                     </h6>
                                                 </div>
                                             </div>
@@ -279,7 +286,7 @@
                                             </div>
                                             <div class="cart">
                                                 <i class="feather icon-eye"></i> 
-                                                <a href="{{ route('main_product.product_detail') }}" class="view-in-cart">Product Details</a>
+                                                <a href="/main_product/detail/${data[i].id}" class="view-in-cart">Product Details</a>
                                             </div>
                                         </div>
                                     </div>
@@ -289,6 +296,7 @@
                             
                         }
                     }else{
+                        $('#products_notfound').empty();
                         $('#products_notfound').append(`
                         <div class="card">
                             <div class="card-body text-center p-4">
