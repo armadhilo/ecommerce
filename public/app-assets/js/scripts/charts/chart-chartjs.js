@@ -6,7 +6,7 @@
 
 $(window).on("load", function () {
 
-  var $primary = '#7367F0';
+  var $primary = '#3f9ce8';
   var $success = '#28C76F';
   var $danger = '#EA5455';
   var $warning = '#FF9F43';

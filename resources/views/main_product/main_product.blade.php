@@ -12,7 +12,7 @@
                     <div class="col-md-12 col-sm-12">
                         <div class="card" style="margin-left: 14px; margin-right: 14px;">
                             <div class="card-content">
-                                <div class="card-body" style="padding: 0px;">
+                                <div class="card-body">
                                     <div id="carousel-interval" class="carousel slide" data-ride="carousel" data-interval="5000">
                                         <ol class="carousel-indicators">
                                             <li data-target="#carousel-interval" data-slide-to="0" class="active"></li>
@@ -59,15 +59,10 @@
                                         <span class="navbar-toggler-icon d-block d-lg-none"><i class="feather icon-menu"></i></span>
                                     </button>
                                     <div class="search-results">
-                                        {{-- 16285 results found --}}
                                     </div>
                                 </div>
                                 <div class="view-options">
-                                    <select class="price-options form-control" id="ecommerce-price-options">
-                                        <option selected>Featured</option>
-                                        <option value="1">Lowest</option>
-                                        <option value="2">Highest</option>
-                                    </select>
+                                    
                                     <div class="view-btn-option">
                                         <button class="btn btn-white view-btn grid-view-btn active">
                                             <i class="feather icon-grid"></i>
@@ -257,11 +252,11 @@
             var category_id =$('input[name="category_id"]:checked').val();
             var search = $('#search_product').val(); 
             var form_data = new FormData();
-            form_data.append('category_id', category_id);
+            form_data.append('filter', category_id);
             form_data.append('search', search);
 
             $.ajax({
-                url: "",
+                url: "/main_product/search",
                 dataType: 'JSON',
                 cache: false,
                 contentType: false,
