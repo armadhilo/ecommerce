@@ -22,71 +22,112 @@
                                 <div class="col-12 col-md-6">
                                     <h5>Canon - EOS 5D Mark IV DSLR Camera with 24-70mm f/4L IS USM Lens
                                     </h5>
-                                    <p class="text-muted">by Apple</p>
-                                    <div class="ecommerce-details-price d-flex flex-wrap">
-
-                                        <p class="text-primary font-medium-3 mr-1 mb-0">$43.99</p>
-                                        <span class="pl-1 font-medium-3 border-left">
-                                            <i class="feather icon-star text-warning"></i>
-                                            <i class="feather icon-star text-warning"></i>
-                                            <i class="feather icon-star text-warning"></i>
-                                            <i class="feather icon-star text-warning"></i>
-                                            <i class="feather icon-star text-secondary"></i>
-                                        </span>
-                                        <span class="ml-50 text-dark font-medium-1">424 ratings</span>
-                                    </div>
+                                    <!--<p class="text-muted">by Apple</p> -->
                                     <hr>
-                                    <p>Shoot professional photos and videos with this Canon EOS 5D Mk V 24-70mm lens kit. A huge 30.4-megapixel
+                                    <table class="mb-1">
+                                        <tr>
+                                            <td>
+                                                <p class="font-weight-bold mb-25"> 
+                                                Kategori Produk
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="font-weight-bold mb-25 pl-1" id="category_id"> 
+                                                : 374873847
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="book-category">
+                                            <td>
+                                                <p class="font-weight-bold mb-25"> 
+                                                NIDN
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="font-weight-bold mb-25 pl-1" id="nidn"> 
+                                                : 374873847
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="book-category">
+                                            <td>
+                                                <p class="font-weight-bold mb-25"> 
+                                                Nama Lengkap
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="font-weight-bold mb-25 pl-1" id="nama_lengkap"> 
+                                                : Nama Lengkap
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="book-category">
+                                            <td>
+                                                <p class="font-weight-bold mb-25"> 
+                                                ISBN
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="font-weight-bold mb-25 pl-1" id="isbn"> 
+                                                : ISBN
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="book-category">
+                                            <td>
+                                                <p class="font-weight-bold mb-25"> 
+                                                Jumlah Halaman
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="font-weight-bold mb-25 pl-1" id="penerbit"> 
+                                                : Jumlah Halaman
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="book-category">
+                                            <td>
+                                                <p class="font-weight-bold mb-25"> 
+                                                Penerbit
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="font-weight-bold mb-25 pl-1" id="penerbit"> 
+                                                : Penerbit
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="others-category">
+                                            <td>
+                                                <p class="font-weight-bold mb-25"> 
+                                                PIC
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="font-weight-bold mb-25 pl-1" id="pic"> 
+                                                : PIC
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="others-category">
+                                            <td>
+                                                <p class="font-weight-bold mb-25"> 
+                                                Mitra
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="font-weight-bold mb-25 pl-1" id="mitra"> 
+                                                : Mitra
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        
+                                    </table>
+                                    <p id="description">Shoot professional photos and videos with this Canon EOS 5D Mk V 24-70mm lens kit. A huge 30.4-megapixel
                                         full-frame sensor delivers outstanding image clarity, and 4K video is possible from this DSLR for powerful
                                         films. Ultra-precise autofocus and huge ISO ranges give you the images you want from this Canon EOS 5D Mk V
                                         24-70mm lens kit.</p>
-                                    <p class="font-weight-bold mb-25"> <i class="feather icon-truck mr-50 font-medium-2"></i>Free Shipping
-                                    </p>
-                                    <p class="font-weight-bold"> <i class="feather icon-dollar-sign mr-50 font-medium-2"></i>EMI options available
-                                    </p>
-                                    <hr>
-                                    <div class="form-group">
-                                        <label class="font-weight-bold">Color</label>
-                                        <ul class="list-unstyled mb-0 product-color-options">
-                                            <li class="d-inline-block selected">
-                                                <div class="color-option b-primary">
-                                                    <div class="filloption bg-primary"></div>
-                                                </div>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <div class="color-option b-success">
-                                                    <div class="filloption bg-success"></div>
-                                                </div>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <div class="color-option b-danger">
-                                                    <div class="filloption bg-danger"></div>
-                                                </div>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <div class="color-option b-warning">
-                                                    <div class="filloption bg-warning"></div>
-                                                </div>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <div class="color-option b-black">
-                                                    <div class="filloption bg-black"></div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <hr>
-                                    <p>Available - <span class="text-success">In stock</span></p>
-
-                                    <div class="d-flex flex-column flex-sm-row">
-                                        <button class="btn btn-primary mr-0 mr-sm-1 mb-1 mb-sm-0"><i class="feather icon-shopping-cart mr-25"></i>ADD TO CART</button>
-                                        <button class="btn btn-outline-danger"><i class="feather icon-heart mr-25"></i>WISHLIST</button>
-                                    </div>
-                                    <hr>
-                                    <button type="button" class="btn btn-icon rounded-circle btn-outline-primary mr-1 mb-1"><i class="feather icon-facebook"></i></button>
-                                    <button type="button" class="btn btn-icon rounded-circle btn-outline-info mr-1 mb-1"><i class="feather icon-twitter"></i></button>
-                                    <button type="button" class="btn btn-icon rounded-circle btn-outline-danger mr-1 mb-1"><i class="feather icon-youtube"></i></button>
-                                    <button type="button" class="btn btn-icon rounded-circle btn-outline-primary mr-1 mb-1"><i class="feather icon-instagram"></i></button>
+                                    
                                 </div>
                             </div>
                         </div>
