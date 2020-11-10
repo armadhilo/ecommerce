@@ -73,7 +73,7 @@
             </div>
             <div class="modal-body">
                 <form class="form form-horizontal" id="form" autocomplete="off">
-                    <input name="id" type="text" id="id"/>
+                    <input name="id" type="text" id="id" hidden/>
                     <div class="form-body">
                         <div class="row pr-1 pl-1">
                             <div class="col-12">
@@ -135,7 +135,7 @@
         var slider = $('#slider').prop('files')[0];
         var form_data = new FormData();
         form_data.append('id', $('#id').val());
-        form_data.append('slider', $('#slider').val());
+        form_data.append('slider', slider);
 
         $.ajax({
             url: url,
@@ -182,15 +182,35 @@
     }
 
     function hapus(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonClass: 'btn btn-primary',
+            cancelButtonClass: 'btn btn-danger ml-1',
+            buttonsStyling: false,
+            }).then(function (result) {
+            if (result.value) {
+                ajax_delete(id);
+            }
+        });
+    }
+
+    function ajax_delete(id){
         $.ajax({
             url : "/slider/delete/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data){
                 if(data.callback === "success"){
-                    alert('success');
+                    alertResponse('success', 'Deleted!', 'Your file has been deleted.');
+                    reload();
                 }else{
-                    alertResponse('error', 'Failed!', 'Data tidak ditemukan');
+                    alertResponse('error', 'Failed!', 'Your file has failed to delete.');
                 }
                
             },error: function (jqXHR, textStatus, errorThrown){
@@ -198,5 +218,6 @@
             }
         });
     }
+
     </script>
     @endsection
