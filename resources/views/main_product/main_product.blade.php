@@ -253,7 +253,7 @@
                                 <div class="card ecommerce-card">
                                     <div class="card-content">
                                         <div class="item-img text-center pt-0">
-                                            <a href="/main_product/detail/${data[i].id}">
+                                            <a href="/product_detail/${data[i].id}">
                                                 <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/${data[i].image}" alt="img-product"></a>
                                         </div>
                                         
@@ -284,9 +284,9 @@
                                                     </h6>
                                                 </div>
                                             </div>
-                                            <div class="cart">
+                                            <div class="cart" onclick="product_detail('${data[i].id}')">
                                                 <i class="feather icon-eye"></i> 
-                                                <a href="/main_product/detail/${data[i].id}" class="view-in-cart">Product Details</a>
+                                                <a href="/product_detail/${data[i].id}" class="view-in-cart">Product Details</a>
                                             </div>
                                         </div>
                                     </div>
@@ -318,6 +318,10 @@
                 }
             });
 
+        }
+
+        function product_detail(id){
+            window.location.href = "/product_detail/"+ id;
         }
     </script>
     @endsection

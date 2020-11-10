@@ -253,35 +253,47 @@
         form_data.append('status', status);
         form_data.append('image', image);
         form_data.append('description', description);
-       
-        var url = "";
-        if(save_method === 'add'){
-            url = "<?= url('/product/add') ?>";
+
+        if(category_id == null){
+            alertResponse('info', 'Info!','Mohon pilih kategori');
+        }else if(product_name == ""){
+            alertResponse('info', 'Info!','Nama produk tidak boleh kosong');
+        }else if(description < 1){
+            alertResponse('info', 'Info!','Deskripsi tidak boleh kosong');
         }else{
-            url = "<?= url('/product/update') ?>";
-        }
-        $.ajax({
-            url: url,
-            dataType: 'JSON',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'POST',
-            success: function(response) {
-                console.log(response.callback);
-                if(response.callback === "success"){
-                    alertResponse('success', 'Success!', response.desc);
-                    $('#modal_form').modal('hide');
-                    reload();
-                }else{
-                    alertResponse('error', 'Failed!', response.desc);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown){
-                console.log("Error json " + errorThrown);
+            var url = "";
+            if(save_method === 'add'){
+                url = "<?= url('/product/add') ?>";
+            }else{
+                url = "<?= url('/product/update') ?>";
             }
-        });
+            $.ajax({
+                url: url,
+                dataType: 'JSON',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'POST',
+                success: function(response) {
+                    console.log(response.callback);
+                    if(response.callback === "success"){
+                        alertResponse('success', 'Success!', response.desc);
+                        $('#modal_form').modal('hide');
+                        reload();
+                    }else{
+                        alertResponse('error', 'Failed!', response.desc);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown){
+                    console.log("Error json " + errorThrown);
+                }
+            });
+        }
+
+        
+       
+        
     }
     
     function ganti(id){

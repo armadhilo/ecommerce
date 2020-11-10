@@ -20,113 +20,128 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <h5>Canon - EOS 5D Mark IV DSLR Camera with 24-70mm f/4L IS USM Lens
+                                    <h5>{{$product->product_name}}
                                     </h5>
                                     <!--<p class="text-muted">by Apple</p> -->
                                     <hr>
                                     <table class="mb-1">
-                                        <tr>
-                                            <td>
-                                                <p class="font-weight-bold mb-25"> 
-                                                Kategori Produk
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="font-weight-bold mb-25 pl-1" id="category_id"> 
-                                                : 374873847
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr class="book-category">
-                                            <td>
-                                                <p class="font-weight-bold mb-25"> 
-                                                NIDN
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="font-weight-bold mb-25 pl-1" id="nidn"> 
-                                                : 374873847
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr class="book-category">
-                                            <td>
-                                                <p class="font-weight-bold mb-25"> 
-                                                Nama Lengkap
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="font-weight-bold mb-25 pl-1" id="nama_lengkap"> 
-                                                : Nama Lengkap
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr class="book-category">
-                                            <td>
-                                                <p class="font-weight-bold mb-25"> 
-                                                ISBN
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="font-weight-bold mb-25 pl-1" id="isbn"> 
-                                                : ISBN
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr class="book-category">
-                                            <td>
-                                                <p class="font-weight-bold mb-25"> 
-                                                Jumlah Halaman
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="font-weight-bold mb-25 pl-1" id="penerbit"> 
-                                                : Jumlah Halaman
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr class="book-category">
-                                            <td>
-                                                <p class="font-weight-bold mb-25"> 
-                                                Penerbit
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="font-weight-bold mb-25 pl-1" id="penerbit"> 
-                                                : Penerbit
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr class="others-category">
-                                            <td>
-                                                <p class="font-weight-bold mb-25"> 
-                                                PIC
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="font-weight-bold mb-25 pl-1" id="pic"> 
-                                                : PIC
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr class="others-category">
-                                            <td>
-                                                <p class="font-weight-bold mb-25"> 
-                                                Mitra
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="font-weight-bold mb-25 pl-1" id="mitra"> 
-                                                : Mitra
-                                                </p>
-                                            </td>
-                                        </tr>
+                                        <?php
+                                            if($product->nama_lengkap != ""){
+                                                ?>
+                                                <tr class="book-category">
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25"> 
+                                                        Nama Lengkap
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25 pl-1" id="nama_lengkap"> 
+                                                            : {{$product->nama_lengkap}}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        ?>
+                                        
+                                        <?php
+                                            if($product->isbn != ""){
+                                                ?>
+                                                 <tr class="book-category">
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25"> 
+                                                        ISBN
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25 pl-1" id="isbn"> 
+                                                            : {{$product->isbn}}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        ?>
+                                       
+                                       <?php
+                                            if($product->jml_halaman != ""){
+                                                ?>
+                                                <tr class="book-category">
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25"> 
+                                                        Jumlah Halaman
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25 pl-1" id="jml_halaman"> 
+                                                            : {{$product->jml_halaman}}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        ?>
+                                        
+                                        <?php
+                                            if($product->penerbit != ""){
+                                                ?>
+                                                <tr class="book-category">
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25"> 
+                                                        Penerbit
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25 pl-1" id="penerbit"> 
+                                                            : {{$product->penerbit}}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        ?>
+                                        
+                                        <?php
+                                            if($product->pic != ""){
+                                                ?>
+                                                <tr class="others-category">
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25"> 
+                                                        PIC
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25 pl-1" id="pic"> 
+                                                            : {{$product->pic}}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        ?>
+                                        
+                                        <?php
+                                            if($product->mitra != ""){
+                                                ?>
+                                                <tr class="others-category">
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25"> 
+                                                        Mitra
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="font-weight-bold mb-25 pl-1" id="mitra"> 
+                                                            : {{$product->mitra}}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        ?>
+                                        
                                         
                                     </table>
-                                    <p id="description">Shoot professional photos and videos with this Canon EOS 5D Mk V 24-70mm lens kit. A huge 30.4-megapixel
-                                        full-frame sensor delivers outstanding image clarity, and 4K video is possible from this DSLR for powerful
-                                        films. Ultra-precise autofocus and huge ISO ranges give you the images you want from this Canon EOS 5D Mk V
-                                        24-70mm lens kit.</p>
+                                    <p id="description"> {{strip_tags($product->description)}}</p>
                                     
                                 </div>
                             </div>
