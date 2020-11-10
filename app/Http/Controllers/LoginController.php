@@ -42,7 +42,8 @@ class LoginController extends Controller
 
     public function logout(Request $request){
 
-		$request->session()->forget('username');
+        $request->session()->forget('username');
+        $request->session()->forget('id');
 		$request->session()->forget('nama');
 		$request->session()->forget('role');
         

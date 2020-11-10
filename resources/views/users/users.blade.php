@@ -156,7 +156,8 @@
         table.ajax.reload(null, false);
     }
 
-    $('#form').submit(function(){
+    $('#form').submit(function(e){
+        e.preventDefault();
         save();
     });
 
@@ -180,7 +181,6 @@
                 }else{
                     alertResponse('error', 'Failed!', response.desc);
                 }
-                location.reload();
                 
             },
             error: function (jqXHR, textStatus, errorThrown){
