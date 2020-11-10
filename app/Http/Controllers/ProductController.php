@@ -18,10 +18,10 @@ class ProductController extends Controller
 
     public function list() {
         $data = array();
-        $list = DB::table('product')->join('category', 'product.category_id', '=', 'category.id')->select('product.*','çategory.category_name')->get();
+        $list = DB::table('product')->join('category', 'product.category_id', '=', 'category.id')->select('product.*','category.category_name')->get();
         foreach ($list as $row) {
             $val = array();
-            $val[] = '<img src="'.asset('image/'.$row->image).'">';
+            $val[] = '<img src="'.asset('images/'.$row->image).'" width="30%" height="30%">';
             $val[] = $row->product_name;
             $val[] = $row->category_name;
             $val[] = $row->description;
@@ -57,12 +57,17 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg'
         ]);
 
-        $data = $request->input('image');
-        $file = $request->file('image');
-        $photo =  time().$file->getClientOriginalName();
-        $file->move('images',$photo);
+        $foto = 'coba.jpg';
 
+        if($request->hasfile('image')){
+            $data = $request->input('image');
+            $file = $request->file('image');
+            $photo =  time().$file->getClientOriginalName();
+            $file->move('images',$photo);
 
+            $foto = $photo;
+        }
+        
         $query = DB::table('product')->insertGetId([
                     "category_id" => $request->category_id,
                     "users_id" => session('id'),
@@ -74,7 +79,7 @@ class ProductController extends Controller
                     "jml_halaman" => $request->jml_halaman,
                     "penerbit" => $request->penerbit,
                     "status" => '1',
-                    "image" => $photo,
+                    "image" => $foto,
                  ]);
 
         if($query){
@@ -91,9 +96,36 @@ class ProductController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //BELUM
+        $foto = 'coba.jpg';
+
+        if($request->hasfile('image')){
+            $data = $request->input('image');
+            $file = $request->file('image');
+            $photo =  time().$file->getClientOriginalName();
+            $file->move('images',$photo);
+
+            $foto = $photo;
+        }
+
+        $query = DB::table('category')->update([
+            "category_id" => $request->category_id,
+            "users_id" => session('id'),
+            "product_name" => $request->product_name,
+            "description" => $request->description,
+            "pic" => $request->pic,
+            "mitra" => $request->mitra,
+            "nidn" => $request->nidn,
+            "jml_halaman" => $request->jml_halaman,
+            "penerbit" => $request->penerbit,
+            "status" => '1',   
+            "image" => $foto,     
+        ],
+    );
+
+
+
     }
 
 
