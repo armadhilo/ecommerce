@@ -225,7 +225,6 @@
     });
     
     function save(){
-        var id              = $('$id').val();
         var category_id     = $('#category_id').val();
         var product_name    = $('#product_name').val();
         var nidn            = $('#nidn').val();

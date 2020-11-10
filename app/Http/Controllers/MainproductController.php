@@ -15,10 +15,10 @@ class MainproductController extends Controller
         return view('main_product.detail_product');
     }
 
-    public function list(){
+    public function list(Request $request){
         
-        $search = 'bcak';
-        $filter = '2';
+        $search = $request->search;
+        $filter = $request->filter;
 
         $query = DB::table('product')->where([
             ['product_name', 'like', '%'.$search.'%'],
