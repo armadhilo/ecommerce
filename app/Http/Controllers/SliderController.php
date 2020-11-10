@@ -20,7 +20,7 @@ class SliderController extends Controller
 
         foreach ($list as $row) {
             $val = array();
-            $val[] ='<img  class="img-fluid rounded-sm" style="height: 120px; width: auto;" src="'.asset('images/'.$row->slider).'">';
+            $val[] ='<img  class="img-fluid rounded-sm" style="height: 120px; width: auto;" src="'.asset('images/slider/'.$row->slider).'">';
             $val[] = '<div style="text-align: center;">'
                     . '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="ganti('."'".$row->id."'".')"><i class="fa fa-pencil"></i> Edit</a>&nbsp;'
                     . '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Delete" onclick="hapus('."'".$row->id."'".')"><i class="fa fa-trash"></i> Delete</a>'
@@ -37,7 +37,7 @@ class SliderController extends Controller
             $status = "Please choose a picture";
         }else{
 
-            $save_path = "public/images";
+            $save_path = "images/slider";
 
             $this->validate($request, [
                 'slider' => 'required|image|mimes:jpg,png,jpeg'
@@ -46,7 +46,7 @@ class SliderController extends Controller
             $data = $request->input('slider');
             $file = $request->file('slider');
             $photo =  time().$file->getClientOriginalName();
-            $file->move('images',$photo);
+            $file->move($save_path,$photo);
 
             $query = DB::table('slider')->insert([
                 "slider" => $photo,
@@ -79,8 +79,7 @@ class SliderController extends Controller
         if(empty($_FILES['slider']['name'])){
             $status = "Please choose a picture";
         }else{
-
-            $save_path = "public/images/slider";
+            $save_path = "images/slider";
 
             $this->validate($request, [
                 'slider' => 'required|image|mimes:jpg,png,jpeg'
@@ -89,14 +88,13 @@ class SliderController extends Controller
             $data = $request->input('slider');
             $file = $request->file('slider');
             $photo =  time().$file->getClientOriginalName();
-            $file->move('images',$photo);
+            $file->move($save_path,$photo);
 
             $query = DB::table('slider')->where('id',$request->id)->update([
                 "slider" => $photo,
                 "updated_at" => date("Y-m-d H:i:s"),
             ]);
             if($query){
-
                 $pict = DB::table('slider')->where('id',$request->id)->select('image')->first();
                 $image_path = 'images/slider/'.$pict->image;  // Value is not URL but directory file path
                 if(File::exists($image_path)) {
@@ -106,19 +104,9 @@ class SliderController extends Controller
             }else{
                 $status = "Data gagal terupdate";
             }
-
-            // $query = DB::table('slider')->insert([
-            //     "id" => 1,
-            //     "slider" => $photo,
-            // ]);
-            
         }
 
         echo json_encode(array("status" => $status));
-
-        
-        
-        // return response()->json(["callback" => 'success', "desc" => "Data terupdate"]);
     }
 
 

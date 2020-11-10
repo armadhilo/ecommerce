@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Image;
 use File;
 use DB;
+use Illuminate\Support\Facades\Validator;
 use App\Gambar;
 use Illuminate\Http\Request;
 
@@ -53,22 +54,21 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $save_path = "public/images";
-
-        $this->validate($request, [
+        $validator = $this->validate($request, [
             'image' => 'required|image|mimes:jpg,png,jpeg'
         ]);
 
-        $foto = 'coba.jpg';
-
-        if($request->hasfile('image')){
-            $data = $request->input('image');
-            $file = $request->file('image');
-            $photo =  time().$file->getClientOriginalName();
-            $file->move('images',$photo);
-
-            $foto = $photo;
+        if($validator->fails()){
+            return response()->json([
+                "status" => 'Please choose a picture',
+            ]);
         }
+        
+        $data = $request->input('image');
+        $file = $request->file('image');
+        $photo =  time().$file->getClientOriginalName();
+        $file->move('images',$photo);
+        $foto = $photo;
         
         $query = DB::table('product')->insertGetId([
                     "category_id" => $request->category_id,
@@ -86,7 +86,7 @@ class ProductController extends Controller
 
         if($query){
             DB::table('users_log')->insert([
-                "users_id" => session('username'),
+                "users_id" => session('id'),
                 "action" => 'INSERT',
                 "product_id" => $query,
                 "created_at" => date("Y-m-d H:i:s"),
@@ -130,7 +130,7 @@ class ProductController extends Controller
         ]);
 
         DB::table('users_log')->insert([
-            "users_id" => session('username'),
+            "users_id" => session('id'),
             "action" => 'UPDATE',
             "product_id" => $query,
             "created_at" => date("Y-m-d H:i:s"),
@@ -146,7 +146,7 @@ class ProductController extends Controller
         $query = DB::table('product')->where('id',$id)->update(['deleted_at' => date("Y-m-d H:i:s")]);
         if($query){
             DB::table('users_log')->insert([
-                "users_id" => session('username'),
+                "users_id" => session('id'),
                 "action" => 'DELETE',
                 "product_id" => $id,
                 "created_at" => date("Y-m-d H:i:s"),
