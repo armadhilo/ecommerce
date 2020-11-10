@@ -59,7 +59,7 @@
                                         <span class="navbar-toggler-icon d-block d-lg-none"><i class="feather icon-menu"></i></span>
                                     </button>
                                     <div class="search-results">
-                                        16285 results found
+                                        {{-- 16285 results found --}}
                                     </div>
                                 </div>
                                 <div class="view-options">
@@ -91,7 +91,7 @@
                     <div class="row mt-1">
                         <div class="col-sm-12">
                             <fieldset class="form-group position-relative">
-                                <input type="text" class="form-control search-product" id="iconLeft5" placeholder="Search here">
+                                <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here">
                                 <div class="form-control-position">
                                     <i class="feather icon-search"></i>
                                 </div>
@@ -194,7 +194,7 @@
                                 <ul class="list-unstyled categories-list">
                                     <li>
                                         <span class="vs-radio-con vs-radio-primary py-25">
-                                            <input type="radio" name="category_id" value="all">
+                                            <input type="radio" name="category_id" value="all" checked>
                                             <span class="vs-radio">
                                                 <span class="vs-radio--border"></span>
                                                 <span class="vs-radio--circle"></span>
@@ -222,11 +222,11 @@
                                 </ul>
                             </div>
                             <!-- Categories Ends -->
-                            <hr>
+                            <!--<hr>-->
                             <!-- Clear Filters Starts -->
-                            <div id="clear-filters">
+                            <!--<div id="clear-filters">
                                 <button class="btn btn-block btn-primary">CLEAR ALL FILTERS</button>
-                            </div>
+                            </div>-->
                             <!-- Clear Filters Ends -->
 
                         </div>
@@ -246,25 +246,36 @@
         $(document).ready(function() {
 
             $("input:radio").click(function() {
-                var category_id =$('input[name="category_id"]:checked').val();
-                $.ajax({
-                    url : "/users/detail/" + category_id,
-                    type: "GET",
-                    dataType: "JSON",
-                    success: function(response){
-                        //append product
-                        console.log(response);
-                    },error: function (jqXHR, textStatus, errorThrown){
-                        console.log('Error get data');
-                    }
-                });
-
+                filterProduct();
             });
 
-            
-
-            // $("input:radio:first").prop("checked", true).trigger("click");
+            $("input:radio:first").prop("checked", true).trigger("click");
 
         });
+
+        function filterProduct(){
+            var category_id =$('input[name="category_id"]:checked').val();
+            var search = $('#search_product').val(); 
+            var form_data = new FormData();
+            form_data.append('category_id', category_id);
+            form_data.append('search', search);
+
+            $.ajax({
+                url: "",
+                dataType: 'JSON',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'POST',
+                success: function(response){
+                    //append product
+                    console.log(response);
+                },error: function (jqXHR, textStatus, errorThrown){
+                    console.log('Error get data');
+                }
+            });
+
+        }
     </script>
     @endsection
