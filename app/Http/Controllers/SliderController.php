@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
+use File;
+use App\Gambar;
 
 class SliderController extends Controller
 {
@@ -14,7 +16,7 @@ class SliderController extends Controller
 
     public function list() {
         $data = array();
-        $list = DB::table('slider')->get();
+        $list = DB::table('slider')->whereNull('deleted_at')->orderByDesc('id')->get();
 
         foreach ($list as $row) {
             $val = array();
@@ -48,6 +50,7 @@ class SliderController extends Controller
 
             $query = DB::table('slider')->insert([
                 "slider" => $photo,
+                "created_at" => date("Y-m-d H:i:s"),
             ]);
             if($query){
                 $status = "Data tersimpan";
@@ -77,7 +80,7 @@ class SliderController extends Controller
             $status = "Please choose a picture";
         }else{
 
-            $save_path = "public/images";
+            $save_path = "public/images/slider";
 
             $this->validate($request, [
                 'slider' => 'required|image|mimes:jpg,png,jpeg'
@@ -88,10 +91,17 @@ class SliderController extends Controller
             $photo =  time().$file->getClientOriginalName();
             $file->move('images',$photo);
 
-            $query = DB::table('slider')->where('id','1')->update([
+            $query = DB::table('slider')->where('id',$request->id)->update([
                 "slider" => $photo,
+                "updated_at" => date("Y-m-d H:i:s"),
             ]);
             if($query){
+
+                $pict = DB::table('slider')->where('id',$request->id)->select('image')->first();
+                $image_path = 'images/slider/'.$pict->image;  // Value is not URL but directory file path
+                if(File::exists($image_path)) {
+                    File::delete($image_path);
+                }
                 $status = "Data terupdate";
             }else{
                 $status = "Data gagal terupdate";
@@ -111,6 +121,21 @@ class SliderController extends Controller
         // return response()->json(["callback" => 'success', "desc" => "Data terupdate"]);
     }
 
+
+    public function delete($id)
+    {
+        $query = DB::table('slider')->where('id',$id)->update(['deleted_at' => date("Y-m-d H:i:s")]);
+        if($query){
+            $pict = DB::table('slider')->where('id',$id)->select('image')->first();
+            $image_path = 'images/slider/'.$pict->image;  // Value is not URL but directory file path
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
+            return response()->json(["callback" => 'success']);
+        }else{
+            return response()->json(["callback" => 'fail']);
+        }
+    }
     
 
 }

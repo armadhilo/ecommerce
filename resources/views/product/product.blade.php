@@ -297,8 +297,9 @@
             success: function(data){
                 if(data.callback === "success"){
                     var data = data.data;
-                    $('#id').val(data.id);
                     $('#category_id').val(data.category_id);
+                    chooseCategory();
+                    $('#id').val(data.id);
                     $('#product_name').val(data.product_name);
                     $('#description').val(data.description);
                     $('#pic').val(data.pic);
@@ -307,6 +308,24 @@
                     $('#jml_halaman').val(data.jml_halaman);
                     $('#penerbit').val(data.penerbit);
                     
+                }else{
+                    alertResponse('error', 'Failed!', 'Data tidak ditemukan');
+                }
+               
+            },error: function (jqXHR, textStatus, errorThrown){
+                console.log('Error get data');
+            }
+        });
+    }
+
+    function hapus(id){
+        $.ajax({
+            url : "/product/delete/" + id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data){
+                if(data.callback === "success"){
+                    alert('success');
                 }else{
                     alertResponse('error', 'Failed!', 'Data tidak ditemukan');
                 }

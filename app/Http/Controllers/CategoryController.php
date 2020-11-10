@@ -14,7 +14,7 @@ class CategoryController extends Controller
 
     public function list() {
         $data = array();
-        $list = DB::table('category')->get();
+        $list = DB::table('category')->orderByDesc('id')->get();
 
         foreach ($list as $row) {
             $val = array();

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Image;
 use File;
 use DB;
+use App\Gambar;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,10 +19,11 @@ class ProductController extends Controller
 
     public function list() {
         $data = array();
-        $list = DB::table('product')->join('category', 'product.category_id', '=', 'category.id')->select('product.*','category.category_name')->get();
+        $list = DB::table('product')->join('category', 'product.category_id', '=', 'category.id')->select('product.*','category.category_name')->whereNull('deleted_at')->orderByDesc('id')->get();
+        
         foreach ($list as $row) {
             $val = array();
-            $val[] = '<img src="'.asset('images/'.$row->image).'" width="30%" height="30%">';
+            $val[] = '<img class="img-fluid rounded-sm" style="height: 120px; width: auto;" src="'.asset('images/'.$row->image).'">';
             $val[] = $row->product_name;
             $val[] = $row->category_name;
             $val[] = $row->description;
@@ -98,9 +100,13 @@ class ProductController extends Controller
 
     public function update(Request $request)
     {
-        $foto = 'coba.jpg';
-
         if($request->hasfile('image')){
+
+            $pict = DB::table('product')->where('id',$request->id)->select('image')->first();
+            
+            $image_path = 'images/'.$pict->image;
+            File::delete($image_path);
+
             $data = $request->input('image');
             $file = $request->file('image');
             $photo =  time().$file->getClientOriginalName();
@@ -109,7 +115,7 @@ class ProductController extends Controller
             $foto = $photo;
         }
 
-        $query = DB::table('product')->update([
+        $query = DB::table('product')->where('id',$request->id)->update([
             "category_id" => $request->category_id,
             "users_id" => session('id'),
             "product_name" => $request->product_name,
@@ -137,9 +143,8 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        $query = DB::table('product')->update(['deleted_at' => \Carbon::now()]);
+        $query = DB::table('product')->where('id',$id)->update(['deleted_at' => date("Y-m-d H:i:s")]);
         if($query){
-
             DB::table('users_log')->insert([
                 "users_id" => session('username'),
                 "action" => 'DELETE',
@@ -147,6 +152,12 @@ class ProductController extends Controller
                 "created_at" => date("Y-m-d H:i:s"),
                 "updated_at" => date("Y-m-d H:i:s"),
             ]);
+
+            $pict = DB::table('product')->where('id',$id)->select('image')->first();
+            $image_path = 'images/'.$pict->image;  // Value is not URL but directory file path
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
 
             return response()->json(["callback" => 'success']);
         }else{

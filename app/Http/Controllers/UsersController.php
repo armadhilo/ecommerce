@@ -18,7 +18,7 @@ class UsersController extends Controller
 
     public function list() {
         $data = array();
-        $list = DB::table('users')->get();
+        $list = DB::table('users')->orderByDesc('id')->get();
         foreach ($list as $row) {
             $val = array();
             $val[] = $row->username;

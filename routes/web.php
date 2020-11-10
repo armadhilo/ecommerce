@@ -38,6 +38,7 @@ Route::get('logout','LoginController@logout')->name('login.logout');
     Route::post('product/update','ProductController@update')->name('product.edit');
     // Route::delete('category','UsersController@delete')->name('users.delete');
     Route::get('product/detail/{id}','ProductController@detail')->name('product.detail');
+    Route::post('product/delete/{id}','ProductController@delete')->name('product.delete');
 
     Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
     Route::get('/users','UsersController@index')->name('users.index');
@@ -49,6 +50,7 @@ Route::get('logout','LoginController@logout')->name('login.logout');
     Route::get('slider/list','SliderController@list')->name('slider.get');
     Route::get('slider/detail/{id}','SliderController@detail')->name('slider.detail');
     Route::post('slider/update','SliderController@update')->name('slider.edit');
+    Route::post('slider/delete/{id}','SliderController@delete')->name('slider.delete');
 
 
 // });
@@ -56,8 +58,11 @@ Route::get('logout','LoginController@logout')->name('login.logout');
     
 
     Route::get('/main_product','MainproductController@index')->name('main_product.index');
-    Route::post('main_product/search','MainproductController@list');
+    Route::get('main_product/search','MainproductController@list');
+    Route::get('main_product/detail/{id}','MainproductController@detail');
     Route::get('/product_detail','MainproductController@product_detail')->name('main_product.product_detail');
 
     Route::get('/change_password','SettingsController@change_password')->name('settings.change_password');
     Route::get('/edit_profile','SettingsController@edit_profile')->name('settings.edit_profile');
+
+    Route::get('coba','ProductController@coba');

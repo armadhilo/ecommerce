@@ -180,5 +180,23 @@
             }
         });
     }
+
+    function hapus(id){
+        $.ajax({
+            url : "/slider/delete/" + id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data){
+                if(data.callback === "success"){
+                    alert('success');
+                }else{
+                    alertResponse('error', 'Failed!', 'Data tidak ditemukan');
+                }
+               
+            },error: function (jqXHR, textStatus, errorThrown){
+                console.log('Error get data');
+            }
+        });
+    }
     </script>
     @endsection
