@@ -249,10 +249,7 @@ html .pace .pace-progress {
 /*=========================================================================================
     File Name: sidebar.scss
     Description: content sidebar specific scss.
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
-    Author: PIXINVENT
-    Author URL: http://www.themeforest.net/user/pixinvent
+    
 ==========================================================================================*/
 .sidebar {
   position : relative;
@@ -345,10 +342,7 @@ body.fixed-footer footer.footer-dark {
 /*=========================================================================================
     File Name: navigations.scss
     Description: Common mixin for menus, contain dark and light version scss.
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
-    Author: PIXINVENT
-    Author URL: http://www.themeforest.net/user/pixinvent
+    
 ==========================================================================================*/
 .main-menu {
   z-index : 1031;
@@ -1804,10 +1798,7 @@ body.fixed-footer .main-menu.menu-fixed {
 /*=========================================================================================
 	File Name: search.scss
 	Description: Search  functionality.
-	----------------------------------------------------------------------------------------
-	Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
-	Author: PIXINVENT
-	Author URL: http://www.themeforest.net/user/pixinvent
+	 
 ==========================================================================================*/
 .navbar-container a.nav-link-search {
   float : right;
@@ -2901,10 +2892,7 @@ body.navbar-static .navbar-container .search-input.open {
 /*=========================================================================================
     File Name: demo.scss
     Description: CSS used for demo purpose only. Remove this css from your project.
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
-    Author: PIXINVENT
-    Author URL: http://www.themeforest.net/user/pixinvent
+    
 ==========================================================================================*/
 .fonticon-container > .fonticon-wrap {
   float : right;
@@ -2987,10 +2975,7 @@ body.navbar-static .navbar-container .search-input.open {
 /*=========================================================================================
 	File Name: customizer.scss
 	Description: CSS used for demo purpose only. Remove this css from your project.
-	----------------------------------------------------------------------------------------
-	Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
-	Author: PIXINVENT
-	Author URL: http://www.themeforest.net/user/pixinvent
+	 
 ==========================================================================================*/
 .customizer {
   width : 400px;
