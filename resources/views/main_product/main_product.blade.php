@@ -21,13 +21,13 @@
                                         </ol>
                                         <div class="carousel-inner" role="listbox">
                                             <div class="carousel-item active" style="height: 300px;">
-                                                <img class="img-fluid" src="../../../app-assets/images/slider/01.jpg" alt="First slide">
+                                                <img class="img-fluid" src="../../../app-assets/images/banner/banner-1.jpg" alt="First slide">
                                             </div>
                                             <div class="carousel-item" style="height: 300px;">
-                                                <img class="img-fluid" src="../../../app-assets/images/slider/03.jpg" alt="Second slide">
+                                                <img class="img-fluid" src="../../../app-assets/images/banner/banner-2.jpg" alt="Second slide">
                                             </div>
                                             <div class="carousel-item" style="height: 300px;">
-                                                <img class="img-fluid" src="../../../app-assets/images/slider/02.jpg" alt="Third slide">
+                                                <img class="img-fluid" src="../../../app-assets/images/banner/banner-3.jpg" alt="Third slide">
                                             </div>
                                         </div>
 
