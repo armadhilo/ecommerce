@@ -8,7 +8,8 @@ use DB;
 class MainproductController extends Controller
 {
     public function index(){
-        return view('main_product.main_product');
+        $data['slider'] = DB::table('slider')->limit(3)->get();
+        return view('main_product.main_product',$data);
     }
     
     public function product_detail($id){

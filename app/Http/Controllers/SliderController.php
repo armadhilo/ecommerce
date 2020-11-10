@@ -77,9 +77,8 @@ class SliderController extends Controller
 
     public function update(Request $request){
 
-        dd($request);
         if(!$request->hasfile('slider')){
-            return response()->json(["callback" => 'add image please']);
+            return response()->json(["status" => 'add image please']);
         }
         
         $data = $request->input('slider');
@@ -93,7 +92,7 @@ class SliderController extends Controller
         ]);
 
        return response()->json([
-           "status" => 'Data Tersimpan',
+           "status" => 'Data terupdate',
        ]);
     }
 
@@ -102,8 +101,8 @@ class SliderController extends Controller
     {
         $query = DB::table('slider')->where('id',$id)->update(['deleted_at' => date("Y-m-d H:i:s")]);
         if($query){
-            $pict = DB::table('slider')->where('id',$id)->select('image')->first();
-            $image_path = 'images/slider/'.$pict->image;  // Value is not URL but directory file path
+            $pict = DB::table('slider')->where('id',$id)->select('slider')->first();
+            $image_path = 'images/slider/'.$pict->slider;  // Value is not URL but directory file path
             if(File::exists($image_path)) {
                 File::delete($image_path);
             }

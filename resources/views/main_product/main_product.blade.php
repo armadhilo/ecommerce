@@ -20,15 +20,19 @@
                                             <li data-target="#carousel-interval" data-slide-to="2"></li>
                                         </ol>
                                         <div class="carousel-inner" role="listbox">
-                                            <div class="carousel-item active" style="height: 300px;">
+
+                                            @foreach($slider as $key => $item)
+                                            <div class="carousel-item @if($key == 0) active @endif" style="height: 300px;">
+                                                <img class="img-fluid" src="{{asset('images/slider/'.$item->slider)}}" alt="Second slide">
+                                            </div>
+                                            @endforeach
+                                            {{-- <div class="carousel-item active" style="height: 300px;">
                                                 <img class="img-fluid" src="../../../app-assets/images/banner/banner-1.jpg" alt="First slide">
                                             </div>
-                                            <div class="carousel-item" style="height: 300px;">
-                                                <img class="img-fluid" src="../../../app-assets/images/banner/banner-2.jpg" alt="Second slide">
-                                            </div>
+                                            
                                             <div class="carousel-item" style="height: 300px;">
                                                 <img class="img-fluid" src="../../../app-assets/images/banner/banner-3.jpg" alt="Third slide">
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                         <a class="carousel-control-prev" href="#carousel-interval" role="button" data-slide="prev">
