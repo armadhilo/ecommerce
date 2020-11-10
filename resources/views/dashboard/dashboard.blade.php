@@ -23,7 +23,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <h1 class="mb-2 text-white">Welcome, Dinda Anggraini!</h1>
+                                        <h1 class="mb-2 text-white">Welcome, {{session('nama')}}!</h1>
                                     </div>
                                 </div>
                             </div>

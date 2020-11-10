@@ -16,7 +16,7 @@ class cekAdmin
     public function handle($request, Closure $next)
     {
         if(session('role') != '1' || session('role') != '2'){
-            return redirect('/admin/login');
+            return redirect('/login');
         }
 
         return $next($request);

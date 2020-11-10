@@ -225,6 +225,7 @@
     });
     
     function save(){
+        var id              = $('$id').val();
         var category_id     = $('#category_id').val();
         var product_name    = $('#product_name').val();
         var nidn            = $('#nidn').val();
@@ -296,7 +297,15 @@
                 if(data.callback === "success"){
                     var data = data.data;
                     $('#id').val(data.id);
-                    $('#category_name').val(data.category_name);
+                    $('#category_id').val(data.category_id);
+                    $('#product_name').val(data.product_name);
+                    $('#description').val(data.description);
+                    $('#pic').val(data.pic);
+                    $('#mitra').val(data.mitra);
+                    $('#nidn').val(data.nidn);
+                    $('#jml_halaman').val(data.jml_halaman);
+                    $('#penerbit').val(data.penerbit);
+                    
                 }else{
                     alertResponse('error', 'Failed!', 'Data tidak ditemukan');
                 }

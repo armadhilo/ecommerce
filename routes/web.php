@@ -17,22 +17,14 @@ Route::get('/', function () {
 
 Route::get('login','LoginController@index')->name('login.index');
 Route::post('login','LoginController@action')->name('login.post');
-Route::get('logout','LoginController@logout');
+Route::get('logout','LoginController@logout')->name('login.logout');
 
-Route::group(['middleware' => 'cekAdmin'], function () {
-
-    
-
-});
+// Route::group(['middleware' => 'cekAdmin'], function () {
 
     Route::post('users/add','UsersController@store')->name('users.post');
     Route::get('users/list','UsersController@list')->name('users.get');
     Route::post('users/update','UsersController@update')->name('users.edit');
-<<<<<<< HEAD
     // Route::delete('users','UsersController@delete')->name('users.delete');
-=======
-    Route::delete('users','UsersController@delete')->name('users.delete');
->>>>>>> f70f0c4dc08ad6a3f93b6bcae88dcd6cf6255d3f
     Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
 
     Route::post('category/add','CategoryController@store')->name('category.post');
@@ -52,7 +44,13 @@ Route::group(['middleware' => 'cekAdmin'], function () {
     Route::get('/category','CategoryController@index')->name('category.index');
     Route::get('/product','ProductController@index')->name('product.index');
 
+
+// });
+
+    
+
     Route::get('/main_product','MainproductController@index')->name('main_product.index');
+    Route::get('main_product/search','MainproductController@list');
     Route::get('/product_detail','MainproductController@product_detail')->name('main_product.product_detail');
 
     Route::get('/change_password','SettingsController@change_password')->name('settings.change_password');

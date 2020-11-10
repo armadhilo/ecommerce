@@ -39,12 +39,11 @@ class LoginController extends Controller
         }
     }
 
-    public function logout(){
+    public function logout(Request $request){
 
 		$request->session()->forget('username');
 		$request->session()->forget('nama');
 		$request->session()->forget('role');
-        $request->session()->flush();
         
 	    return redirect('/login')->with('success','Anda berhasil logout !');
 
