@@ -90,12 +90,15 @@
                 <section id="ecommerce-searchbar">
                     <div class="row mt-1">
                         <div class="col-sm-12">
-                            <fieldset class="form-group position-relative">
-                                <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here">
-                                <div class="form-control-position" onclick="filterProduct();">
-                                    <i class="feather icon-search"></i>
-                                </div>
-                            </fieldset>
+                        <form action="{{ route('main_product.index') }}" method="GET">
+                                @csrf
+                                <fieldset class="form-group position-relative">
+                                <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here" value="{{ request()->search_product }}">
+                                    <div class="form-control-position" onclick="filterProduct();">
+                                        <i class="feather icon-search"></i>
+                                    </div>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
                 </section>
@@ -103,7 +106,50 @@
 
                 <!-- Ecommerce Products Starts -->
                 <section id="ecommerce-products" class="grid-view">
-                    @include('main_product.presult')
+                    
+                        @foreach($product as $p)
+                        <div class="card ecommerce-card">
+                            <div class="card-content">
+                                <div class="item-img text-center pt-0">
+                                    <a href="/product_detail/{{$p->product_name}}">
+                                        <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/{{$p->image}}" alt="img-product"></a>
+                                </div>
+                                
+                                <div class="card-body">
+                                    
+                                        <div class="item-wrapper">
+                                            <div class="item-rating">
+                                            <div class="badge-md"></div>
+                                        </div>
+                                        <div>
+                                            <h6 class="item-price">
+                                            
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="item-name">
+                                        <a href="app-ecommerce-details.html">{{$p->product_name}}</a>
+                                    </div>
+                                    <div>
+                                        <p class="item-description">{{strip_tags($p->description)}}</p>
+                                    </div>
+                                </div>
+                                <div class="item-options text-center">
+                                    <div class="item-wrapper">
+                                        <div class="item-cost">
+                                            <h6 class="item-price">
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="cart" onclick="product_detail('{{$p->id}}')">
+                                        <i class="feather icon-eye"></i> 
+                                        <a href="/product_detail/{{$p->id}}" class="view-in-cart">Product Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        @endforeach
                 </section>
                 
                 <section id="products_notfound">
@@ -111,7 +157,8 @@
                 <!-- Ecommerce Products Ends -->
 
                 <!-- Ecommerce Pagination Starts -->
-                <section id="ecommerce-pagination text-center">
+                <section id="ecommerce-pagination">
+                    {{ $product->appends(request()->input())->links() }}
                 </section>
                 <!-- Ecommerce Pagination Ends -->
 
@@ -272,10 +319,11 @@
         $(document).ready(function() {
 
             $("input:radio").click(function() {
-                filterProduct();
+                alert('{{ count(request()->input()) }}')
+                // filterProduct();
             });
 
-            $("input:radio:first").prop("checked", true).trigger("click");
+            // $("input:radio:first").prop("checked", true).trigger("click");
 
             $('#search_product').keyup(function (e) {
             var key = e.which;
@@ -290,8 +338,12 @@
             filterProduct();
         }
 
-
         function filterProduct(){
+
+            // wes gawe kene
+        }
+
+        function filterProduct1(){
             var product_list = $('#ecommerce-products');
             $('#products_notfound').empty();
             product_list.empty();
@@ -308,7 +360,81 @@
                 contentType: false,
                 processData: false,
                 data: form_data,
-                type: 'GET',
+                type: 'POST',
+                success: function(response){
+                    //append product
+                    console.log(response);
+                    var data = response.data;
+                    $('#products_notfound').empty();
+                    $('#products_notfound').empty();
+                    if(data.length > 0){
+                        for (let i = 0; i < data.length; i++) {
+                            product_list.append(`
+                                <div class="card ecommerce-card">
+                                    <div class="card-content">
+                                        <div class="item-img text-center pt-0">
+                                            <a href="/product_detail/${data[i].id}">
+                                                <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/${data[i].image}" alt="img-product"></a>
+                                        </div>
+                                        
+                                        <div class="card-body">
+                                            
+                                                <div class="item-wrapper">
+                                                    <div class="item-rating">
+                                                    <div class="badge-md"></div>
+                                                </div>
+                                                <div>
+                                                    <h6 class="item-price">
+                                                    
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="item-name">
+                                                <a href="app-ecommerce-details.html">${data[i].product_name}</a>
+                                            </div>
+                                            <div>
+                                                <p class="item-description">${data[i].description}</p>
+                                            </div>
+                                        </div>
+                                        <div class="item-options text-center">
+                                            <div class="item-wrapper">
+                                                <div class="item-cost">
+                                                    <h6 class="item-price">
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="cart" onclick="product_detail('${data[i].id}')">
+                                                <i class="feather icon-eye"></i> 
+                                                <a href="/product_detail/${data[i].id}" class="view-in-cart">Product Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                `);
+                            
+                        }
+                    }else{
+                       
+                        $('#products_notfound').append(`
+                        <div class="card">
+                            <div class="card-body text-center p-4">
+                                <img class="img-fluid rounded-sm mb-1" style="width: 200px; height: auto;" src="{{ asset('app-assets/images/logo/not_found.png') }}">
+                                <p>
+                                    Oops, produk tidak ditemukan.
+                                    Coba gunakan kata kunci lain.
+                                </p>
+                            </div>
+                            
+                        </div>
+                        `);
+
+                    }
+                    
+                    
+                },error: function (jqXHR, textStatus, errorThrown){
+                    console.log('Error get data');
+                }
             });
 
         }

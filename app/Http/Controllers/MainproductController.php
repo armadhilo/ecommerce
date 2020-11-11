@@ -8,22 +8,13 @@ use DB;
 class MainproductController extends Controller
 {
     public function index(Request $request){
-        
-        $data['slider'] = DB::table('slider')->whereNull('deleted_at')->orderByDesc('id')->limit(3)->get();
-        // return view('main_product.main_product',$data);
-
-        $search = $request->search;
+        $search = $request->search_product;
         $filter = $request->filter;
-
-        $data['isi'] = DB::table('product')->where([
+        $data['slider'] = DB::table('slider')->limit(3)->get();
+        $data['product'] = DB::table('product')->where([
             ['product_name', 'like', '%'.$search.'%'],
-            ['category_id', 'like', '%'.$filter.'%'],
-        ])->whereNull('deleted_at')->Paginate(3);
-
-        if ($request->ajax()) {
-            return view('main_product.presult', $data);
-        }
-  
+            ['category_id', 'like', '%'.$filter.'%']
+        ])->paginate(1);
         return view('main_product.main_product',$data);
     }
     

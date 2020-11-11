@@ -41,7 +41,7 @@
                                         <table class="table table-hover-animation mb-0" id="tb">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Image</th>
+                                                    <th scope="col" style="width: 150px;">Image</th>
                                                     <th scope="col">Product Name</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">Description</th>
