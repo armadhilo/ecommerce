@@ -20,8 +20,6 @@ class LogController extends Controller
                     ->select('a.*', 'b.username','b.nama', 'c.product_name')
                     ->orderByDesc('id')->get();
 
-                    dd($list);
-
         foreach ($list as $row) {
             $val = array();
             $val[] = $row->username;

@@ -22,7 +22,7 @@
                                         <div class="carousel-inner" role="listbox">
 
                                             @foreach($slider as $key => $item)
-                                            <div class="carousel-item @if($key == 0) active @endif" style="height: 300px;">
+                                            <div class="carousel-item @if($key == 0) active @endif" style="max-height: 300px;">
                                                 <img class="img-fluid" src="{{asset('images/slider/'.$item->slider)}}" alt="Second slide">
                                             </div>
                                             @endforeach
