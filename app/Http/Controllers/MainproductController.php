@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Crypt;
 
 class MainproductController extends Controller
 {
@@ -24,6 +25,7 @@ class MainproductController extends Controller
     }
     
     public function product_detail($id){
+        $id = Crypt::decrypt($id);
         $data['product'] = DB::table('product')->where('id',$id)->first();
         return view('main_product.detail_product',$data);
     }

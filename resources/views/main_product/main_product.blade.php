@@ -141,9 +141,10 @@
                                             </h6>
                                         </div>
                                     </div>
-                                    <div class="cart" onclick="product_detail('{{$p->id}}')">
+                                    <div class="cart" onclick="product_detail('{{Crypt::encrypt($p->id)}}')">
                                         <i class="feather icon-eye"></i> 
-                                        <a href="/product_detail/{{$p->id}}" class="view-in-cart">Product Details</a>
+                                        
+                                        <a href="/product_detail/{{Crypt::encrypt($p->id)}}" class="view-in-cart">Product Details</a>
                                     </div>
                                 </div>
                             </div>
