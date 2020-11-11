@@ -105,54 +105,70 @@
                 <!-- Ecommerce Search Bar Ends -->
 
                 <!-- Ecommerce Products Starts -->
-                <section id="ecommerce-products" class="grid-view">
-                    
-                        @foreach($product as $p)
-                        <div class="card ecommerce-card">
-                            <div class="card-content">
-                                <div class="item-img text-center pt-0">
-                                    <a href="/product_detail/{{$p->product_name}}">
-                                        <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/{{$p->image}}" alt="img-product"></a>
+                
+                        @if(count($product) == 0)
+                        <section id="products_notfound">
+                            <div class="card">
+                                <div class="card-body text-center p-4">
+                                    <img class="img-fluid rounded-sm mb-1" style="width: 200px; height: auto;" src="{{ asset('app-assets/images/logo/not_found.png') }}">
+                                    <p>
+                                        Oops, produk tidak ditemukan.
+                                        Coba gunakan kata kunci lain.
+                                    </p>
                                 </div>
                                 
-                                <div class="card-body">
+                            </div>
+                        </section>
+                        
+                        @else
+                        <section id="ecommerce-products" class="grid-view">
+                            @foreach($product as $p)
+                            <div class="card ecommerce-card">
+                                <div class="card-content">
+                                    <div class="item-img text-center pt-0">
+                                        <a href="/product_detail/{{$p->product_name}}">
+                                            <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/{{$p->image}}" alt="img-product"></a>
+                                    </div>
                                     
-                                        <div class="item-wrapper">
-                                            <div class="item-rating">
-                                            <div class="badge-md"></div>
+                                    <div class="card-body">
+                                        
+                                            <div class="item-wrapper">
+                                                <div class="item-rating">
+                                                <div class="badge-md"></div>
+                                            </div>
+                                            <div>
+                                                <h6 class="item-price">
+                                                
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="item-name">
+                                            <a href="app-ecommerce-details.html">{{$p->product_name}}</a>
                                         </div>
                                         <div>
-                                            <h6 class="item-price">
-                                            
-                                            </h6>
+                                            <p class="item-description">{{strip_tags($p->description)}}</p>
                                         </div>
                                     </div>
-                                    <div class="item-name">
-                                        <a href="app-ecommerce-details.html">{{$p->product_name}}</a>
-                                    </div>
-                                    <div>
-                                        <p class="item-description">{{strip_tags($p->description)}}</p>
-                                    </div>
-                                </div>
-                                <div class="item-options text-center">
-                                    <div class="item-wrapper">
-                                        <div class="item-cost">
-                                            <h6 class="item-price">
-                                            </h6>
+                                    <div class="item-options text-center">
+                                        <div class="item-wrapper">
+                                            <div class="item-cost">
+                                                <h6 class="item-price">
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="cart" onclick="product_detail('{{$p->id}}')">
+                                            <i class="feather icon-eye"></i> 
+                                            <a href="/product_detail/{{$p->id}}" class="view-in-cart">Product Details</a>
                                         </div>
                                     </div>
-                                    <div class="cart" onclick="product_detail('{{$p->id}}')">
-                                        <i class="feather icon-eye"></i> 
-                                        <a href="/product_detail/{{$p->id}}" class="view-in-cart">Product Details</a>
-                                    </div>
                                 </div>
+                                
                             </div>
-                            
-                        </div>
                         @endforeach
-                </section>
-                <section id="products_notfound">
-                </section>
+                    </section>
+
+                        @endif
+                        
                 <!-- Ecommerce Products Ends -->
 
                 <!-- Ecommerce Pagination Starts -->
@@ -240,8 +256,6 @@
                 var checked = $('input[name="category_id"]:checked').val();
                 addOrUpdateUrlParam('category', checked);
             });
-
-            // $("input:radio:first").prop("checked", true).trigger("click");
 
             $('#search_product').keypress(function (e) {
             var key = e.which;

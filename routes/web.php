@@ -56,15 +56,11 @@ Route::group(['middleware' => 'cekAdmin'], function () {
     Route::post('/change_password/action','SettingsController@actionChangePassword');
     Route::get('/edit_profile','SettingsController@edit_profile')->name('settings.edit_profile');
 
-<<<<<<< HEAD
-    Route::get('/about_us','AboutusController@index')->name('about_us.index');
-    Route::get('/contact_us','AboutusController@contact_us')->name('about_us.contact_us');
-    Route::get('coba','ProductController@coba');
-=======
+    
 });
 
-
+Route::get('/about_us','AboutusController@index')->name('about_us.index');
+Route::get('/contact_us','AboutusController@contact_us')->name('about_us.contact_us');
 Route::get('/main_product','MainproductController@index')->name('main_product.index');
 Route::post('main_product/search','MainproductController@list');
 Route::get('/product_detail/{id}','MainproductController@product_detail')->name('main_product.product_detail');
->>>>>>> d8c5990f698a7d1dca7772168679055ac2792f59
