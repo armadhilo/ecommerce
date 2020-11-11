@@ -64,14 +64,14 @@ class CategoryController extends Controller
         return response()->json(["callback" => 'success', "desc" => "Data terupdate"]);
     }
 
-    public function delete($id)
-    {
-        $query = DB::table('category')->update(['deleted_at' => \Carbon::now()]);
-        if($query){
-            return response()->json(["callback" => 'success']);
-        }else{
-            return response()->json(["callback" => 'fail']);
-        }
-    }
+    // public function delete($id)
+    // {
+    //     $query = DB::table('category')->update(['deleted_at' => \Carbon::now()]);
+    //     if($query){
+    //         return response()->json(["callback" => 'success']);
+    //     }else{
+    //         return response()->json(["callback" => 'fail']);
+    //     }
+    // }
 
 }

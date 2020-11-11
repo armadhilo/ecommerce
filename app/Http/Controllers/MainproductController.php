@@ -8,13 +8,18 @@ use DB;
 class MainproductController extends Controller
 {
     public function index(Request $request){
+        
         $search = $request->search_product;
-        $filter = $request->filter;
-        $data['slider'] = DB::table('slider')->limit(3)->get();
+        $filter = $request->category;
+        
+        $data['slider'] = DB::table('slider')->whereNull('deleted_at')->limit(3)->get();
+        $data['category'] = DB::table('category')->get();
+        
         $data['product'] = DB::table('product')->where([
             ['product_name', 'like', '%'.$search.'%'],
             ['category_id', 'like', '%'.$filter.'%']
-        ])->paginate(1);
+        ])->whereNull('deleted_at')->paginate(1);
+        
         return view('main_product.main_product',$data);
     }
     
@@ -24,15 +29,18 @@ class MainproductController extends Controller
     }
 
     public function list(Request $request){
-
         $search = $request->search;
         $filter = $request->filter;
 
-        $query = DB::table('product')->where([
+        $data['isi'] = DB::table('product')->where([
             ['product_name', 'like', '%'.$search.'%'],
-            ['category_id', 'like', '%'.$filter.'%']
-        ])->get();
+            ['category_id', 'like', '%'.$filter.'%'],
+        ])->whereNull('deleted_at')->simplePaginate(3);
 
-        return response()->json(['data' => $query]);
+        if ($request->ajax()) {
+            return view('main_product.presult', $data);
+        }
+
+        // return response()->json(['data' => $query]);
     }
 }

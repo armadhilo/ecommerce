@@ -94,7 +94,7 @@
                                 @csrf
                                 <fieldset class="form-group position-relative">
                                 <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here" value="{{ request()->search_product }}">
-                                    <div class="form-control-position" onclick="filterProduct();">
+                                    <div class="form-control-position">
                                         <i class="feather icon-search"></i>
                                     </div>
                                 </fieldset>
@@ -195,23 +195,19 @@
                                             <span class="ml-50"> All</span>
                                         </span>
                                     </li>
-                                    <?php
-                                    $list = DB::table('category')->get();
-                                    foreach ($list as $row) {
-                                        ?>
-                                        <li>
-                                            <span class="vs-radio-con vs-radio-primary py-25">
-                                                <input type="radio" name="category_id" value="<?php echo $row->id;?>">
-                                                <span class="vs-radio">
-                                                    <span class="vs-radio--border"></span>
-                                                    <span class="vs-radio--circle"></span>
-                                                </span>
-                                                <span class="ml-50"><?php echo $row->category_name?></span>
+
+                                    @foreach ($category as $row)
+                                    <li>
+                                        <span class="vs-radio-con vs-radio-primary py-25">
+                                            <input type="radio" name="category_id" value="{{$row->id}}">
+                                            <span class="vs-radio">
+                                                <span class="vs-radio--border"></span>
+                                                <span class="vs-radio--circle"></span>
                                             </span>
-                                        </li>
-                                        <?php
-                                    }    
-                                    ?>
+                                            <span class="ml-50">{{$row->category_name}}</span>
+                                        </span>
+                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <!-- Categories Ends -->
@@ -238,9 +234,11 @@
     <script>
         $(document).ready(function() {
 
+            $('input[name="category_id"][value="{{ Request::get('category') }}"]').prop('checked', true);
+
             $("input:radio").click(function() {
-                alert('{{ count(request()->input()) }}')
-                // filterProduct();
+                var checked = $('input[name="category_id"]:checked').val();
+                addOrUpdateUrlParam('category', checked);
             });
 
             // $("input:radio:first").prop("checked", true).trigger("click");
@@ -254,113 +252,26 @@
 
         });
 
-        function searchProduct(){
-            filterProduct();
-        }
-
-        function filterProduct(){
-
-            // wes gawe kene
-        }
-
-        function filterProduct1(){
-            var product_list = $('#ecommerce-products');
-            $('#products_notfound').empty();
-            product_list.empty();
-            var category_id =$('input[name="category_id"]:checked').val();
-            var search = $('#search_product').val(); 
-            var form_data = new FormData();
-            form_data.append('filter', category_id);
-            form_data.append('search', search);
-
-            $.ajax({
-                url: "/main_product/search",
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
-                success: function(response){
-                    //append product
-                    console.log(response);
-                    var data = response.data;
-                    $('#products_notfound').empty();
-                    $('#products_notfound').empty();
-                    if(data.length > 0){
-                        for (let i = 0; i < data.length; i++) {
-                            product_list.append(`
-                                <div class="card ecommerce-card">
-                                    <div class="card-content">
-                                        <div class="item-img text-center pt-0">
-                                            <a href="/product_detail/${data[i].id}">
-                                                <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/${data[i].image}" alt="img-product"></a>
-                                        </div>
-                                        
-                                        <div class="card-body">
-                                            
-                                                <div class="item-wrapper">
-                                                    <div class="item-rating">
-                                                    <div class="badge-md"></div>
-                                                </div>
-                                                <div>
-                                                    <h6 class="item-price">
-                                                    
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                            <div class="item-name">
-                                                <a href="app-ecommerce-details.html">${data[i].product_name}</a>
-                                            </div>
-                                            <div>
-                                                <p class="item-description">${data[i].description}</p>
-                                            </div>
-                                        </div>
-                                        <div class="item-options text-center">
-                                            <div class="item-wrapper">
-                                                <div class="item-cost">
-                                                    <h6 class="item-price">
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                            <div class="cart" onclick="product_detail('${data[i].id}')">
-                                                <i class="feather icon-eye"></i> 
-                                                <a href="/product_detail/${data[i].id}" class="view-in-cart">Product Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                `);
-                            
-                        }
-                    }else{
-                       
-                        $('#products_notfound').append(`
-                        <div class="card">
-                            <div class="card-body text-center p-4">
-                                <img class="img-fluid rounded-sm mb-1" style="width: 200px; height: auto;" src="{{ asset('app-assets/images/logo/not_found.png') }}">
-                                <p>
-                                    Oops, produk tidak ditemukan.
-                                    Coba gunakan kata kunci lain.
-                                </p>
-                            </div>
-                            
-                        </div>
-                        `);
-
-                    }
-                    
-                    
-                },error: function (jqXHR, textStatus, errorThrown){
-                    console.log('Error get data');
-                }
-            });
-
-        }
-
         function product_detail(id){
             window.location.href = "/product_detail/"+ id;
+        }
+
+        function addOrUpdateUrlParam(name, value)
+        {
+            var href = window.location.href;
+            var regex = new RegExp("[&\\?]" + name + "=");
+            if(regex.test(href))
+            {
+                regex = new RegExp("([&\\?])" + name + "=\\d+");
+                window.location.href = href.replace(regex, "$1" + name + "=" + value);
+            }
+            else
+            {
+                if(href.indexOf("?") > -1)
+                window.location.href = href + "&" + name + "=" + value;
+                else
+                window.location.href = href + "?" + name + "=" + value;
+            }
         }
     </script>
     @endsection

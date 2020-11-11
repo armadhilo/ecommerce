@@ -120,7 +120,8 @@
         table.ajax.reload(null, false);
     }
 
-    $('#form').submit(function(){
+    $('#form').submit(function(e){
+        e.preventDefault();
         save();
     });
     

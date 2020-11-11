@@ -15,8 +15,8 @@ class cekAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(session('role') != '1' || session('role') != '2'){
-            return redirect('/login');
+        if(!session('role')){
+            return redirect('/login')->with('error','Anda harus login terlebih dahulu');
         }
 
         return $next($request);
