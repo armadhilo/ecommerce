@@ -72,13 +72,13 @@
                                         <p class="px-2">Welcome back, please login to your account.</p>
                                         
                                         @if ($message = Session::get('success'))
-                                            <div class="alert alert-success">
+                                            <div class="alert alert-success mr-2 ml-2">
                                                 {{$message}} 
                                             </div>    
                                             @endif     
 
                                             @if ($message = Session::get('error'))
-                                            <div class="alert alert-danger">
+                                            <div class="alert alert-danger mr-2 ml-2">
                                                 {{$message}} 
                                             </div>    
                                         @endif              

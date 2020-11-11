@@ -55,10 +55,12 @@ Route::group(['middleware' => 'cekAdmin'], function () {
     Route::get('/change_password','SettingsController@change_password')->name('settings.change_password');
     Route::post('/change_password/action','SettingsController@actionChangePassword');
     Route::get('/edit_profile','SettingsController@edit_profile')->name('settings.edit_profile');
-
+    Route::get('/log','LogController@index')->name('log.index');
+    
 });
 
-
+Route::get('/about_us','AboutusController@index')->name('about_us.index');
+Route::get('/contact_us','AboutusController@contact_us')->name('about_us.contact_us');
 Route::get('/main_product','MainproductController@index')->name('main_product.index');
 Route::post('main_product/search','MainproductController@list');
 Route::get('/product_detail/{id}','MainproductController@product_detail')->name('main_product.product_detail');
