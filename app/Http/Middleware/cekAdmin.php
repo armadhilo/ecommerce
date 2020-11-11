@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Session;
 
-class CekAdmin
+class cekAdmin
 {
     /**
      * Handle an incoming request.
