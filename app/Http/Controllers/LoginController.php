@@ -29,12 +29,7 @@ class LoginController extends Controller
                 $request->session()->put('nama', $data->nama);
                 $request->session()->put('role', $data->role);
 
-<<<<<<< HEAD
                 return response()->json(['status' => 'success']);
-    
-=======
-                    return response()->json(['status' => 'success']);
->>>>>>> 0cace2da4a08996f7ae1f4cb2e9f7dfca1652597
             }else{
                 return response()->json(['status' => 'fail']);
             }

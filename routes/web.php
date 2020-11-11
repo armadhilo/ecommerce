@@ -19,7 +19,7 @@ Route::get('login','LoginController@index')->name('login.index');
 Route::post('login','LoginController@action')->name('login.post');
 Route::get('logout','LoginController@logout')->name('login.logout');
 
-// Route::group(['middleware' => 'cekLogin'], function () {
+Route::group(['middleware' => 'cekLogin'], function () {
 
     Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
     Route::get('/change_password','SettingsController@change_password')->name('settings.change_password');
@@ -62,7 +62,7 @@ Route::get('logout','LoginController@logout')->name('login.logout');
         Route::post('slider/delete/{id}','SliderController@delete')->name('slider.delete');
     });
 
-// });
+});
 
 Route::get('/about_us','AboutusController@index')->name('about_us.index');
 Route::get('/contact_us','AboutusController@contact_us')->name('about_us.contact_us');

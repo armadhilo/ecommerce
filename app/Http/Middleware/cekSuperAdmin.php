@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Session;
 
-class cekSuperAdmin
+class CekSuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,8 +17,8 @@ class cekSuperAdmin
     public function handle($request, Closure $next)
     {
 
-        if(!Session::get('role') == 1){
-            return redirect('/login')->with('error','Anda harus login terlebih dahulu SU');
+        if(Session::get('role') != 1){
+            return redirect('/login')->with('error','Anda harus login terlebih dahulu sebagai Superadmin');
         }
 
         return $next($request);
