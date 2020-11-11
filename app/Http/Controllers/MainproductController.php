@@ -19,7 +19,7 @@ class MainproductController extends Controller
         $data['product'] = DB::table('product')->where([
             ['product_name', 'like', '%'.$search.'%'],
             ['category_id', 'like', '%'.$filter.'%']
-        ])->whereNull('deleted_at')->paginate(1);
+        ])->whereNull('deleted_at')->paginate(6);
         
         return view('main_product.main_product',$data);
     }

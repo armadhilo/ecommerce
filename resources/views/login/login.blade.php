@@ -151,7 +151,8 @@
           });
         }
 
-        $('#form_login').submit(function(){
+        $('#form_login').submit(function(e){
+            e.preventDefault();
             login();
         });
 
