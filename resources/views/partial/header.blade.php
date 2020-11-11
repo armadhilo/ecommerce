@@ -51,72 +51,18 @@ $menu = Request::segment(1);
             <div class="shadow-bottom"></div>
             <div class="main-menu-content">
                 <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                    <?php
-                    if($menu == "users"){
-                        ?>
-                        <li class="nav-item"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
-                        <li class=" navigation-header"><span>Apps</span></li>
-                        <li class=" nav-item active"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('log.index') }}"><i class="fa fa-history"></i><span class="menu-title" data-i18n="Log View">Log View</span></a></li>
-                        <?php
-                    }else if($menu == "category"){
-                        ?>
-                        <li class="nav-item"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
-                        <li class=" navigation-header"><span>Apps</span></li>
-                        <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
-                        <li class=" nav-item active"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('log.index') }}"><i class="fa fa-history"></i><span class="menu-title" data-i18n="Log View">Log View</span></a></li>
-                        <?php
-                    }else if($menu == "product"){
-                        ?>
-                        <li class="nav-item"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
-                        <li class=" navigation-header"><span>Apps</span></li>
-                        <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
-                        <li class=" nav-item active"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('log.index') }}"><i class="fa fa-history"></i><span class="menu-title" data-i18n="Log View">Log View</span></a></li>
-                        <?php
-                    }else if($menu == "slider"){
-                        ?>
-                        <li class="nav-item"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
-                        <li class=" navigation-header"><span>Apps</span></li>
-                        <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
-                        <li class=" nav-item active"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('log.index') }}"><i class="fa fa-history"></i><span class="menu-title" data-i18n="Log View">Log View</span></a></li>
-                        <?php
-                    }else if($menu == "slider"){
-                        ?>
-                        <li class="nav-item"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
-                        <li class=" navigation-header"><span>Apps</span></li>
-                        <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>
-                        <li class=" nav-item active"><a href="{{ route('log.index') }}"><i class="fa fa-history"></i><span class="menu-title" data-i18n="Log View">Log View</span></a></li>
-                        <?php
-                    }else{
-                        ?>
-                        <li class="nav-item active"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
-                        <li class=" navigation-header"><span>Apps</span></li>
-                        <li class=" nav-item"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>
-                        <li class=" nav-item"><a href="{{ route('log.index') }}"><i class="fa fa-history"></i><span class="menu-title" data-i18n="Log View">Log View</span></a></li>
-                        <?php
-                    }
-                    ?>
-                    
+                            <li class="nav-item @if($menu == "dashboard") active @endif"><a href="{{ route('dashboard.index') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
+                            <li class=" navigation-header"><span>Apps</span></li>
+                            @if(Session::get('role') == '1') 
 
-                </ul>
+                            <li class=" nav-item @if($menu == "users") active @endif"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
+                            <li class=" nav-item @if($menu == "log") active @endif"><a href="{{ route('log.index') }}"><i class="fa fa-history"></i><span class="menu-title" data-i18n="Log View">Log View</span></a></li>
+                            @else
+                            <li class=" nav-item @if($menu == "category") active @endif"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
+                            <li class=" nav-item @if($menu == "product") active @endif"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
+                            <li class=" nav-item @if($menu == "slider") active @endif"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>            
+                            @endif
+                        </ul>
             </div>
         </div>
     <!-- END: Main Menu-->
