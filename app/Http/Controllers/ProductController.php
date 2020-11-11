@@ -130,7 +130,7 @@ class ProductController extends Controller
 
         DB::table('users_log')->insert([
             "users_id" => session('id'),
-            "action" => 'UPDATE',
+            "action" => "UPDATE",
             "product_id" => $query,
             "created_at" => date("Y-m-d H:i:s"),
             "updated_at" => date("Y-m-d H:i:s"),
