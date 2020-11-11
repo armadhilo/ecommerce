@@ -55,7 +55,7 @@ Route::group(['middleware' => 'cekAdmin'], function () {
     Route::get('/change_password','SettingsController@change_password')->name('settings.change_password');
     Route::post('/change_password/action','SettingsController@actionChangePassword');
     Route::get('/edit_profile','SettingsController@edit_profile')->name('settings.edit_profile');
-
+    Route::get('/log','LogController@index')->name('log.index');
     
 });
 
