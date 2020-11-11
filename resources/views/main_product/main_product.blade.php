@@ -103,32 +103,15 @@
 
                 <!-- Ecommerce Products Starts -->
                 <section id="ecommerce-products" class="grid-view">
-                    
-                    
+                    @include('main_product.presult')
                 </section>
+                
                 <section id="products_notfound">
                 </section>
                 <!-- Ecommerce Products Ends -->
 
                 <!-- Ecommerce Pagination Starts -->
-                <section id="ecommerce-pagination">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-2">
-                                    <li class="page-item prev-item"><a class="page-link" href="#"></a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item" aria-current="page"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">7</a></li>
-                                    <li class="page-item next-item"><a class="page-link" href="#"></a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                <section id="ecommerce-pagination text-center">
                 </section>
                 <!-- Ecommerce Pagination Ends -->
 
@@ -206,7 +189,86 @@
 @endsection
 
 @section('js')
-    <script>
+<script type="text/javascript">
+    $(window).on('hashchange', function() {
+        if (window.location.hash) {
+            var page = window.location.hash.replace('#', '');
+            if (page == Number.NaN || page <= 0) {
+                return false;
+            }else{
+                getData(page);
+            }
+        }
+    });
+    
+    $(document).ready(function()
+    {
+        // // $("input:radio").click(function() {
+        // //         filterProduct();
+        // // });
+
+        // $("input:radio:first").prop("checked", true).trigger("click");
+
+        $(document).on('click', '.pagination a',function(event)
+        {
+            event.preventDefault();
+  
+            $('li').removeClass('active');
+            $(this).parent('li').addClass('active');
+  
+            var myurl = $(this).attr('href');
+            var page=$(this).attr('href').split('page=')[1];
+  
+            getData(page);
+        });
+  
+    });
+  
+    function getData(page){
+        $.ajax(
+        {
+            url: '?page=' + page,
+            type: "get",
+            datatype: "html"
+        }).done(function(data){
+            $("#ecommerce-products").empty().html(data);
+            location.hash = page;
+        }).fail(function(jqXHR, ajaxOptions, thrownError){
+              alert('No response from server');
+        });
+    }
+
+    function product_detail(id){
+        window.location.href = "/product_detail/"+ id;
+    }
+
+    // function filterProduct(){
+    //     var product_list = $('#ecommerce-products');
+    //     $('#products_notfound').empty();
+    //     product_list.empty();
+    //     var category_id =$('input[name="category_id"]:checked').val();
+    //     var search = $('#search_product').val(); 
+    //     var form_data = new FormData();
+    //     form_data.append('filter', category_id);
+    //     form_data.append('search', search);
+
+    //     $.ajax({
+    //         url: "/main_product/search/"+category_id+'/'+search,
+    //         dataType: 'JSON',
+    //         type: 'GET',
+    //         success: function(response){
+    //             var data = response.data.data;
+    //             $('#products_notfound').empty();
+    //             console.log(data.length);
+    //             if(data.length > 0){
+                   
+    //             }
+    //         }
+    //     });
+
+    // }
+</script>
+    {{-- <script>
         $(document).ready(function() {
 
             $("input:radio").click(function() {
@@ -215,7 +277,7 @@
 
             $("input:radio:first").prop("checked", true).trigger("click");
 
-            $('#search_product').keypress(function (e) {
+            $('#search_product').keyup(function (e) {
             var key = e.which;
             if(key == 13){
                 filterProduct();
@@ -246,82 +308,7 @@
                 contentType: false,
                 processData: false,
                 data: form_data,
-                type: 'POST',
-                success: function(response){
-                    //append product
-                    console.log(response);
-                    var data = response.data;
-                    $('#products_notfound').empty();
-                    $('#products_notfound').empty();
-                    if(data.length > 0){
-                        for (let i = 0; i < data.length; i++) {
-                            product_list.append(`
-                                <div class="card ecommerce-card">
-                                    <div class="card-content">
-                                        <div class="item-img text-center pt-0">
-                                            <a href="/product_detail/${data[i].id}">
-                                                <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/${data[i].image}" alt="img-product"></a>
-                                        </div>
-                                        
-                                        <div class="card-body">
-                                            
-                                                <div class="item-wrapper">
-                                                    <div class="item-rating">
-                                                    <div class="badge-md"></div>
-                                                </div>
-                                                <div>
-                                                    <h6 class="item-price">
-                                                    
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                            <div class="item-name">
-                                                <a href="app-ecommerce-details.html">${data[i].product_name}</a>
-                                                <p class="item-company">By <span class="company-name">Google</span></p>
-                                            </div>
-                                            <div>
-                                                <p class="item-description">${data[i].description}</p>
-                                            </div>
-                                        </div>
-                                        <div class="item-options text-center">
-                                            <div class="item-wrapper">
-                                                <div class="item-cost">
-                                                    <h6 class="item-price">
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                            <div class="cart" onclick="product_detail('${data[i].id}')">
-                                                <i class="feather icon-eye"></i> 
-                                                <a href="/product_detail/${data[i].id}" class="view-in-cart">Product Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                `);
-                            
-                        }
-                    }else{
-                       
-                        $('#products_notfound').append(`
-                        <div class="card">
-                            <div class="card-body text-center p-4">
-                                <img class="img-fluid rounded-sm mb-1" style="width: 200px; height: auto;" src="{{ asset('app-assets/images/logo/not_found.png') }}">
-                                <p>
-                                    Oops, produk tidak ditemukan.
-                                    Coba gunakan kata kunci lain.
-                                </p>
-                            </div>
-                            
-                        </div>
-                        `);
-
-                    }
-                    
-                    
-                },error: function (jqXHR, textStatus, errorThrown){
-                    console.log('Error get data');
-                }
+                type: 'GET',
             });
 
         }
@@ -329,5 +316,5 @@
         function product_detail(id){
             window.location.href = "/product_detail/"+ id;
         }
-    </script>
+    </script> --}}
     @endsection

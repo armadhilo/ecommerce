@@ -19,7 +19,7 @@ Route::get('login','LoginController@index')->name('login.index');
 Route::post('login','LoginController@action')->name('login.post');
 Route::get('logout','LoginController@logout')->name('login.logout');
 
-// Route::group(['middleware' => 'cekAdmin'], function () {
+Route::group(['middleware' => 'cekAdmin'], function () {
 
     Route::post('users/add','UsersController@store')->name('users.post');
     Route::get('users/list','UsersController@list')->name('users.get');
@@ -52,16 +52,13 @@ Route::get('logout','LoginController@logout')->name('login.logout');
     Route::post('slider/update','SliderController@update')->name('slider.edit');
     Route::post('slider/delete/{id}','SliderController@delete')->name('slider.delete');
 
-
-// });
-
-    
-
-    Route::get('/main_product','MainproductController@index')->name('main_product.index');
-    Route::post('main_product/search','MainproductController@list');
-    Route::get('/product_detail/{id}','MainproductController@product_detail')->name('main_product.product_detail');
     Route::get('/change_password','SettingsController@change_password')->name('settings.change_password');
     Route::post('/change_password/action','SettingsController@actionChangePassword');
     Route::get('/edit_profile','SettingsController@edit_profile')->name('settings.edit_profile');
 
-    Route::get('coba','ProductController@coba');
+});
+
+
+Route::get('/main_product','MainproductController@index')->name('main_product.index');
+Route::post('main_product/search','MainproductController@list');
+Route::get('/product_detail/{id}','MainproductController@product_detail')->name('main_product.product_detail');
