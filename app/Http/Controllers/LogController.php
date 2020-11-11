@@ -14,11 +14,20 @@ class LogController extends Controller
 
     public function list() {
         $data = array();
-        $list = DB::table('users_log')->orderByDesc('id')->get();
+        $list = DB::table('users_log as a')
+                    ->join('users as b', 'a.users_id', '=', 'b.id')
+                    ->join('product as c', 'a.product_id', '=', 'c.id')
+                    ->select('a.*', 'b.username','b.nama', 'c.product_name')
+                    ->orderByDesc('id')->get();
 
         foreach ($list as $row) {
             $val = array();
-            $val[] = $row->category_name;
+            $val[] = $row->username;
+            $val[] = $row->nama;
+            $val[] = $row->action;
+            $val[] = $row->product_name;
+            $val[] = $row->created_at;
+            $val[] = $row->updated_at;
             $data[] = $val;
         }
         $output = array("data" => $data);

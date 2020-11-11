@@ -108,7 +108,7 @@
         
     $(document).ready(function() {
         table = $('#tb').DataTable({
-            "ajax": "{{ route('category.get') }}"
+            "ajax": "{{ route('log.get') }}"
         });
     });
     
