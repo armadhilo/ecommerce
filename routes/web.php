@@ -64,4 +64,6 @@ Route::get('logout','LoginController@logout')->name('login.logout');
     Route::post('/change_password/action','SettingsController@actionChangePassword');
     Route::get('/edit_profile','SettingsController@edit_profile')->name('settings.edit_profile');
 
+    Route::get('/about_us','AboutusController@index')->name('about_us.index');
+    Route::get('/contact_us','AboutusController@contact_us')->name('about_us.contact_us');
     Route::get('coba','ProductController@coba');

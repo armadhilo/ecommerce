@@ -1,3 +1,6 @@
+<?php
+$menu = Request::segment(1);
+?>
 <!-- BEGIN: Header-->
 <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-fixed navbar-shadow navbar-brand-center">
     <div class="navbar-header d-xl-block d-none">
@@ -35,14 +38,36 @@
         <!-- Horizontal menu content-->
         <div class="navbar-container main-menu-content" data-menu="menu-container">
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="dropdown nav-item active"><a class="nav-link" href="#"><i class="feather icon-home"></i><span data-i18n="Home">Home</span></a>
-                 </li>
-                 <li class="dropdown nav-item"><a class="nav-link" href="#"><i class="feather icon-package"></i><span data-i18n="Product">Product</span></a>
-                 </li>
-                 <li class="dropdown nav-item"><a class="nav-link" href="#"><i class="fa fa-building-o"></i><span data-i18n="AboutUs">About Us</span></a>
-                 </li>
-                 <li class="dropdown nav-item"><a class="nav-link" href="#"><i class="feather icon-phone"></i><span data-i18n="ContactUs">Contact Us</span></a>
-                 </li>
+                <?php
+                if($menu == "about_us"){
+                ?>
+                    <li class="dropdown nav-item"><a class="nav-link" href="{{ route('main_product.index') }}"><i class="feather icon-home"></i><span data-i18n="Home">Home</span></a>
+                    </li>
+                    <li class="dropdown nav-item active"><a class="nav-link" href="{{ route('about_us.index') }}"><i class="fa fa-building-o"></i><span data-i18n="AboutUs">About Us</span></a>
+                    </li>
+                    <li class="dropdown nav-item"><a class="nav-link" href="{{ route('about_us.contact_us') }}"><i class="feather icon-phone"></i><span data-i18n="ContactUs">Contact Us</span></a>
+                    </li>
+                <?php
+                } else if($menu == "contact_us"){
+                ?>
+                    <li class="dropdown nav-item"><a class="nav-link" href="{{ route('main_product.index') }}"><i class="feather icon-home"></i><span data-i18n="Home">Home</span></a>
+                    </li>
+                    <li class="dropdown nav-item"><a class="nav-link" href="{{ route('about_us.index') }}"><i class="fa fa-building-o"></i><span data-i18n="AboutUs">About Us</span></a>
+                    </li>
+                    <li class="dropdown nav-item active"><a class="nav-link" href="{{ route('about_us.contact_us') }}"><i class="feather icon-phone"></i><span data-i18n="ContactUs">Contact Us</span></a>
+                    </li>
+                <?php
+                } else{
+                ?>
+                    <li class="dropdown nav-item active"><a class="nav-link" href="{{ route('main_product.index') }}"><i class="feather icon-home"></i><span data-i18n="Home">Home</span></a>
+                    </li>
+                    <li class="dropdown nav-item"><a class="nav-link" href="{{ route('about_us.index') }}"><i class="fa fa-building-o"></i><span data-i18n="AboutUs">About Us</span></a>
+                    </li>
+                    <li class="dropdown nav-item"><a class="nav-link" href="{{ route('about_us.contact_us') }}"><i class="feather icon-phone"></i><span data-i18n="ContactUs">Contact Us</span></a>
+                    </li>
+                <?php
+                } 
+                ?>
             </ul>
         </div>
 

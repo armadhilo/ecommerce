@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/extensions/noui-slider.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-ecommerce-shop.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-ecommerce-details.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/knowledge-base.css') }}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
