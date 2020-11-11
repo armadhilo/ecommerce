@@ -27,10 +27,6 @@
             <section id="basic-horizontal-layouts">
                 <div class="row match-height">
                     <div class="col-md-12 col-12">
-                        <div class="text-right pr-0">
-                            <button type="button" class="btn btn-primary mr-1 mb-1 waves-effect waves-light" onclick="add();"><i class="feather icon-plus"></i> Add</button>
-                            <button type="button" class="btn btn-warning mb-1 waves-effect waves-light"><i class="feather icon-refresh-cw"></i> Reload</button>
-                        </div>
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Log View</h4>
@@ -111,74 +107,9 @@
             "ajax": "{{ route('log.get') }}"
         });
     });
-    
-    function add(){
-        save_method = 'add';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Add Category');
-    }
-    
     function reload(){
         table.ajax.reload(null, false);
     }
 
-    $('#form').submit(function(e){
-        e.preventDefault();
-        save();
-    });
-    
-    function save(){
-        var url = "";
-        if(save_method === 'add'){
-            url = "<?= url('/category/add') ?>";
-        }else{
-            url = "<?= url('/category/update') ?>";
-        }
-        $.ajax({
-            url : url,
-            type: "POST",
-            data: $('#form').serialize(),
-            dataType: "JSON",
-            success: function(response) {
-                if(response.callback === "success"){
-                    alertResponse('success', 'Success!', response.desc);
-                    $('#modal_form').modal('hide');
-                    reload();
-                }else{
-                    alertResponse('error', 'Failed!', response.desc);
-                }
-                
-            },
-            error: function (jqXHR, textStatus, errorThrown){
-                console.log("Error json " + errorThrown);
-            }
-        });
-    }
-    
-    function ganti(id){
-        save_method = 'update';
-        $('#form')[0].reset();
-        $('#modal_form').modal('show');
-        $('.modal-title').text('Edit Category');
-        
-        $.ajax({
-            url : "/category/detail/" + id,
-            type: "GET",
-            dataType: "JSON",
-            success: function(data){
-                if(data.callback === "success"){
-                    var data = data.data;
-                    $('#id').val(data.id);
-                    $('#category_name').val(data.category_name);
-                }else{
-                    alertResponse('error', 'Failed!', 'Data tidak ditemukan');
-                }
-               
-            },error: function (jqXHR, textStatus, errorThrown){
-                console.log('Error get data');
-            }
-        });
-    }
     </script>
     @endsection
