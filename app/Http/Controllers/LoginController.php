@@ -29,9 +29,7 @@ class LoginController extends Controller
                 $request->session()->put('nama', $data->nama);
                 $request->session()->put('role', $data->role);
 
-                if($data->role == '2'){
                     return response()->json(['status' => 'success']);
-                }
             }else{
                 return response()->json(['status' => 'fail']);
             }
