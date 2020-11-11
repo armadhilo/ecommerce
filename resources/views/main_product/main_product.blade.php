@@ -90,12 +90,15 @@
                 <section id="ecommerce-searchbar">
                     <div class="row mt-1">
                         <div class="col-sm-12">
-                            <fieldset class="form-group position-relative">
-                                <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here">
-                                <div class="form-control-position" onclick="filterProduct();">
-                                    <i class="feather icon-search"></i>
-                                </div>
-                            </fieldset>
+                        <form action="{{ route('main_product.index') }}" method="GET">
+                                @csrf
+                                <fieldset class="form-group position-relative">
+                                <input type="text" class="form-control search-product" id="search_product" name="search_product" placeholder="Search here" value="{{ request()->search_product }}">
+                                    <div class="form-control-position" onclick="filterProduct();">
+                                        <i class="feather icon-search"></i>
+                                    </div>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
                 </section>
@@ -104,7 +107,49 @@
                 <!-- Ecommerce Products Starts -->
                 <section id="ecommerce-products" class="grid-view">
                     
-                    
+                        @foreach($product as $p)
+                        <div class="card ecommerce-card">
+                            <div class="card-content">
+                                <div class="item-img text-center pt-0">
+                                    <a href="/product_detail/{{$p->product_name}}">
+                                        <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/{{$p->image}}" alt="img-product"></a>
+                                </div>
+                                
+                                <div class="card-body">
+                                    
+                                        <div class="item-wrapper">
+                                            <div class="item-rating">
+                                            <div class="badge-md"></div>
+                                        </div>
+                                        <div>
+                                            <h6 class="item-price">
+                                            
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="item-name">
+                                        <a href="app-ecommerce-details.html">{{$p->product_name}}</a>
+                                    </div>
+                                    <div>
+                                        <p class="item-description">{{strip_tags($p->description)}}</p>
+                                    </div>
+                                </div>
+                                <div class="item-options text-center">
+                                    <div class="item-wrapper">
+                                        <div class="item-cost">
+                                            <h6 class="item-price">
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="cart" onclick="product_detail('{{$p->id}}')">
+                                        <i class="feather icon-eye"></i> 
+                                        <a href="/product_detail/{{$p->id}}" class="view-in-cart">Product Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        @endforeach
                 </section>
                 <section id="products_notfound">
                 </section>
@@ -112,23 +157,7 @@
 
                 <!-- Ecommerce Pagination Starts -->
                 <section id="ecommerce-pagination">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-2">
-                                    <li class="page-item prev-item"><a class="page-link" href="#"></a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item" aria-current="page"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">7</a></li>
-                                    <li class="page-item next-item"><a class="page-link" href="#"></a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                    {{ $product->appends(request()->input())->links() }}
                 </section>
                 <!-- Ecommerce Pagination Ends -->
 
@@ -210,10 +239,11 @@
         $(document).ready(function() {
 
             $("input:radio").click(function() {
-                filterProduct();
+                alert('{{ count(request()->input()) }}')
+                // filterProduct();
             });
 
-            $("input:radio:first").prop("checked", true).trigger("click");
+            // $("input:radio:first").prop("checked", true).trigger("click");
 
             $('#search_product').keypress(function (e) {
             var key = e.which;
@@ -228,8 +258,12 @@
             filterProduct();
         }
 
-
         function filterProduct(){
+
+            // wes gawe kene
+        }
+
+        function filterProduct1(){
             var product_list = $('#ecommerce-products');
             $('#products_notfound').empty();
             product_list.empty();
@@ -277,7 +311,6 @@
                                             </div>
                                             <div class="item-name">
                                                 <a href="app-ecommerce-details.html">${data[i].product_name}</a>
-                                                <p class="item-company">By <span class="company-name">Google</span></p>
                                             </div>
                                             <div>
                                                 <p class="item-description">${data[i].description}</p>

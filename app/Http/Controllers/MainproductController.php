@@ -7,8 +7,14 @@ use DB;
 
 class MainproductController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $search = $request->search_product;
+        $filter = $request->filter;
         $data['slider'] = DB::table('slider')->limit(3)->get();
+        $data['product'] = DB::table('product')->where([
+            ['product_name', 'like', '%'.$search.'%'],
+            ['category_id', 'like', '%'.$filter.'%']
+        ])->paginate(1);
         return view('main_product.main_product',$data);
     }
     

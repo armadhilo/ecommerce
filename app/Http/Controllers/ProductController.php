@@ -27,7 +27,7 @@ class ProductController extends Controller
             $val[] = '<img class="img-fluid rounded-sm" style="height: 120px; width: auto;" src="'.asset('images/'.$row->image).'">';
             $val[] = $row->product_name;
             $val[] = $row->category_name;
-            $val[] = $row->description;
+            $val[] = substr($row->description,0,100).'...';
             $val[] = '<div style="text-align: center;">'
                     . '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="ganti('."'".$row->id."'".')"><i class="fa fa-pencil"></i> Edit</a>&nbsp;'
                     . '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Delete" onclick="hapus('."'".$row->id."'".')"><i class="fa fa-trash"></i> Delete</a>'
