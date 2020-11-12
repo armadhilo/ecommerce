@@ -27,6 +27,16 @@ class MainproductController extends Controller
     public function product_detail($id){
         $id = Crypt::decrypt($id);
         $data['product'] = DB::table('product')->where('id',$id)->first();
+
+        $count = DB::table('product')->select('count')->where('id',$id)->first();
+        $jumlah = $count->count;
+
+        $jumlah += 1;
+
+        DB::table('product')->where('id',$id)->update([
+            "count" => $jumlah,
+        ]);
+
         return view('main_product.detail_product',$data);
     }
 
