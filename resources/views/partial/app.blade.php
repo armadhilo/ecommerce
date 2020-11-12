@@ -75,6 +75,8 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <script src="{{ asset('app-assets/vendors/js/charts/chart.min.js') }}"></script>
+    
     <!-- END: Page JS-->
     <script type="text/javascript">
         function alertResponse(type, title, text){

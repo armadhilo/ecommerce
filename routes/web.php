@@ -20,16 +20,17 @@ Route::get('logout','LoginController@logout')->name('login.logout');
 Route::group(['middleware' => 'cekLogin'], function () {
 
     Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
+    Route::get('/dashboard/chart','DashboardController@chart')->name('dashboard.chart');
     Route::get('/change_password','SettingsController@change_password')->name('settings.change_password');
     Route::post('/change_password/action','SettingsController@actionChangePassword');
     Route::get('/edit_profile','SettingsController@edit_profile')->name('settings.edit_profile');
+    
 
     Route::group(['middleware' => 'cekSuperAdmin'], function () {
         Route::get('/users','UsersController@index')->name('users.index');
         Route::post('users/add','UsersController@store')->name('users.post');
         Route::get('users/list','UsersController@list')->name('users.get');
         Route::post('users/update','UsersController@update')->name('users.edit');
-        // Route::delete('users','UsersController@delete')->name('users.delete');
         Route::get('users/detail/{id}','UsersController@detail')->name('users.detail');
 
         Route::get('/log','LogController@index')->name('log.index');
@@ -41,14 +42,12 @@ Route::group(['middleware' => 'cekLogin'], function () {
         Route::post('category/add','CategoryController@store')->name('category.post');
         Route::get('category/list','CategoryController@list')->name('category.get');
         Route::post('category/update','CategoryController@update')->name('category.edit');
-        // Route::delete('category','UsersController@delete')->name('users.delete');
         Route::get('category/detail/{id}','CategoryController@detail')->name('category.detail');
 
         Route::get('/product','ProductController@index')->name('product.index');
         Route::post('product/add','ProductController@store')->name('product.post');
         Route::get('product/list','ProductController@list')->name('product.get');
         Route::post('product/update','ProductController@update')->name('product.edit');
-        // Route::delete('category','UsersController@delete')->name('users.delete');
         Route::get('product/detail/{id}','ProductController@detail')->name('product.detail');
         Route::post('product/delete/{id}','ProductController@delete')->name('product.delete');
 
