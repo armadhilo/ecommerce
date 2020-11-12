@@ -141,7 +141,7 @@
                                         
                                         
                                     </table>
-                                    <p id="description"> {{strip_tags($product->description)}}</p>
+                                    <p id="description"> {!! $product->description !!}</p>
                                     
                                 </div>
                             </div>

@@ -126,7 +126,7 @@
                             <div class="card ecommerce-card">
                                 <div class="card-content">
                                     <div class="item-img text-center pt-0">
-                                        <a href="/product_detail/{{$p->product_name}}">
+                                        <a href="/product_detail/{{Crypt::encrypt($p->id)}}">
                                             <img style="width: 380px; height: 220px;" class="img-fluid" src="{{ url('images/') }}/{{$p->image}}" alt="img-product"></a>
                                     </div>
                                     
