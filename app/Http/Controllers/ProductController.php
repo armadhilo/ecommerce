@@ -29,6 +29,7 @@ class ProductController extends Controller
             $val[] = $row->category_name;
             $val[] = substr($row->description,0,100).'...';
             $val[] = '<div style="text-align: center;">'
+                    . '<a class="btn btn-sm btn-success" href="javascript:void(0)" title="Detail" onclick="detail_foto('."'".$row->id."'".', '."'".$row->product_name."'".')"><i class="fa fa-image"></i> Detail</a>&nbsp;'
                     . '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="ganti('."'".$row->id."'".')"><i class="fa fa-pencil"></i> Edit</a>&nbsp;'
                     . '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Delete" onclick="hapus('."'".$row->id."'".')"><i class="fa fa-trash"></i> Delete</a>'
                     . '</div>';

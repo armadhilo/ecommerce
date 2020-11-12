@@ -45,7 +45,7 @@
                                                     <th scope="col">Product Name</th>
                                                     <th scope="col">Category</th>
                                                     <th scope="col">Description</th>
-                                                    <th scope="col" class="text-center" style="width: 150px;">Action</th>
+                                                    <th scope="col" class="text-center" style="width: 250px;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -180,6 +180,58 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal_image" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form form-horizontal" id="form_image" autocomplete="off">
+                    <input name="id" hidden type="text" id="dt_id" name="dt_id"/>
+                    <div class="form-body">
+                        <div class="row pr-1 pl-1">
+                            <div class="col-6">
+                                <div class="form-group mb-1">
+                                    <label style="padding-bottom: 4px;">Nama Product</label>
+                                    <input type="text" id="dt_nama_product" class="form-control" name="dt_nama_product" readonly>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mb-1">
+                                    <label style="padding-bottom: 4px;">Image</label>
+                                    <input type="file" class="form-control" id="dt_image" name="dt_image">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="save_image();">Save</button>
+                </div>
+                <h5 class="mt-2">List Image</h5><hr>
+                <div class="table-responsive">
+                    <table class="table table-hover-animation mb-0" id="tb_detil">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 150px;">Image</th>
+                                <th scope="col" class="text-center" style="width: 150px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('js')
@@ -193,6 +245,7 @@
         table = $('#tb').DataTable({
             "ajax": "{{ route('product.get') }}"
         });
+        $('#tb_detil').DataTable();
         
     });
     
@@ -221,9 +274,25 @@
         table.ajax.reload(null, false);
     }
 
+    function reload() {
+        table_image = $('#tb_detil').DataTable({
+            "ajax": "{{ route('product.get') }}"
+        });
+        table_image.ajax.reload(null, false);
+    }
+
     // $('#form').submit(function(){
     //     save();
     // });
+
+    function detail_foto(id, name){
+        $('#form_image')[0].reset();
+        $('#modal_image').modal('show');
+        $('.modal-title').text('Detail Photo');
+        $('#dt_id').val(id);
+        $('#dt_nama_product').val(name);
+
+    }
     
     function save(){
         var id              = $('#id').val();
@@ -292,8 +361,42 @@
             });
         }
 
-        
-       
+    }
+
+    function save_image(){
+        var id              = $('#dt_id').val();
+        var image           = $('#dt_image').prop('files')[0];
+        var form_data = new FormData();
+        form_data.append('id', id);
+        form_data.append('image', image);
+
+        var url = "";
+        if(save_method === 'add'){
+            url = "<?= url('/imageadd') ?>";
+        }else{
+            url = "<?= url('/imageupdate') ?>";
+        }
+        $.ajax({
+            url: url,
+            dataType: 'JSON',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'POST',
+            success: function(response) {
+                console.log(response.callback);
+                if(response.callback === "success"){
+                    alertResponse('success', 'Success!', response.desc);
+                    reload();
+                }else{
+                    alertResponse('error', 'Failed!', response.desc);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown){
+                console.log("Error json " + errorThrown);
+            }
+        });
         
     }
     
