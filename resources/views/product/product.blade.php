@@ -247,9 +247,6 @@
         table = $('#tb').DataTable({
             "ajax": "{{ route('product.get') }}"
         });
-        table_image = $('#tb_detil').DataTable({
-            "ajax": "/image/list"
-        });
         
     });
     
@@ -279,7 +276,12 @@
     }
 
     function reload_image() {
-        table_image.ajax.reload(null, false);
+        $('#tb_detil').DataTable().destroy();
+        var id = $('#dt_id').val();
+        table_image = $('#tb_detil').DataTable({
+            "ajax": "/image/list/" + id
+        });
+        
     }
 
     // $('#form').submit(function(){
@@ -291,6 +293,11 @@
         $('.modal-title').text('Detail Photo');
         $('#dt_id').val(id);
         $('#dt_nama_product').val(name);
+        $('#tb_detil').DataTable().destroy();
+        table_image = $('#tb_detil').DataTable({
+            "ajax": "/image/list/" + id
+        });
+        
 
     }
     
