@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row mb-5 mt-2">
-                                <section id="carousel-options">
+                                {{-- <section id="carousel-options">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="card" style="margin-left: 14px; margin-right: 14px;">
@@ -48,12 +48,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                </section> 
-<!--                                <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
+                                </section>  --}}
+                                   <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <img style="width: 500px; height: auto;" src="{{asset('images/'.$product->image)}}" class="img-fluid" alt="product image">
                                     </div>
-                                </div>-->
+                                </div>
                                 <div class="col-12 col-md-6">
                                     <h5>{{$product->product_name}}
                                     </h5>
