@@ -14,11 +14,46 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row mb-5 mt-2">
-                                <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
+                                <section id="carousel-options">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="card" style="margin-left: 14px; margin-right: 14px;">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div id="carousel-interval" class="carousel" data-interval="false">
+                                                            <ol class="carousel-indicators">
+                                                                <li data-target="#carousel-interval" data-slide-to="0" class="active"></li>
+                                                                <li data-target="#carousel-interval" data-slide-to="1"></li>
+                                                            </ol>
+                                                            <div class="carousel-inner" role="listbox">
+                                                                    <div class="carousel-item active" style="max-width: 450px; max-height: auto;">
+                                                                        <img class="img-fluid" src="{{ asset('app-assets/images/slider/01.jpg') }}" alt="First slide">
+                                                                    </div>
+                                                                    <div class="carousel-item" style="max-width: 450px; max-height: auto">
+                                                                        <img class="img-fluid" src="{{ asset('app-assets/images/slider/03.jpg') }}" alt="Second slide">
+                                                                    </div>
+                                                                </div>
+
+                                                            <a class="carousel-control-prev" href="#carousel-interval" role="button" data-slide="prev">
+                                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                <span class="sr-only">Previous</span>
+                                                            </a>
+                                                            <a class="carousel-control-next" href="#carousel-interval" role="button" data-slide="next">
+                                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                <span class="sr-only">Next</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section> 
+<!--                                <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <img style="width: 500px; height: auto;" src="{{asset('images/'.$product->image)}}" class="img-fluid" alt="product image">
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="col-12 col-md-6">
                                     <h5>{{$product->product_name}}
                                     </h5>
