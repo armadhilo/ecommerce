@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="content-body">
+            <div class="content-body mt-2">
             
             <section id="basic-horizontal-layouts">
                 <div class="row match-height">

@@ -18,7 +18,7 @@
                                     <div class="card-body p-sm-4 p-2 text-center">
                                         <h1 class="white">Contact Us</h1>
                                         <p class="card-text mb-2">
-                                            Bonbon sesame snaps lemon drops marshmallow ice cream carrot cake croissant wafer.
+                                            Hubungi kami untuk segala pertanyaan Anda.
                                         </p>
                                     </div>
                                 </div>
@@ -36,18 +36,16 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-12">
-                                            <div class="title mt-2 text-center">
-                                                <h3>PT. Inovasi Unesa</h3>
-                                                <p>
-                                                    Jalan Mangga Merah No. 15-17<br>
-                                                    Surabaya 60175 - Jawa Timur<br>
-                                                    Telp. (031) 432 6546, Fax. (031) 352 6523
-                                                </p>
+                                            <div class="title mt-4 text-center">
+                                                <a href="http://lppm.unesa.ac.id/"><h4 class="mb-0" class="title-link">Lembaga Penelitian dan Pengabdian Masyarakat</h4></a>
+                                                <a href="http://lppm.unesa.ac.id/"><h4>Universitas Negeri Surabaya</h4></a>
+                                                <p class="mb-0">Lidah Wetan, Kec. Lakarsantri<br>Kota SBY, Jawa Timur 60213</p>
+                                                
+                                                <p> Telp. (031)829 6260</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-12 pl-4 pr-4 pt-2 pb-2">
-                                            <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://www.maps.ie/route-planner.htm"></a></div>
-                                
+                                            <div style="width: 100%"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Lembaga%20Penelitian%20dan%20Pengabdian%20Masyarakat%20Unesa&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div>
                                         </div>
                                     </div>
                                     
