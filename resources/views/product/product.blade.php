@@ -274,11 +274,11 @@
         table.ajax.reload(null, false);
     }
 
-    function reload() {
-        table_image = $('#tb_detil').DataTable({
-            "ajax": "{{ route('product.get') }}"
-        });
-        table_image.ajax.reload(null, false);
+    function reload_image() {
+        // table_image = $('#tb_detil').DataTable({
+        //     "ajax": "{{ route('product.get') }}"
+        // });
+        // table_image.ajax.reload(null, false);
     }
 
     // $('#form').submit(function(){
@@ -367,7 +367,7 @@
         var id              = $('#dt_id').val();
         var image           = $('#dt_image').prop('files')[0];
         var form_data = new FormData();
-        form_data.append('id', id);
+        form_data.append('product_id', id);
         form_data.append('image', image);
 
         var url = "";
@@ -386,12 +386,12 @@
             type: 'POST',
             success: function(response) {
                 console.log(response.callback);
-                if(response.callback === "success"){
-                    alertResponse('success', 'Success!', response.desc);
-                    reload();
-                }else{
-                    alertResponse('error', 'Failed!', response.desc);
-                }
+                // if(response.callback === "success"){
+                //     alertResponse('success', 'Success!', response.desc);
+                //     reload();
+                // }else{
+                //     alertResponse('error', 'Failed!', response.desc);
+                // }
             },
             error: function (jqXHR, textStatus, errorThrown){
                 console.log("Error json " + errorThrown);
