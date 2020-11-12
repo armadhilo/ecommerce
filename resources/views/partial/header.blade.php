@@ -56,9 +56,9 @@ $menu = Request::segment(1);
                             @if(Session::get('role') == '1') 
 
                             <li class=" nav-item @if($menu == "users") active @endif"><a href="{{ route('users.index') }}"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Users">Users</span></a></li>
+                            <li class=" nav-item @if($menu == "category") active @endif"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
                             <li class=" nav-item @if($menu == "log") active @endif"><a href="{{ route('log.index') }}"><i class="fa fa-history"></i><span class="menu-title" data-i18n="Log View">Log View</span></a></li>
                             @else
-                            <li class=" nav-item @if($menu == "category") active @endif"><a href="{{ route('category.index') }}"><i class="feather icon-list"></i><span class="menu-title" data-i18n="Category">Category</span></a></li>
                             <li class=" nav-item @if($menu == "product") active @endif"><a href="{{ route('product.index') }}"><i class="feather icon-box"></i><span class="menu-title" data-i18n="Product">Product</span></a></li>
                             <li class=" nav-item @if($menu == "slider") active @endif"><a href="{{ route('slider.index') }}"><i class="feather icon-image"></i><span class="menu-title" data-i18n="Product">Slider</span></a></li>            
                             @endif

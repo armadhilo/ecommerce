@@ -27,6 +27,9 @@
             <section id="basic-horizontal-layouts">
                 <div class="row match-height">
                     <div class="col-md-12 col-12">
+                        <div class="text-right pr-0">
+                            <button type="button" class="btn btn-warning mb-1 waves-effect waves-light"><i class="feather icon-refresh-cw"></i> Reload</button>
+                        </div>
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Log View</h4>
