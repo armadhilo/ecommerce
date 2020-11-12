@@ -218,7 +218,7 @@
                 </div>
                 <h5 class="mt-2">List Image</h5><hr>
                 <div class="table-responsive">
-                    <table class="table table-hover-animation mb-0" id="tb_detil">
+                    <table class="table table-hover-animation mb-0" id="tb_detil" width="100%">
                         <thead>
                             <tr>
                                 <th scope="col" style="width: 150px;">Image</th>
@@ -239,6 +239,7 @@
 <script>
     var save_method;
     var table;
+    var table_image;
 
     $(document).ready(function () {
         $('.book-category').attr('hidden', true);
@@ -246,7 +247,9 @@
         table = $('#tb').DataTable({
             "ajax": "{{ route('product.get') }}"
         });
-        $('#tb_detil').DataTable();
+        table_image = $('#tb_detil').DataTable({
+            "ajax": "/image/list"
+        });
         
     });
     
@@ -276,9 +279,6 @@
     }
 
     function reload_image() {
-        table_image = $('#tb_detil').DataTable({
-            "ajax": "{{ route('product.get') }}"
-        });
         table_image.ajax.reload(null, false);
     }
 
@@ -392,7 +392,7 @@
                 if(response.callback === "success"){
                     alertResponse('success', 'Success!', response.desc);
                     $('#id_detail').val('');
-                    reload();
+                    reload_image();
                 }else{
                     alertResponse('error', 'Failed!', response.desc);
                 }
@@ -461,6 +461,7 @@
             }
         });
     }
+    
 
     function ajax_delete(id){
         $.ajax({
@@ -471,6 +472,45 @@
                 if(data.callback === "success"){
                     alertResponse('success', 'Deleted!', 'Your file has been deleted.');
                     reload();
+                }else{
+                    alertResponse('error', 'Failed!', 'Your file has failed to delete.');
+                }
+               
+            },error: function (jqXHR, textStatus, errorThrown){
+                console.log('Error get data');
+            }
+        });
+    }
+
+    function hapus_image(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonClass: 'btn btn-primary',
+            cancelButtonClass: 'btn btn-danger ml-1',
+            buttonsStyling: false,
+            }).then(function (result) {
+            if (result.value) {
+                ajax_delete_image(id);
+            }
+        });
+    }
+    
+
+    function ajax_delete_image(id){
+        $.ajax({
+            url : "/image/delete/" + id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data){
+                if(data.callback === "success"){
+                    alertResponse('success', 'Deleted!', 'Your file has been deleted.');
+                    reload_image();
                 }else{
                     alertResponse('error', 'Failed!', 'Your file has failed to delete.');
                 }

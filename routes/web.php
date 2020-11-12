@@ -54,6 +54,7 @@ Route::group(['middleware' => 'cekLogin'], function () {
         Route::post('image/add','ImageController@store');
         Route::post('image/update','ImageController@update');
         Route::get('image/detail/{id}','ImageController@detail');
+        Route::get('image/list','ImageController@list');
         Route::post('image/delete/{id}','ImageController@delete');
 
         Route::get('/slider','SliderController@index')->name('slider.index');
