@@ -27,6 +27,12 @@ Route::group(['middleware' => 'cekLogin'], function () {
     
 
     Route::group(['middleware' => 'cekSuperAdmin'], function () {
+        Route::get('/category','CategoryController@index')->name('category.index');
+        Route::post('category/add','CategoryController@store')->name('category.post');
+        Route::get('category/list','CategoryController@list')->name('category.get');
+        Route::post('category/update','CategoryController@update')->name('category.edit');
+        Route::get('category/detail/{id}','CategoryController@detail')->name('category.detail');
+
         Route::get('/users','UsersController@index')->name('users.index');
         Route::post('users/add','UsersController@store')->name('users.post');
         Route::get('users/list','UsersController@list')->name('users.get');
@@ -38,18 +44,17 @@ Route::group(['middleware' => 'cekLogin'], function () {
     });
 
     Route::group(['middleware' => 'cekAdmin'], function () {
-        Route::get('/category','CategoryController@index')->name('category.index');
-        Route::post('category/add','CategoryController@store')->name('category.post');
-        Route::get('category/list','CategoryController@list')->name('category.get');
-        Route::post('category/update','CategoryController@update')->name('category.edit');
-        Route::get('category/detail/{id}','CategoryController@detail')->name('category.detail');
-
         Route::get('/product','ProductController@index')->name('product.index');
         Route::post('product/add','ProductController@store')->name('product.post');
         Route::get('product/list','ProductController@list')->name('product.get');
         Route::post('product/update','ProductController@update')->name('product.edit');
         Route::get('product/detail/{id}','ProductController@detail')->name('product.detail');
         Route::post('product/delete/{id}','ProductController@delete')->name('product.delete');
+
+        Route::post('image/add','ImageController@store');
+        Route::post('image/update','ImageController@update');
+        Route::get('image/detail/{id}','ImageController@detail');
+        Route::post('image/delete/{id}','ImageController@delete');
 
         Route::get('/slider','SliderController@index')->name('slider.index');
         Route::post('slider/add','SliderController@store')->name('slider.post');
