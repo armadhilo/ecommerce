@@ -53,6 +53,24 @@ class ImageController extends Controller
         }
     }
 
+    public function list() {
+        $data = array();
+        $list = DB::table('product_image as a')->join('product as b', 'a.product_id', '=', 'b.id')->select('a.*','b.product_name')->whereNull('deleted_at')->orderByDesc('a.id')->get();
+        
+        foreach ($list as $row) {
+            $val = array();
+            $val[] = $row->product_name;
+            $val[] = '<img class="img-fluid rounded-sm" style="height: 120px; width: auto;" src="'.asset('images/'.$row->image).'">';
+            $val[] = '<div style="text-align: center;">'
+                    . '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="ganti('."'".$row->id."'".')"><i class="fa fa-pencil"></i> Edit</a>&nbsp;'
+                    . '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Delete" onclick="hapus('."'".$row->id."'".')"><i class="fa fa-trash"></i> Delete</a>'
+                    . '</div>';
+            $data[] = $val;
+        }
+        $output = array("data" => $data);
+        echo json_encode($output);
+    }
+
     public function detail($id)
     {
         $query = DB::table('product_image')->where('product_id',$id)->whereNull('deleted_at')->get();
