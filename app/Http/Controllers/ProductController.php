@@ -77,7 +77,7 @@ class ProductController extends Controller
                     "nama_lengkap" => $request->nama_lengkap,
                     "jml_halaman" => $request->jml_halaman,
                     "penerbit" => $request->penerbit,
-                    "status" => '1',
+                    "status" => $request->status,
                     "image" => $foto,
                  ]);
 
