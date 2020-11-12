@@ -193,7 +193,8 @@
             </div>
             <div class="modal-body">
                 <form class="form form-horizontal" id="form_image" autocomplete="off">
-                    <input name="id" hidden type="text" id="dt_id" name="dt_id"/>
+                    <input name="id" hidden type="text" id="dt_id"/>
+                    <input name="id_detail" hidden type="text" id="id_detail"/>
                     <div class="form-body">
                         <div class="row pr-1 pl-1">
                             <div class="col-6">
@@ -275,10 +276,10 @@
     }
 
     function reload_image() {
-        // table_image = $('#tb_detil').DataTable({
-        //     "ajax": "{{ route('product.get') }}"
-        // });
-        // table_image.ajax.reload(null, false);
+        table_image = $('#tb_detil').DataTable({
+            "ajax": "{{ route('product.get') }}"
+        });
+        table_image.ajax.reload(null, false);
     }
 
     // $('#form').submit(function(){
@@ -286,7 +287,6 @@
     // });
 
     function detail_foto(id, name){
-        $('#form_image')[0].reset();
         $('#modal_image').modal('show');
         $('.modal-title').text('Detail Photo');
         $('#dt_id').val(id);
@@ -365,16 +365,18 @@
 
     function save_image(){
         var id              = $('#dt_id').val();
+        var id_detail       = $('#id_detail').val();
         var image           = $('#dt_image').prop('files')[0];
         var form_data = new FormData();
         form_data.append('product_id', id);
+        form_data.append('id_detail', id_detail);
         form_data.append('image', image);
 
         var url = "";
-        if(save_method === 'add'){
-            url = "<?= url('/imageadd') ?>";
+        if(id_detail === ''){
+            url = "<?= url('/image/add') ?>";
         }else{
-            url = "<?= url('/imageupdate') ?>";
+            url = "<?= url('/image/update') ?>";
         }
         $.ajax({
             url: url,
@@ -386,12 +388,14 @@
             type: 'POST',
             success: function(response) {
                 console.log(response.callback);
-                // if(response.callback === "success"){
-                //     alertResponse('success', 'Success!', response.desc);
-                //     reload();
-                // }else{
-                //     alertResponse('error', 'Failed!', response.desc);
-                // }
+                $('#form_image')[0].reset();
+                if(response.callback === "success"){
+                    alertResponse('success', 'Success!', response.desc);
+                    $('#id_detail').val('');
+                    reload();
+                }else{
+                    alertResponse('error', 'Failed!', response.desc);
+                }
             },
             error: function (jqXHR, textStatus, errorThrown){
                 console.log("Error json " + errorThrown);

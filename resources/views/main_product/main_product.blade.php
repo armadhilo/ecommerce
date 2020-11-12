@@ -143,7 +143,7 @@
                                             </div>
                                         </div>
                                         <div class="item-name">
-                                            <a href="app-ecommerce-details.html">{{$p->product_name}}</a>
+                                            <a href="/product_detail/{{Crypt::encrypt($p->id)}}">{{$p->product_name}}</a>
                                         </div>
                                         <div>
                                             <p class="item-description">{{strip_tags($p->description)}}</p>
