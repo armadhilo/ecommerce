@@ -140,7 +140,7 @@ var themeColors = [$primary, $success, $danger, $warning, $label_color];
             var barchartData = {
             labels: data.labelProduct,
             datasets: [{
-                label: "Population (millions)",
+                label: "Total Product",
                 data: data.dataProduct,
                 backgroundColor: themeColors,
                 borderColor: "transparent"
@@ -209,7 +209,7 @@ var themeColors = [$primary, $success, $danger, $warning, $label_color];
         var horizontalchartData = {
             labels: data.labelClick,
             datasets: [{
-            label: "Population (millions)",
+            label: "Total Viewer",
             data: data.dataClick,
             backgroundColor: themeColors,
             borderColor: "transparent"
