@@ -56,14 +56,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         if(!$request->hasfile('image')){
-            return response()->json(["callback" => 'fail', "desc" => 'add image please']);
+            $foto = "template/no_image.png";
+        }else{
+            $data = $request->input('image');
+            $file = $request->file('image');
+            $photo =  time().$file->getClientOriginalName();
+            $file->move('images',$photo);
+            $foto = $photo;
         }
         
-        $data = $request->input('image');
-        $file = $request->file('image');
-        $photo =  time().$file->getClientOriginalName();
-        $file->move('images',$photo);
-        $foto = $photo;
+        
         
         $query = DB::table('product')->insertGetId([
                     "category_id" => $request->category_id,
