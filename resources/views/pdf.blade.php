@@ -36,25 +36,6 @@
         <br>
         <br>
         <img src="{{asset('images/'.$item->image)}}" alt="" width="40%"> 
-        {{-- <table class="table" width="100%" style="margin-right:10px">
-            <thead>
-                <tr>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%">  </th>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%"> </th>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%"> </th>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%"> </th>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%"> </th>
-                </tr>
-                <br>
-                <tr>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%">  </th>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%"> </th>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%"> </th>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%"> </th>
-                    <th><img src="{{asset('images/16050071042.78a8055e.png')}}" alt="" width="10%"> </th>
-                </tr>
-            </thead>
-        </table> --}}
         <div style="border:2px dashed black;padding: 25px;text-align: center;">
         <b>Description</b>
         <br>
@@ -63,6 +44,40 @@
     </center>
     </div>
 @endforeach
- 
+
+{{-- <div class="container page_break" style="margin-top:8%">
+	<center>
+		<h3>Category Name</h3>
+		<h5><a target="_blank">Product Name</a></h5>
+    
+        <br>
+        <br>
+        <img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="40%"> 
+        <table class="table" width="100%" style="margin-right:10px">
+            <thead>
+                <tr>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%">  </th>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%"> </th>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%"> </th>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%"> </th>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%"> </th>
+                </tr>
+                <tr>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%">  </th>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%"> </th>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%"> </th>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%"> </th>
+                    <th><img src="{{asset('images/1605366615banner-1.jpg')}}" alt="" width="10%"> </th>
+                </tr>
+            </thead>
+        </table>
+        <div style="border:2px dashed black;padding: 25px;text-align: center;">
+        <b>Description</b>
+        <br>
+        <p>Description</p>
+        </div>
+    </center>
+    </div> --}}
+
 </body>
 </html>

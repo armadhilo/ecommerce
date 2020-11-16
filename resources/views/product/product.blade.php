@@ -354,24 +354,7 @@
 
     function process_pdf(){
         var category_id = $('#pdf_category').val();
-        $.ajax({
-                url: "/product/export_pdf/" + category_id,
-                type: 'GET',
-                success: function(response) {
-                    console.log(response);
-                    // if(response.callback === "success"){
-                    //     alertResponse('success', 'Success!', response.desc);
-                    //     $('#modal_form').modal('hide');
-                    //     reload();
-                    // }else{
-                    //     alertResponse('error', 'Failed!', response.desc);
-                    // }
-                },
-                error: function (jqXHR, textStatus, errorThrown){
-                    console.log("Error json " + errorThrown);
-                }
-            });
-        
+        window.open("/product/export_pdf/"+category_id, '_blank');
     }
     
     function save(){

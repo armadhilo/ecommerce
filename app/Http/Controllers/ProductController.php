@@ -63,14 +63,14 @@ class ProductController extends Controller
             $file = $request->file('image');
             $photo =  time().$file->getClientOriginalName();
             
-            $thumbImage = Image::make($file->getRealPath())->resize(50, 50);
-            $thumbPath = 'images'.$photo;
+            $thumbImage = Image::make($file->getRealPath())->resize(150, 150);
+            $thumbPath = 'images/'.$photo;
             $thumbImage = Image::make($thumbImage)->save($thumbPath);
         
-            $oriPath = 'images'.$photo;
+            $oriPath = 'images/ori/'.$photo;
             $oriImage = Image::make($file)->save($oriPath);
 
-            $file->move('images',$photo);
+            // $file->move('images',$photo);
             $foto = $photo;
         }
         
@@ -177,14 +177,13 @@ class ProductController extends Controller
     public function cetak_pdf($id)
     { 
         if($id == 0){
-            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->get();
+            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->orderByDesc('product.id')->limit(10)->get();
         }else{
-            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->where('category_id',$id)->get();
+            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->where('category_id',$id)->orderByDesc('product.id')->limit(10)->get();
         }
         
-        if($data['product']){
+        if(count($data['product']) > 0){
             $pdf = PDF::loadview('pdf',$data);
-            // return $pdf->download('laporan-pdf');
             return $pdf->stream();
         }else{
             return response()->json([
@@ -194,4 +193,8 @@ class ProductController extends Controller
         }
 
     }
+
+    // $pdf = PDF::loadview('pdf');
+    // return $pdf->stream();
+    // }
 }
