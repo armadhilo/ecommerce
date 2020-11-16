@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Image;
 use File;
 use DB;
+use PDF;
 use Illuminate\Support\Facades\Validator;
 use App\Gambar;
 use Illuminate\Http\Request;
@@ -61,11 +62,17 @@ class ProductController extends Controller
             $data = $request->input('image');
             $file = $request->file('image');
             $photo =  time().$file->getClientOriginalName();
+            
+            $thumbImage = Image::make($file->getRealPath())->resize(50, 50);
+            $thumbPath = 'images'.$photo;
+            $thumbImage = Image::make($thumbImage)->save($thumbPath);
+        
+            $oriPath = 'images'.$photo;
+            $oriImage = Image::make($file)->save($oriPath);
+
             $file->move('images',$photo);
             $foto = $photo;
         }
-        
-        
         
         $query = DB::table('product')->insertGetId([
                     "category_id" => $request->category_id,
@@ -165,5 +172,26 @@ class ProductController extends Controller
         }else{
             return response()->json(["callback" => 'fail']);
         }
+    }
+
+    public function cetak_pdf($id)
+    { 
+        if($id == 0){
+            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->get();
+        }else{
+            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->where('category_id',$id)->get();
+        }
+        
+        if($data['product']){
+            $pdf = PDF::loadview('pdf',$data);
+            // return $pdf->download('laporan-pdf');
+            return $pdf->stream();
+        }else{
+            return response()->json([
+                "status" => 'fail',
+                "desc"   => 'Data yang anda cari kosong silahkan pilih category lain',
+            ]);
+        }
+
     }
 }

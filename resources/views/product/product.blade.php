@@ -253,7 +253,7 @@
                                 <div class="form-group mb-1">
                                     <label style="padding-bottom: 4px;">Category</label>
                                     <select class="form-control" id="pdf_category" name="pdf_category">
-                                        <option value="" selected>All</option>
+                                        <option value="0" selected>All</option>
                                         @foreach ($category as $item)
                                             <option value="{{$item->id}}">{{$item->category_name}}</option>
                                         @endforeach
@@ -345,16 +345,9 @@
 
     function process_pdf(){
         var category_id = $('#pdf_category').val();
-        var form_data   = new FormData();
-        form_data.append('category_id', category_id);
         $.ajax({
-                url: "/export_pdf/" + category_id,
-                dataType: 'JSON',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'POST',
+                url: "/product/export_pdf/" + category_id,
+                type: 'GET',
                 success: function(response) {
                     console.log(response);
                     // if(response.callback === "success"){

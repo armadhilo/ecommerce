@@ -67,6 +67,8 @@ Route::group(['middleware' => 'cekLogin'], function () {
 
 });
 
+Route::get('product/export_pdf/{id}','ProductController@cetak_pdf');
+// Route::view('product/export_pdf','pdf');
 Route::get('/about_us','AboutusController@index')->name('about_us.index');
 Route::get('/contact_us','AboutusController@contact_us')->name('about_us.contact_us');
 Route::get('/main_product','MainproductController@index')->name('main_product.index');
