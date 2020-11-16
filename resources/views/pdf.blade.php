@@ -26,13 +26,13 @@
     <img src="{{asset('logo.png')}}" alt="" width="30%" style="margin-top:-50px ">
 </center>
 
-
-@foreach ($product as $item)
+@if (count($product) > 0)
+    @foreach ($product as $item)
     <div class="container page_break" style="margin-top:8%">
-	<center>
-		<h3>{{$item->category_name}}</h3>
-		<h5><a target="_blank">{{$item->product_name}}</a></h5>
-    
+    <center>
+        <h3>{{$item->category_name}}</h3>
+        <h5><a target="_blank">{{$item->product_name}}</a></h5>
+
         <br>
         <br>
         <img src="{{asset('images/'.$item->image)}}" alt="" width="40%"> 
@@ -43,7 +43,18 @@
         </div>
     </center>
     </div>
-@endforeach
+    @endforeach
+@else
+<div class="container page_break" style="margin-top:8%">
+    <center>
+        <div style="border:2px dashed black;padding: 25px;text-align: center;">
+            <b>Tidak ada data yang ditampilkan</b>
+        </div>
+    </center>
+
+@endif
+
+
 
 {{-- <div class="container page_break" style="margin-top:8%">
 	<center>

@@ -182,15 +182,19 @@ class ProductController extends Controller
             $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->where('category_id',$id)->orderByDesc('product.id')->limit(10)->get();
         }
         
-        if(count($data['product']) > 0){
-            $pdf = PDF::loadview('pdf',$data);
-            return $pdf->stream();
-        }else{
-            return response()->json([
-                "status" => 'fail',
-                "desc"   => 'Data yang anda cari kosong silahkan pilih category lain',
-            ]);
-        }
+        // if(count($data['product']) > 0){
+        //     $pdf = PDF::loadview('pdf',$data);
+        //     return $pdf->stream();
+        // }
+        // else{
+        //     return response()->json([
+        //         "status" => 'fail',
+        //         "desc"   => 'Data yang anda cari kosong silahkan pilih category lain',
+        //     ]);
+        // }
+
+        $pdf = PDF::loadview('pdf',$data);
+        return $pdf->stream();
 
     }
 
