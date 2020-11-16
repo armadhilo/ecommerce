@@ -133,7 +133,7 @@
                             <!-- Others Category Start -->
                             <div class="col-6 other-category">
                                 <div class="form-group mb-1">
-                                    <label style="padding-bottom: 4px;">PIC</label>
+                                    <label style="padding-bottom: 4px;" id="lb_pic">PIC</label>
                                     <input type="text" id="pic" class="form-control" name="pic">
                                 </div>
                             </div>
@@ -299,6 +299,14 @@
             $('.book-category').attr('hidden', true);
             $('.other-category').attr('hidden', false);
         }
+
+        var category_text = $("#category_id option:selected").text().toLowerCase();
+        if(category_text === "teknologi" || category_text === "technology"){
+            $('#lb_pic').text('Inventor');
+        }else{
+            $('#lb_pic').text('PIC');
+        }
+
     }
     function add() {
         save_method = 'add';
@@ -306,6 +314,7 @@
         $('#modal_form').modal('show');
         $('.modal-title').text('Add Product');
         $('#category_id').attr('disabled', false);
+        
     }
 
     function reload() {
@@ -479,6 +488,14 @@
         $('#modal_form').modal('show');
         $('.modal-title').text('Edit Users');
         $('#category_id').attr('disabled', true);
+
+        var category_text = $("#category_id option:selected").text().toLowerCase();
+        if(category_text === "teknologi" || category_text === "technology"){
+            $('#lb_pic').text('Inventor');
+        }else{
+            $('#lb_pic').text('PIC');
+        }
+
         $.ajax({
             url : "/product/detail/" + id,
             type: "GET",
