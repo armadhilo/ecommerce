@@ -58,7 +58,7 @@ class ImageController extends Controller
 
     public function list($id) {
         $data = array();
-        $list = DB::table('product_image as a')->join('product as b', 'a.product_id', '=', 'b.id')->select('a.*','b.product_name')->where('product_id', $id)->whereNull('a.deleted_at')->orderByDesc('a.id')->get();
+        $list = DB::table('product_image as a')->join('product as b', 'a.product_id', '=', 'b.id')->select('a.*','b.product_name')->where('a.product_id', $id)->whereNull('a.deleted_at')->orderByDesc('a.id')->get();
         
         foreach ($list as $row) {
             $val = array();

@@ -449,7 +449,7 @@
             type: 'POST',
             success: function(response) {
                 console.log(response.callback);
-                $('#form_image')[0].reset();
+                $('#dt_image').val('');
                 if(response.callback === "success"){
                     alertResponse('success', 'Success!', response.desc);
                     $('#id_detail').val('');
