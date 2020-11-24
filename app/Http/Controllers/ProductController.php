@@ -63,7 +63,9 @@ class ProductController extends Controller
             $file = $request->file('image');
             $photo =  time().$file->getClientOriginalName();
             
-            $thumbImage = Image::make($file->getRealPath())->resize(150, 150);
+            $thumbImage = Image::make($file->getRealPath())->resize(null, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            });
             $thumbPath = 'images/'.$photo;
             $thumbImage = Image::make($thumbImage)->save($thumbPath);
         
