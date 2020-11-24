@@ -325,7 +325,7 @@
         $('#tb_detil').DataTable().destroy();
         var id = $('#dt_id').val();
         table_image = $('#tb_detil').DataTable({
-            "ajax": "/image/list/" + id
+            "ajax": "<?= url('/image/list') ?>"+"/"+ id
         });
         
     }
@@ -341,7 +341,7 @@
         $('#dt_nama_product').val(name);
         $('#tb_detil').DataTable().destroy();
         table_image = $('#tb_detil').DataTable({
-            "ajax": "/image/list/" + id
+            "ajax": "<?= url('/image/list/') ?>" + "/" + id
         });
         
 
@@ -480,7 +480,7 @@
         }
 
         $.ajax({
-            url : "/product/detail/" + id,
+            url : "<?= url('/product/detail') ?>" + "/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data){
@@ -534,7 +534,7 @@
 
     function ajax_delete(id){
         $.ajax({
-            url : "/product/delete/" + id,
+            url : "<?= url('/product/delete') ?>"+"/"+ id,
             type: "POST",
             dataType: "JSON",
             success: function(data){
@@ -573,7 +573,7 @@
 
     function ajax_delete_image(id){
         $.ajax({
-            url : "/image/delete/" + id,
+            url : "<?= url('/image/delete') ?>"+ "/" + id,
             type: "POST",
             dataType: "JSON",
             success: function(data){
