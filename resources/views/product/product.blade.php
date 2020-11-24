@@ -354,7 +354,7 @@
 
     function process_pdf(){
         var category_id = $('#pdf_category').val();
-        window.open("/product/export_pdf/"+category_id, '_blank');
+        window.open("<?= url('/product/export_pdf') ?>"+"/"+category_id, '_blank');
     }
     
     function save(){

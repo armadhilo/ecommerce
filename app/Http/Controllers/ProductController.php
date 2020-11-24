@@ -177,9 +177,9 @@ class ProductController extends Controller
     public function cetak_pdf($id)
     { 
         if($id == 0){
-            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->orderByDesc('product.id')->limit(10)->get();
+            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->whereNull('deleted_at')->orderByDesc('product.id')->limit(10)->get();
         }else{
-            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->where('category_id',$id)->orderByDesc('product.id')->limit(10)->get();
+            $data['product'] = DB::table('product')->join('category','product.category_id', '=', 'category.id')->whereNull('deleted_at')->where('category_id',$id)->orderByDesc('product.id')->limit(10)->get();
         }
         
         // if(count($data['product']) > 0){
