@@ -196,6 +196,7 @@ class ProductController extends Controller
         // }
 
         $pdf = PDF::loadview('pdf',$data);
+        $pdf->setPaper("A4","Potrait");
         return $pdf->stream();
 
     }
